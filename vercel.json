@@ -1,6 +1,19 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/vasil-isachki/index.html" },
-    { "source": "/assets/:path*", "destination": "/vasil-isachki/assets/:path*" }
+    {
+      "source": "/",
+      "destination": "/vasil-isachki/index.html"
+    },
+    {
+      "source": "/assets/:path*",
+      "destination": "/vasil-isachki/assets/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/stamen",
+      "destination": "/stamen/",
+      "permanent": false
+    }
   ]
 }
