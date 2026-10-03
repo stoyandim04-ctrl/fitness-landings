@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/vasil-isachki/index.html" },
+    { "source": "/assets/:path*", "destination": "/vasil-isachki/assets/:path*" }
+  ]
+}
