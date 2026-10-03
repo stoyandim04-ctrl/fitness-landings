@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>INTNS // Check-in</title>
-  <meta name="description" content="Седмичен клиентски чек-ин по метода INTNS | Mind, Health & Body." />
+  <title>INTNS | Mind, Health &amp; Body</title>
+  <meta name="description" content="INTNS — платформа за седмични чек-ини и треньорско табло по метода Mind, Health &amp; Body." />
   <meta name="theme-color" content="#000000" />
   <!-- Демо: не индексирай в търсачките. -->
   <meta name="robots" content="noindex, nofollow" />
@@ -14,585 +14,709 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-          },
-          colors: {
-            gold: {
-              200: '#efe2c0',
-              300: '#e3cd95',
-              400: '#d4b46e',
-              500: '#c19a4f',
-              600: '#9c7a3a',
-            },
-          },
-          letterSpacing: { label: '0.18em' },
-        },
-      },
-    };
-  </script>
-
-  <style>
-    :root { color-scheme: dark; }
-    body { font-feature-settings: "ss01", "cv11"; }
-
-    /* Фин шум + радиален отблясък за дълбочина */
-    .bg-luxe {
-      background:
-        radial-gradient(120% 60% at 50% -10%, rgba(212,180,110,0.10), transparent 60%),
-        radial-gradient(80% 50% at 100% 0%, rgba(255,255,255,0.04), transparent 60%),
-        #000;
-    }
-    .grain::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .035;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    /* Карти с фин горен отблясък */
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
-      box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.06), 0 1px 2px rgba(0,0,0,.6);
-    }
-
-    .text-gold-grad {
-      background: linear-gradient(180deg, #f3e6c4 0%, #d4b46e 55%, #a8843f 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-
-    /* Скала 1–10 */
-    .scale-input:checked + .scale-dot {
-      background: linear-gradient(180deg, #efe2c0, #c19a4f);
-      color: #0a0a0a; border-color: transparent;
-      box-shadow: 0 0 0 1px rgba(212,180,110,.4), 0 8px 24px -6px rgba(212,180,110,.55);
-      transform: translateY(-1px);
-    }
-    .scale-input:focus-visible + .scale-dot { outline: 2px solid rgba(212,180,110,.7); outline-offset: 2px; }
-
-    /* Бутон за изпращане: въртящ се златен контур */
-    @property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-    .btn-luxe {
-      background:
-        linear-gradient(#0b0b0c, #0b0b0c) padding-box,
-        conic-gradient(from var(--angle), rgba(212,180,110,.15), #e3cd95, rgba(212,180,110,.15) 30%, rgba(255,255,255,.12) 60%, rgba(212,180,110,.15)) border-box;
-      border: 1px solid transparent;
-      animation: spin-border 6s linear infinite;
-    }
-    @keyframes spin-border { to { --angle: 360deg; } }
-    .btn-luxe:hover, .btn-luxe:focus-visible { animation-duration: 2.2s; }
-
-    .reveal { opacity: 0; transform: translateY(8px); animation: reveal .7s cubic-bezier(.2,.7,.2,1) forwards; }
-    @keyframes reveal { to { opacity: 1; transform: none; } }
-
-    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type=number] { -moz-appearance: textfield; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal, .btn-luxe { animation: none !important; opacity: 1; transform: none; }
-    }
-  </style>
+  <script src="js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="css/app.css" />
+  <script type="module" src="js/app.js"></script>
 </head>
 
 <body class="bg-luxe grain min-h-screen font-sans text-zinc-200 selection:bg-gold-400/30 selection:text-white">
 
-  <!-- ─── Top bar ─────────────────────────────────────────────── -->
-  <header class="sticky top-0 z-30 border-b border-white/[0.06] bg-black/70 backdrop-blur-xl">
-    <div class="mx-auto flex h-14 max-w-xl items-center justify-between px-4 sm:px-6">
-      <a href="#" class="group flex items-center gap-2.5" aria-label="INTNS Check-in начало">
+  <!-- ─── Хедър (клиент / треньор) ───────────────────────────── -->
+  <header id="app-header" class="sticky top-0 z-30 border-b border-white/[0.06] bg-black/70 backdrop-blur-xl" hidden>
+    <div data-width class="mx-auto flex h-14 max-w-xl items-center gap-3 px-4 transition-[max-width] duration-500 sm:px-6">
+      <span class="flex items-center gap-2.5">
         <span class="grid h-7 w-7 place-items-center rounded-md border border-gold-400/30 bg-gradient-to-b from-gold-400/15 to-transparent">
           <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-gold-300" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 20 12 4l8 16"/><path d="M8 13h8"/></svg>
         </span>
-        <span class="text-[13px] font-semibold tracking-[0.22em] text-white">INTNS<span class="mx-1.5 font-normal text-gold-400/80">//</span><span class="font-medium text-zinc-400">CHECK-IN</span></span>
-      </a>
-      <span class="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-wider text-zinc-400">
-        <span class="relative flex h-1.5 w-1.5"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60"></span><span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400"></span></span>
-        Демо
+        <span class="text-[13px] font-semibold tracking-[0.22em] text-white">INTNS<span class="mx-1.5 font-normal text-gold-400/80">//</span><span data-context class="font-medium text-zinc-400"></span></span>
       </span>
+
+      <div data-coach-nav hidden>
+        <nav class="ml-4 hidden items-center gap-1 text-[13px] md:flex" aria-label="Табло">
+          <a href="#/coach" data-tab-link class="rounded-md px-2.5 py-1.5 text-zinc-400 transition hover:bg-white/[0.04] hover:text-white aria-[current=page]:bg-white/[0.06] aria-[current=page]:font-medium aria-[current=page]:text-white">Чек-ини</a>
+          <a href="#/coach/revenue" data-tab-link class="rounded-md px-2.5 py-1.5 text-zinc-400 transition hover:bg-white/[0.04] hover:text-white aria-[current=page]:bg-white/[0.06] aria-[current=page]:font-medium aria-[current=page]:text-white">Приходи</a>
+        </nav>
+      </div>
+
+      <div class="ml-auto flex items-center gap-2.5">
+        <span data-user-avatar class="grid h-7 w-7 place-items-center overflow-hidden rounded-full bg-white/[0.06] text-[10.5px] font-semibold text-zinc-300 ring-1 ring-gold-400/30"></span>
+        <span class="hidden leading-tight sm:block">
+          <span data-user-name class="block text-[12.5px] font-medium text-white"></span>
+          <span data-user-meta class="block font-mono text-[10px] text-zinc-500"></span>
+        </span>
+        <button type="button" data-logout class="ml-1 inline-flex h-8 items-center gap-1.5 rounded-lg border border-white/10 px-2.5 text-[12px] text-zinc-400 transition hover:border-white/20 hover:text-white" aria-label="Смени роля / изход">
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg>
+          <span class="hidden sm:inline">Изход</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="relative z-10 mx-auto max-w-xl px-4 pb-32 pt-8 sm:px-6 sm:pt-12">
-    <form id="checkin" class="space-y-5" novalidate>
+  <!-- ═══ 1. Вход / избор на роля ═══════════════════════════════ -->
+  <main id="view-auth" class="view relative z-10" hidden>
+    <div class="mx-auto flex min-h-[100svh] max-w-3xl flex-col px-4 py-10 sm:px-6 sm:py-16">
+      <div class="flex items-center justify-center gap-2.5">
+        <span class="grid h-9 w-9 place-items-center rounded-lg border border-gold-400/30 bg-gradient-to-b from-gold-400/15 to-transparent">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 text-gold-300" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 20 12 4l8 16"/><path d="M8 13h8"/></svg>
+        </span>
+        <span class="text-[15px] font-semibold tracking-[0.24em] text-white">INTNS</span>
+      </div>
 
-      <!-- ─── 1. Welcome ──────────────────────────────────────── -->
-      <section aria-labelledby="welcome-title" class="reveal">
+      <div class="mt-12 text-center sm:mt-16">
         <p class="font-mono text-[11px] uppercase tracking-label text-gold-400/90">Mind · Health · Body</p>
-        <h1 id="welcome-title" class="mt-3 text-[32px] font-semibold leading-[1.1] tracking-tight text-white sm:text-[40px]">
-          Добре дошла,<br /><span class="text-gold-grad">Мария.</span>
-        </h1>
-        <p class="mt-3 max-w-md text-[15px] leading-relaxed text-zinc-400">Твоят седмичен чек-ин отнема под 3 минути. Бъди честна — данните са само за теб и треньора ти.</p>
+        <h1 class="mt-4 text-[34px] font-semibold leading-[1.08] tracking-tight text-white sm:text-[46px]">Добре дошли в <span class="text-gold-grad">INTNS.</span></h1>
+        <p class="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-zinc-400">Една платформа за клиента и треньора. Избери как влизаш.</p>
+      </div>
 
-        <div class="card mt-6 rounded-2xl border border-white/10 p-4">
+      <div class="mt-10 grid gap-3 sm:grid-cols-2 sm:gap-4" role="list">
+        <!-- Клиент -->
+        <button type="button" data-login="client" role="listitem"
+          class="card group relative flex flex-col rounded-2xl border border-white/10 bg-zinc-950 p-5 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50 sm:p-6">
           <div class="flex items-center justify-between">
-            <div>
-              <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Програма INTNS</p>
-              <p class="mt-1 text-[15px] font-medium text-white">Седмица <span class="tabular-nums">06</span> <span class="text-zinc-500">/ 12</span></p>
-            </div>
-            <div class="text-right">
-              <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Фаза</p>
-              <p class="mt-1 text-[15px] font-medium text-gold-300">Build</p>
-            </div>
+            <span class="grid h-11 w-11 place-items-center rounded-full bg-white/[0.06] text-[13px] font-semibold text-zinc-200 ring-1 ring-white/10">МП</span>
+            <span class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Клиент</span>
           </div>
-          <!-- 12 сегмента: 5 завършени, 1 текущ -->
-          <ol class="mt-4 grid grid-cols-12 gap-1" aria-label="Прогрес по седмици: 6 от 12">
-            <li class="h-1 rounded-full bg-zinc-300"></li>
-            <li class="h-1 rounded-full bg-zinc-300"></li>
-            <li class="h-1 rounded-full bg-zinc-300"></li>
-            <li class="h-1 rounded-full bg-zinc-300"></li>
-            <li class="h-1 rounded-full bg-zinc-300"></li>
-            <li class="h-1 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 shadow-[0_0_12px_rgba(212,180,110,.6)]"></li>
-            <li class="h-1 rounded-full bg-white/10"></li>
-            <li class="h-1 rounded-full bg-white/10"></li>
-            <li class="h-1 rounded-full bg-white/10"></li>
-            <li class="h-1 rounded-full bg-white/10"></li>
-            <li class="h-1 rounded-full bg-white/10"></li>
-            <li class="h-1 rounded-full bg-white/10"></li>
-          </ol>
-          <p class="mt-3 font-mono text-[11px] text-zinc-500"><time datetime="2026-10-03">Събота, 03.10.2026</time> · краен срок 21:00</p>
-        </div>
-      </section>
-
-      <!-- ─── 2. Biometrics ───────────────────────────────────── -->
-      <section aria-labelledby="bio-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.06s">
-        <header class="flex items-start justify-between">
-          <div>
-            <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">01 — Body</p>
-            <h2 id="bio-title" class="mt-1 text-[17px] font-semibold text-white">Биометрия</h2>
-          </div>
-          <span id="delta-chip" class="rounded-full border border-emerald-400/20 bg-emerald-400/[0.07] px-2.5 py-1 font-mono text-[11px] text-emerald-300">−3.8 кг</span>
-        </header>
-
-        <div class="mt-5 flex items-end justify-between gap-4">
-          <div class="min-w-0">
-            <label for="weight" class="block text-[13px] text-zinc-400">Тегло тази сутрин</label>
-            <div class="mt-1 flex items-baseline gap-1.5">
-              <input id="weight" name="weight" type="number" inputmode="decimal" step="0.1" min="30" max="250" value="68.6"
-                class="w-[3.6ch] bg-transparent text-[44px] font-semibold leading-none tracking-tight text-white tabular-nums outline-none placeholder:text-zinc-700 focus:text-gold-200" aria-describedby="weight-help" />
-              <span class="text-[15px] text-zinc-500">кг</span>
-            </div>
-          </div>
-          <div class="flex shrink-0 overflow-hidden rounded-xl border border-white/10" role="group" aria-label="Промени теглото">
-            <button type="button" data-step="-0.1" class="grid h-11 w-11 place-items-center text-zinc-400 transition hover:bg-white/[0.05] hover:text-white focus-visible:bg-white/[0.06] focus-visible:outline-none" aria-label="Намали с 0.1 кг">
-              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg>
-            </button>
-            <span class="w-px bg-white/10" aria-hidden="true"></span>
-            <button type="button" data-step="0.1" class="grid h-11 w-11 place-items-center text-zinc-400 transition hover:bg-white/[0.05] hover:text-white focus-visible:bg-white/[0.06] focus-visible:outline-none" aria-label="Увеличи с 0.1 кг">
-              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Прогрес към целта -->
-        <div class="mt-6">
-          <div class="flex items-center justify-between font-mono text-[11px] text-zinc-500">
-            <span>Старт <span class="text-zinc-300">72.4</span></span>
-            <span id="progress-pct" class="text-gold-300">45%</span>
-            <span>Цел <span class="text-zinc-300">64.0</span></span>
-          </div>
-          <div class="relative mt-2 h-1.5 rounded-full bg-white/[0.06]" role="progressbar" aria-label="Прогрес към целево тегло" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" id="progress">
-            <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-zinc-400 via-gold-300 to-gold-500 transition-[width] duration-700 ease-out" style="width:45%"></div>
-            <span id="progress-knob" class="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black bg-gold-200 shadow-[0_0_0_4px_rgba(212,180,110,.15)] transition-[left] duration-700 ease-out" style="left:45%" aria-hidden="true"></span>
-          </div>
-          <p id="weight-help" class="mt-3 text-[13px] text-zinc-500"><span id="remaining" class="text-zinc-300">4.6 кг</span> до целта · среден темп −0.63 кг/седм.</p>
-        </div>
-
-        <dl class="mt-5 grid grid-cols-3 divide-x divide-white/[0.06] rounded-xl border border-white/[0.06] bg-black/30">
-          <div class="px-3 py-2.5">
-            <dt class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Талия</dt>
-            <dd class="mt-0.5 text-[15px] font-medium text-white tabular-nums">71 <span class="text-[12px] text-zinc-500">см</span></dd>
-          </div>
-          <div class="px-3 py-2.5">
-            <dt class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Ханш</dt>
-            <dd class="mt-0.5 text-[15px] font-medium text-white tabular-nums">98 <span class="text-[12px] text-zinc-500">см</span></dd>
-          </div>
-          <div class="px-3 py-2.5">
-            <dt class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Стъпки</dt>
-            <dd class="mt-0.5 text-[15px] font-medium text-white tabular-nums">9.4<span class="text-[12px] text-zinc-500">k</span></dd>
-          </div>
-        </dl>
-      </section>
-
-      <!-- ─── 3. Mind & Sleep ─────────────────────────────────── -->
-      <section aria-labelledby="mind-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.12s">
-        <header>
-          <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">02 — Mind</p>
-          <h2 id="mind-title" class="mt-1 text-[17px] font-semibold text-white">Енергия и възстановяване</h2>
-        </header>
-
-        <!-- Скалите се генерират от JS в тези fieldset-и -->
-        <fieldset class="mt-5" data-scale="energy" data-default="7">
-          <div class="flex items-baseline justify-between">
-            <legend class="text-[13px] text-zinc-400">Ментална енергия</legend>
-            <p class="text-[13px]"><output class="font-semibold tabular-nums text-white" data-value>7</output><span class="text-zinc-600">/10</span> · <span class="text-gold-300" data-caption>Фокусирана</span></p>
-          </div>
-          <div class="mt-3 grid grid-cols-10 gap-1.5" data-options></div>
-        </fieldset>
-
-        <div class="my-5 h-px bg-white/[0.06]" aria-hidden="true"></div>
-
-        <fieldset data-scale="sleep" data-default="6">
-          <div class="flex items-baseline justify-between">
-            <legend class="text-[13px] text-zinc-400">Качество на съня</legend>
-            <p class="text-[13px]"><output class="font-semibold tabular-nums text-white" data-value>6</output><span class="text-zinc-600">/10</span> · <span class="text-gold-300" data-caption>Стабилен</span></p>
-          </div>
-          <div class="mt-3 grid grid-cols-10 gap-1.5" data-options></div>
-          <div class="mt-4 flex items-center gap-3">
-            <label for="sleep-hours" class="text-[13px] text-zinc-500">Средно часове сън</label>
-            <select id="sleep-hours" name="sleepHours" class="ml-auto rounded-lg border border-white/10 bg-zinc-950 px-3 py-1.5 font-mono text-[13px] text-zinc-200 outline-none transition focus:border-gold-400/50">
-              <option>&lt; 5</option><option>5–6</option><option>6–7</option><option selected>7–8</option><option>8+</option>
-            </select>
-          </div>
-        </fieldset>
-      </section>
-
-      <!-- ─── 4. Progress photos ──────────────────────────────── -->
-      <section aria-labelledby="photo-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.18s">
-        <header class="flex items-start justify-between">
-          <div>
-            <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">03 — Visual</p>
-            <h2 id="photo-title" class="mt-1 text-[17px] font-semibold text-white">Прогрес снимки</h2>
-          </div>
-          <span class="inline-flex items-center gap-1 font-mono text-[11px] text-zinc-500">
-            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-            Криптирани
+          <p class="mt-6 text-[19px] font-semibold text-white">Вход като Клиент</p>
+          <p class="mt-1 font-mono text-[11.5px] text-zinc-500">Мария Петрова · INTNS Academy</p>
+          <ul class="mt-5 space-y-2 text-[13.5px] text-zinc-400">
+            <li class="flex items-center gap-2"><span class="h-1 w-1 rounded-full bg-zinc-500"></span>Седмичен чек-ин и мерки</li>
+            <li class="flex items-center gap-2"><span class="h-1 w-1 rounded-full bg-zinc-500"></span>Прогрес снимки</li>
+            <li class="flex items-center gap-2"><span class="h-1 w-1 rounded-full bg-zinc-500"></span>Енергия, сън и рефлексия</li>
+          </ul>
+          <span class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4 text-[13px] font-medium text-zinc-200">
+            Отвори чек-ина
+            <svg data-arrow viewBox="0 0 24 24" class="h-4 w-4 text-zinc-500 transition group-hover:translate-x-1 group-hover:text-white" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            <svg data-spinner viewBox="0 0 24 24" class="hidden h-4 w-4 animate-spin text-gold-300" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".25" stroke-width="2.5"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
           </span>
-        </header>
-        <p class="mt-2 text-[13px] leading-relaxed text-zinc-500">Същата светлина, същото време от деня, без филтри.</p>
-
-        <div class="mt-4 grid grid-cols-3 gap-2.5">
-          <!-- Шаблон: label обвива скрит input, preview се показва от JS -->
-          <label class="photo-slot group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-xl border border-dashed border-white/15 bg-black/40 transition hover:border-gold-400/40 hover:bg-white/[0.02] focus-within:border-gold-400/60">
-            <input type="file" name="photoFront" accept="image/*" class="sr-only" />
-            <img alt="" class="absolute inset-0 hidden h-full w-full object-cover" />
-            <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 transition group-hover:text-zinc-300" data-empty>
-              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="5.5" r="2.5"/><path d="M12 8v7m-4-4.5h8M9.5 21l2.5-6 2.5 6"/></svg>
-              <span class="text-[12px] font-medium">Предна</span>
-            </span>
-            <span class="absolute inset-x-1.5 bottom-1.5 hidden items-center justify-between rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur" data-filled>
-              Предна <svg viewBox="0 0 24 24" class="h-3 w-3 text-gold-300" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
-            </span>
-          </label>
-
-          <label class="photo-slot group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-xl border border-dashed border-white/15 bg-black/40 transition hover:border-gold-400/40 hover:bg-white/[0.02] focus-within:border-gold-400/60">
-            <input type="file" name="photoSide" accept="image/*" class="sr-only" />
-            <img alt="" class="absolute inset-0 hidden h-full w-full object-cover" />
-            <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 transition group-hover:text-zinc-300" data-empty>
-              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="5.5" r="2.5"/><path d="M12 8c-1.5 2-1.5 5 0 7m0-4.5 3 1.5M12 15l-1 6m1-6 1.5 6"/></svg>
-              <span class="text-[12px] font-medium">Странична</span>
-            </span>
-            <span class="absolute inset-x-1.5 bottom-1.5 hidden items-center justify-between rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur" data-filled>
-              Странична <svg viewBox="0 0 24 24" class="h-3 w-3 text-gold-300" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
-            </span>
-          </label>
-
-          <label class="photo-slot group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-xl border border-dashed border-white/15 bg-black/40 transition hover:border-gold-400/40 hover:bg-white/[0.02] focus-within:border-gold-400/60">
-            <input type="file" name="photoBack" accept="image/*" class="sr-only" />
-            <img alt="" class="absolute inset-0 hidden h-full w-full object-cover" />
-            <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 transition group-hover:text-zinc-300" data-empty>
-              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="5.5" r="2.5" stroke-dasharray="2 2"/><path d="M12 8v7m-4-4.5h8M9.5 21l2.5-6 2.5 6"/></svg>
-              <span class="text-[12px] font-medium">Задна</span>
-            </span>
-            <span class="absolute inset-x-1.5 bottom-1.5 hidden items-center justify-between rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur" data-filled>
-              Задна <svg viewBox="0 0 24 24" class="h-3 w-3 text-gold-300" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
-            </span>
-          </label>
-        </div>
-        <p class="mt-3 font-mono text-[11px] text-zinc-600"><span id="photo-count">0</span>/3 качени · JPG, PNG, HEIC</p>
-      </section>
-
-      <!-- ─── 5. Coach note & reflection ──────────────────────── -->
-      <section aria-labelledby="reflect-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.24s">
-        <header>
-          <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">04 — Reflection</p>
-          <h2 id="reflect-title" class="mt-1 text-[17px] font-semibold text-white">Рефлексия по метода INTNS</h2>
-        </header>
-
-        <!-- Бележка от треньора -->
-        <figure class="mt-4 rounded-xl border border-gold-400/15 bg-gradient-to-b from-gold-400/[0.06] to-transparent p-4">
-          <figcaption class="flex items-center gap-3">
-            <img src="assets/coach.webp" alt="Тони Интенс" width="36" height="36" class="h-9 w-9 rounded-full object-cover ring-1 ring-gold-400/40" />
-            <div class="leading-tight">
-              <p class="text-[13px] font-medium text-white">Тони Интенс</p>
-              <p class="font-mono text-[10.5px] text-zinc-500">Head Coach · <span id="coach-note-when">миналата седмица</span></p>
-            </div>
-          </figcaption>
-          <blockquote id="coach-note" class="mt-3 whitespace-pre-line text-[14px] leading-relaxed text-zinc-300">
-            „Силна седмица на тренировките. Този път искам да чуя повече за съня и стреса — там е следващото ти ниво.“
-          </blockquote>
-        </figure>
-
-        <div class="mt-5">
-          <div class="flex items-center justify-between">
-            <label for="reflection" class="text-[13px] text-zinc-400">Твоята седмица</label>
-            <span class="font-mono text-[11px] text-zinc-600"><span id="char-count">0</span>/600</span>
-          </div>
-
-          <div class="mt-2 flex flex-wrap gap-1.5" role="group" aria-label="Подсказки">
-            <button type="button" data-prompt="Mind: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Mind</button>
-            <button type="button" data-prompt="Health: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Health</button>
-            <button type="button" data-prompt="Body: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Body</button>
-            <button type="button" data-prompt="Победа на седмицата: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Победа</button>
-          </div>
-
-          <textarea id="reflection" name="reflection" rows="5" maxlength="600"
-            placeholder="Какво работи? Къде срещна съпротива? Какво ще промениш следващата седмица?"
-            class="mt-3 block w-full resize-none rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-[15px] leading-relaxed text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-gold-400/50 focus:bg-black/60 focus:ring-4 focus:ring-gold-400/[0.07]"></textarea>
-        </div>
-
-        <label class="mt-4 flex cursor-pointer items-center gap-3 rounded-xl border border-white/[0.06] px-3.5 py-3 transition hover:bg-white/[0.02]">
-          <input type="checkbox" name="wantsCall" class="peer sr-only" />
-          <span class="relative h-5 w-9 shrink-0 rounded-full bg-white/10 transition peer-checked:bg-gold-400 peer-focus-visible:ring-2 peer-focus-visible:ring-gold-400/60 after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-zinc-300 after:transition peer-checked:after:translate-x-4 peer-checked:after:bg-black" aria-hidden="true"></span>
-          <span class="text-[13px] text-zinc-300">Искам 10-минутен разговор с треньора</span>
-        </label>
-      </section>
-
-      <!-- ─── 6. Submit ───────────────────────────────────────── -->
-      <div class="reveal pt-2" style="animation-delay:.3s">
-        <button id="submit" type="submit"
-          class="btn-luxe group relative flex h-14 w-full items-center justify-center gap-2.5 overflow-hidden rounded-2xl text-[15px] font-semibold tracking-wide text-white transition duration-300 hover:shadow-[0_0_40px_-8px_rgba(212,180,110,.55)] focus-visible:shadow-[0_0_40px_-8px_rgba(212,180,110,.7)] focus-visible:outline-none active:scale-[0.985] disabled:cursor-not-allowed">
-          <span class="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.07] to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" aria-hidden="true"></span>
-          <span data-label>Изпрати чек-ин</span>
-          <svg data-arrow viewBox="0 0 24 24" class="h-4 w-4 text-gold-300 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          <svg data-spinner viewBox="0 0 24 24" class="hidden h-4 w-4 animate-spin text-gold-300" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".25" stroke-width="2.5"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
         </button>
-        <p class="mt-3 text-center font-mono text-[11px] text-zinc-600">Отговор от треньора до 24 ч · ⌘/Ctrl + Enter за изпращане</p>
-      </div>
-    </form>
 
-    <!-- Успех -->
-    <section id="success" class="hidden pt-10 text-center" aria-live="polite">
-      <div class="mx-auto grid h-16 w-16 place-items-center rounded-full border border-gold-400/30 bg-gradient-to-b from-gold-400/15 to-transparent shadow-[0_0_60px_-10px_rgba(212,180,110,.6)]">
-        <svg viewBox="0 0 24 24" class="h-7 w-7 text-gold-200" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
-      </div>
-      <h2 class="mt-6 text-[26px] font-semibold tracking-tight text-white">Чек-инът е изпратен.</h2>
-      <p class="mx-auto mt-2 max-w-xs text-[15px] text-zinc-400">Седмица 06 е заключена. Тони ще прегледа данните ти до 24 часа.</p>
-      <a href="coach/" class="mt-8 inline-flex items-center gap-1.5 text-[13px] text-gold-300 transition hover:text-gold-200">Виж го в треньорския панел →</a><br />
-      <button type="button" id="again" class="mt-4 rounded-xl border border-white/10 px-4 py-2 text-[13px] text-zinc-300 transition hover:border-white/20 hover:text-white">Обратно към формата</button>
-    </section>
-    <!-- ─── 3-дневна програма (Stripe) ──────────────────────── -->
-    <aside aria-labelledby="offer-title" class="mt-14">
-      <div class="flex items-center gap-3" aria-hidden="true">
-        <span class="h-px flex-1 bg-white/[0.06]"></span>
-        <span class="font-mono text-[10.5px] uppercase tracking-label text-zinc-600">Следваща стъпка</span>
-        <span class="h-px flex-1 bg-white/[0.06]"></span>
-      </div>
-
-      <div class="card relative mt-6 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-4 sm:p-5">
-        <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gold-400/10 blur-3xl" aria-hidden="true"></div>
-
-        <div class="relative flex gap-4">
-          <img src="assets/program-3day.webp" alt="Корица на програмата „Да се върна, себе си да прегърна“" width="360" height="360" loading="lazy"
-            class="aspect-square w-[42%] max-w-[180px] shrink-0 self-start rounded-xl object-cover ring-1 ring-white/10" />
-          <div class="flex min-w-0 flex-col py-0.5">
-            <p class="flex flex-wrap items-center gap-1.5">
-              <span class="rounded-full border border-gold-400/25 bg-gold-400/[0.08] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-gold-300">Pre-order</span>
-              <span class="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">3 дни</span>
-            </p>
-            <h2 id="offer-title" class="mt-2.5 text-[17px] font-semibold leading-snug text-white sm:text-[19px]">Да се върна, себе си да прегърна</h2>
-            <p class="mt-1.5 text-[13px] leading-relaxed text-zinc-400">Моята 3-дневна програма за връщане към теб — тяло, ум и спокойствие.</p>
-            <p class="mt-auto hidden pt-3 font-mono text-[11px] text-zinc-500 sm:block">от Тони Интенс</p>
+        <!-- Треньор -->
+        <button type="button" data-login="coach" role="listitem"
+          class="card group relative flex flex-col overflow-hidden rounded-2xl border border-gold-400/25 bg-zinc-950 p-5 text-left transition duration-300 hover:-translate-y-0.5 hover:border-gold-400/50 hover:shadow-[0_0_50px_-15px_rgba(212,180,110,.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/60 sm:p-6">
+          <span class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-gold-300/70 to-transparent" aria-hidden="true"></span>
+          <span class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-gold-400/10 blur-3xl" aria-hidden="true"></span>
+          <div class="relative flex items-center justify-between">
+            <img src="assets/coach.webp" alt="" width="44" height="44" class="h-11 w-11 rounded-full object-cover ring-1 ring-gold-400/40" />
+            <span class="font-mono text-[10.5px] uppercase tracking-label text-gold-400/90">Треньор</span>
           </div>
-        </div>
-
-        <a href="https://buy.stripe.com/bJe4gydoseHk4UNgMxbII1r" target="_blank" rel="noopener noreferrer"
-          class="group relative mt-4 flex h-[52px] w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-b from-gold-200 via-gold-300 to-gold-500 text-[12px] font-semibold tracking-[0.08em] text-zinc-950 sm:text-[12.5px] sm:tracking-[0.14em] shadow-[0_1px_0_0_rgba(255,255,255,.5)_inset,0_12px_36px_-14px_rgba(212,180,110,.6)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_1px_0_0_rgba(255,255,255,.6)_inset,0_18px_44px_-12px_rgba(212,180,110,.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-200 focus-visible:ring-offset-2 focus-visible:ring-offset-black active:translate-y-0 active:scale-[0.99]">
-          <span class="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-white/40 opacity-0 blur-md transition-all duration-700 ease-out group-hover:left-[110%] group-hover:opacity-100" aria-hidden="true"></span>
-          <span class="relative">ВЗЕМИ МОЯТА 3-ДНЕВНА ПРОГРАМА</span>
-          <svg viewBox="0 0 24 24" class="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
-          <span class="sr-only">(отваря се в нов раздел)</span>
-        </a>
-        <p class="mt-3 flex items-center justify-center gap-1.5 font-mono text-[11px] text-zinc-500">
-          <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          Сигурно плащане чрез Stripe
-        </p>
+          <p class="relative mt-6 text-[19px] font-semibold text-white">Вход като Треньор</p>
+          <p class="relative mt-1 font-mono text-[11.5px] text-gold-300/80">Tony Intense · Head Coach</p>
+          <ul class="relative mt-5 space-y-2 text-[13.5px] text-zinc-400">
+            <li class="flex items-center gap-2"><span class="h-1 w-1 rounded-full bg-gold-400"></span>Преглед на клиентите</li>
+            <li class="flex items-center gap-2"><span class="h-1 w-1 rounded-full bg-gold-400"></span>Снимки и обратна връзка</li>
+            <li class="flex items-center gap-2"><span class="h-1 w-1 rounded-full bg-gold-400"></span>Приходи и Stripe</li>
+          </ul>
+          <span class="relative mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4 text-[13px] font-medium text-gold-200">
+            Отвори таблото
+            <svg data-arrow viewBox="0 0 24 24" class="h-4 w-4 text-gold-400 transition group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            <svg data-spinner viewBox="0 0 24 24" class="hidden h-4 w-4 animate-spin text-gold-300" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".25" stroke-width="2.5"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </span>
+        </button>
       </div>
-    </aside>
+
+      <p class="mt-8 flex items-center justify-center gap-1.5 text-center font-mono text-[11px] text-zinc-600">
+        <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Демо среда · без парола · данните остават в този браузър
+      </p>
+      <p class="mt-auto pt-12 text-center font-mono text-[10.5px] uppercase tracking-label text-zinc-700">INTNS | Mind, Health &amp; Body</p>
+    </div>
   </main>
 
-  <footer class="relative z-10 border-t border-white/[0.06] py-6 text-center font-mono text-[10.5px] uppercase tracking-label text-zinc-600">
-    INTNS | Mind, Health &amp; Body
-    <!-- Демо: бърз преход към треньорския панел -->
-    <a href="coach/" class="mt-2 block normal-case tracking-normal text-zinc-500 transition hover:text-gold-300">Треньорски панел →</a>
-  </footer>
+  <!-- ═══ 2. Клиент: седмичен чек-ин ═════════════════════════════ -->
+  <main id="view-client" class="view relative z-10" hidden>
+    <div class="mx-auto max-w-xl px-4 pb-24 pt-8 sm:px-6 sm:pt-12">
+      <form id="checkin" class="space-y-5" novalidate>
 
-  <script>
-    (() => {
-      // ── Демо връзка с треньорския панел (coach/) ──
-      // Без бекенд: двете страници споделят localStorage на един и същ домейн.
-      //   intns.checkins.v1  → { [clientId]: чек-ин }        (пише тази страница)
-      //   intns.feedback.v1  → { [clientId]: { text, sentAt } } (пише треньорът)
-      const CLIENT_ID = 'maria-p', WEEK = 6;
-      const store = {
-        read(key) { try { return JSON.parse(localStorage.getItem(key)) || {}; } catch { return {}; } },
-        write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch { return false; } },
-      };
+        <!-- ─── 1. Welcome ──────────────────────────────────────── -->
+        <section aria-labelledby="welcome-title" class="reveal">
+          <p class="font-mono text-[11px] uppercase tracking-label text-gold-400/90">Mind · Health · Body</p>
+          <h1 id="welcome-title" class="mt-3 text-[32px] font-semibold leading-[1.1] tracking-tight text-white sm:text-[40px]">
+            Добре дошла,<br /><span class="text-gold-grad">Мария.</span>
+          </h1>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-zinc-400">Твоят седмичен чек-ин отнема под 3 минути. Бъди честна — данните са само за теб и треньора ти.</p>
 
-      const fb = store.read('intns.feedback.v1')[CLIENT_ID];
-      if (fb && fb.text) {
-        document.getElementById('coach-note').textContent = '„' + fb.text + '“';
-        document.getElementById('coach-note-when').textContent = new Date(fb.sentAt).toLocaleDateString('bg-BG', { day: 'numeric', month: 'short' });
-      }
+          <div class="card mt-6 rounded-2xl border border-white/10 p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Програма INTNS</p>
+                <p class="mt-1 text-[15px] font-medium text-white">Седмица <span class="tabular-nums">06</span> <span class="text-zinc-500">/ 12</span></p>
+              </div>
+              <div class="text-right">
+                <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Фаза</p>
+                <p class="mt-1 text-[15px] font-medium text-gold-300">Build</p>
+              </div>
+            </div>
+            <!-- 12 сегмента: 5 завършени, 1 текущ -->
+            <ol class="mt-4 grid grid-cols-12 gap-1" aria-label="Прогрес по седмици: 6 от 12">
+              <li class="h-1 rounded-full bg-zinc-300"></li>
+              <li class="h-1 rounded-full bg-zinc-300"></li>
+              <li class="h-1 rounded-full bg-zinc-300"></li>
+              <li class="h-1 rounded-full bg-zinc-300"></li>
+              <li class="h-1 rounded-full bg-zinc-300"></li>
+              <li class="h-1 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 shadow-[0_0_12px_rgba(212,180,110,.6)]"></li>
+              <li class="h-1 rounded-full bg-white/10"></li>
+              <li class="h-1 rounded-full bg-white/10"></li>
+              <li class="h-1 rounded-full bg-white/10"></li>
+              <li class="h-1 rounded-full bg-white/10"></li>
+              <li class="h-1 rounded-full bg-white/10"></li>
+              <li class="h-1 rounded-full bg-white/10"></li>
+            </ol>
+            <p class="mt-3 font-mono text-[11px] text-zinc-500"><time datetime="2026-10-03">Събота, 03.10.2026</time> · краен срок 21:00</p>
+          </div>
+        </section>
 
-      // ── Биометрия: прогрес спрямо целта ──
-      const START = 72.4, GOAL = 64.0;
-      const weight = document.getElementById('weight');
-      const bar = document.getElementById('progress-bar');
-      const knob = document.getElementById('progress-knob');
-      const progress = document.getElementById('progress');
-      const pct = document.getElementById('progress-pct');
-      const remaining = document.getElementById('remaining');
-      const delta = document.getElementById('delta-chip');
+        <!-- ─── 2. Biometrics ───────────────────────────────────── -->
+        <section aria-labelledby="bio-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.06s">
+          <header class="flex items-start justify-between">
+            <div>
+              <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">01 — Body</p>
+              <h2 id="bio-title" class="mt-1 text-[17px] font-semibold text-white">Биометрия</h2>
+            </div>
+            <span id="delta-chip" class="rounded-full border border-emerald-400/20 bg-emerald-400/[0.07] px-2.5 py-1 font-mono text-[11px] text-emerald-300">−3.8 кг</span>
+          </header>
 
-      function renderWeight() {
-        const w = parseFloat(weight.value);
-        if (Number.isNaN(w)) return;
-        const p = Math.max(0, Math.min(100, ((START - w) / (START - GOAL)) * 100));
-        const r = Math.round(p);
-        bar.style.width = knob.style.left = p + '%';
-        progress.setAttribute('aria-valuenow', r);
-        pct.textContent = r + '%';
-        const left = Math.max(0, w - GOAL);
-        remaining.textContent = left === 0 ? 'Целта е постигната' : left.toFixed(1) + ' кг';
-        const d = w - START;
-        delta.textContent = (d <= 0 ? '−' : '+') + Math.abs(d).toFixed(1) + ' кг';
-        delta.className = 'rounded-full border px-2.5 py-1 font-mono text-[11px] ' + (d <= 0
-          ? 'border-emerald-400/20 bg-emerald-400/[0.07] text-emerald-300'
-          : 'border-amber-400/20 bg-amber-400/[0.07] text-amber-300');
-      }
-      weight.addEventListener('input', renderWeight);
-      document.querySelectorAll('[data-step]').forEach(btn => btn.addEventListener('click', () => {
-        weight.value = (parseFloat(weight.value || START) + parseFloat(btn.dataset.step)).toFixed(1);
-        renderWeight();
-      }));
-      renderWeight();
+          <div class="mt-5 flex items-end justify-between gap-4">
+            <div class="min-w-0">
+              <label for="weight" class="block text-[13px] text-zinc-400">Тегло тази сутрин</label>
+              <div class="mt-1 flex items-baseline gap-1.5">
+                <input id="weight" name="weight" type="number" inputmode="decimal" step="0.1" min="30" max="250" value="68.6"
+                  class="w-[3.6ch] bg-transparent text-[44px] font-semibold leading-none tracking-tight text-white tabular-nums outline-none placeholder:text-zinc-700 focus:text-gold-200" aria-describedby="weight-help" />
+                <span class="text-[15px] text-zinc-500">кг</span>
+              </div>
+            </div>
+            <div class="flex shrink-0 overflow-hidden rounded-xl border border-white/10" role="group" aria-label="Промени теглото">
+              <button type="button" data-step="-0.1" class="grid h-11 w-11 place-items-center text-zinc-400 transition hover:bg-white/[0.05] hover:text-white focus-visible:bg-white/[0.06] focus-visible:outline-none" aria-label="Намали с 0.1 кг">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg>
+              </button>
+              <span class="w-px bg-white/10" aria-hidden="true"></span>
+              <button type="button" data-step="0.1" class="grid h-11 w-11 place-items-center text-zinc-400 transition hover:bg-white/[0.05] hover:text-white focus-visible:bg-white/[0.06] focus-visible:outline-none" aria-label="Увеличи с 0.1 кг">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
 
-      // ── Скали 1–10 ──
-      const captions = {
-        energy: ['Изтощена', 'Изтощена', 'Ниска', 'Ниска', 'Неутрална', 'Неутрална', 'Фокусирана', 'Фокусирана', 'Остра', 'Пикова'],
-        sleep:  ['Разбит', 'Разбит', 'Слаб', 'Слаб', 'Накъсан', 'Стабилен', 'Стабилен', 'Дълбок', 'Дълбок', 'Перфектен'],
-      };
-      document.querySelectorAll('[data-scale]').forEach(fs => {
-        const key = fs.dataset.scale, def = +fs.dataset.default;
-        const wrap = fs.querySelector('[data-options]');
-        const out = fs.querySelector('[data-value]');
-        const cap = fs.querySelector('[data-caption]');
-        for (let i = 1; i <= 10; i++) {
-          const label = document.createElement('label');
-          label.className = 'relative';
-          label.innerHTML =
-            `<input type="radio" name="${key}" value="${i}" class="scale-input peer sr-only" ${i === def ? 'checked' : ''} aria-label="${i} от 10" />` +
-            `<span class="scale-dot grid h-10 cursor-pointer place-items-center rounded-lg border border-white/10 bg-white/[0.02] font-mono text-[13px] tabular-nums text-zinc-400 transition duration-200 hover:border-white/25 hover:text-white">${i}</span>`;
-          wrap.appendChild(label);
-        }
-        fs.addEventListener('change', e => {
-          const v = +e.target.value;
-          out.textContent = v;
-          cap.textContent = captions[key][v - 1];
-          if (navigator.vibrate) navigator.vibrate(6);
-        });
-      });
+          <!-- Прогрес към целта -->
+          <div class="mt-6">
+            <div class="flex items-center justify-between font-mono text-[11px] text-zinc-500">
+              <span>Старт <span class="text-zinc-300">72.4</span></span>
+              <span id="progress-pct" class="text-gold-300">45%</span>
+              <span>Цел <span class="text-zinc-300">64.0</span></span>
+            </div>
+            <div class="relative mt-2 h-1.5 rounded-full bg-white/[0.06]" role="progressbar" aria-label="Прогрес към целево тегло" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" id="progress">
+              <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-zinc-400 via-gold-300 to-gold-500 transition-[width] duration-700 ease-out" style="width:45%"></div>
+              <span id="progress-knob" class="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black bg-gold-200 shadow-[0_0_0_4px_rgba(212,180,110,.15)] transition-[left] duration-700 ease-out" style="left:45%" aria-hidden="true"></span>
+            </div>
+            <p id="weight-help" class="mt-3 text-[13px] text-zinc-500"><span id="remaining" class="text-zinc-300">4.6 кг</span> до целта · среден темп −0.63 кг/седм.</p>
+          </div>
 
-      // ── Снимки: локален преглед ──
-      const photoCount = document.getElementById('photo-count');
-      document.querySelectorAll('.photo-slot').forEach(slot => {
-        const input = slot.querySelector('input');
-        const img = slot.querySelector('img');
-        input.addEventListener('change', () => {
-          const file = input.files && input.files[0];
-          if (!file) return;
-          if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
-          img.src = URL.createObjectURL(file);
-          img.classList.remove('hidden');
-          slot.querySelector('[data-empty]').classList.add('hidden');
-          slot.querySelector('[data-filled]').classList.replace('hidden', 'flex');
-          slot.classList.replace('border-dashed', 'border-solid');
-          slot.classList.add('border-gold-400/30');
-          photoCount.textContent = [...document.querySelectorAll('.photo-slot input')].filter(i => i.files.length).length;
-        });
-      });
+          <dl class="mt-5 grid grid-cols-3 divide-x divide-white/[0.06] rounded-xl border border-white/[0.06] bg-black/30">
+            <div class="px-3 py-2.5">
+              <dt class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Талия</dt>
+              <dd class="mt-0.5 text-[15px] font-medium text-white tabular-nums">71 <span class="text-[12px] text-zinc-500">см</span></dd>
+            </div>
+            <div class="px-3 py-2.5">
+              <dt class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Ханш</dt>
+              <dd class="mt-0.5 text-[15px] font-medium text-white tabular-nums">98 <span class="text-[12px] text-zinc-500">см</span></dd>
+            </div>
+            <div class="px-3 py-2.5">
+              <dt class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Стъпки</dt>
+              <dd class="mt-0.5 text-[15px] font-medium text-white tabular-nums">9.4<span class="text-[12px] text-zinc-500">k</span></dd>
+            </div>
+          </dl>
+        </section>
 
-      // ── Рефлексия ──
-      const ta = document.getElementById('reflection');
-      const count = document.getElementById('char-count');
-      const updateCount = () => count.textContent = ta.value.length;
-      ta.addEventListener('input', updateCount);
-      document.querySelectorAll('[data-prompt]').forEach(btn => btn.addEventListener('click', () => {
-        const sep = ta.value && !ta.value.endsWith('\n') ? '\n' : '';
-        ta.value = (ta.value + sep + btn.dataset.prompt).slice(0, 600);
-        ta.focus();
-        ta.setSelectionRange(ta.value.length, ta.value.length);
-        updateCount();
-      }));
+        <!-- ─── 3. Mind & Sleep ─────────────────────────────────── -->
+        <section aria-labelledby="mind-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.12s">
+          <header>
+            <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">02 — Mind</p>
+            <h2 id="mind-title" class="mt-1 text-[17px] font-semibold text-white">Енергия и възстановяване</h2>
+          </header>
 
-      // ── Изпращане (демо: без бекенд) ──
-      const form = document.getElementById('checkin');
-      const submit = document.getElementById('submit');
-      const success = document.getElementById('success');
-      form.addEventListener('keydown', e => {
-        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) form.requestSubmit();
-      });
-      // Смалява снимката до ~480px JPEG, за да се събере в localStorage
-      const shrink = file => new Promise(resolve => {
-        if (!file) return resolve(null);
-        const img = new Image();
-        img.onload = () => {
-          const scale = Math.min(1, 480 / Math.max(img.width, img.height));
-          const c = document.createElement('canvas');
-          c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
-          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-          URL.revokeObjectURL(img.src);
-          resolve(c.toDataURL('image/jpeg', 0.72));
-        };
-        img.onerror = () => resolve(null);
-        img.src = URL.createObjectURL(file);
-      });
+          <!-- Скалите се генерират от JS в тези fieldset-и -->
+          <fieldset class="mt-5" data-scale="energy" data-default="7">
+            <div class="flex items-baseline justify-between">
+              <legend class="text-[13px] text-zinc-400">Ментална енергия</legend>
+              <p class="text-[13px]"><output class="font-semibold tabular-nums text-white" data-value>7</output><span class="text-zinc-600">/10</span> · <span class="text-gold-300" data-caption>Фокусирана</span></p>
+            </div>
+            <div class="mt-3 grid grid-cols-10 gap-1.5" data-options></div>
+          </fieldset>
 
-      async function saveCheckin() {
-        const data = new FormData(form);
-        const file = name => { const f = data.get(name); return f && f.size ? f : null; };
-        const [front, side, back] = await Promise.all(['photoFront', 'photoSide', 'photoBack'].map(n => shrink(file(n))));
-        const all = store.read('intns.checkins.v1');
-        all[CLIENT_ID] = {
-          clientId: CLIENT_ID, week: WEEK, submittedAt: new Date().toISOString(),
-          weight: parseFloat(data.get('weight')),
-          energy: +data.get('energy'), sleep: +data.get('sleep'), sleepHours: data.get('sleepHours'),
-          reflection: (data.get('reflection') || '').trim(),
-          wantsCall: data.get('wantsCall') === 'on',
-          photos: { front, side, back },
-        };
-        // Ако снимките не се побират, запази поне данните
-        if (!store.write('intns.checkins.v1', all)) {
-          all[CLIENT_ID].photos = { front: null, side: null, back: null };
-          store.write('intns.checkins.v1', all);
-        }
-      }
+          <div class="my-5 h-px bg-white/[0.06]" aria-hidden="true"></div>
 
-      form.addEventListener('submit', async e => {
-        e.preventDefault();
-        submit.disabled = true;
-        submit.querySelector('[data-label]').textContent = 'Изпращане…';
-        submit.querySelector('[data-arrow]').classList.add('hidden');
-        submit.querySelector('[data-spinner]').classList.remove('hidden');
-        await Promise.all([saveCheckin(), new Promise(r => setTimeout(r, 1100))]);
-        {
-          form.classList.add('hidden');
-          success.classList.remove('hidden');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      });
-      document.getElementById('again').addEventListener('click', () => {
-        success.classList.add('hidden');
-        form.classList.remove('hidden');
-        submit.disabled = false;
-        submit.querySelector('[data-label]').textContent = 'Изпрати чек-ин';
-        submit.querySelector('[data-arrow]').classList.remove('hidden');
-        submit.querySelector('[data-spinner]').classList.add('hidden');
-      });
-    })();
-  </script>
+          <fieldset data-scale="sleep" data-default="6">
+            <div class="flex items-baseline justify-between">
+              <legend class="text-[13px] text-zinc-400">Качество на съня</legend>
+              <p class="text-[13px]"><output class="font-semibold tabular-nums text-white" data-value>6</output><span class="text-zinc-600">/10</span> · <span class="text-gold-300" data-caption>Стабилен</span></p>
+            </div>
+            <div class="mt-3 grid grid-cols-10 gap-1.5" data-options></div>
+            <div class="mt-4 flex items-center gap-3">
+              <label for="sleep-hours" class="text-[13px] text-zinc-500">Средно часове сън</label>
+              <select id="sleep-hours" name="sleepHours" class="ml-auto rounded-lg border border-white/10 bg-zinc-950 px-3 py-1.5 font-mono text-[13px] text-zinc-200 outline-none transition focus:border-gold-400/50">
+                <option>&lt; 5</option><option>5–6</option><option>6–7</option><option selected>7–8</option><option>8+</option>
+              </select>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- ─── 4. Progress photos ──────────────────────────────── -->
+        <section aria-labelledby="photo-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.18s">
+          <header class="flex items-start justify-between">
+            <div>
+              <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">03 — Visual</p>
+              <h2 id="photo-title" class="mt-1 text-[17px] font-semibold text-white">Прогрес снимки</h2>
+            </div>
+            <span class="inline-flex items-center gap-1 font-mono text-[11px] text-zinc-500">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Криптирани
+            </span>
+          </header>
+          <p class="mt-2 text-[13px] leading-relaxed text-zinc-500">Същата светлина, същото време от деня, без филтри.</p>
+
+          <div class="mt-4 grid grid-cols-3 gap-2.5">
+            <!-- Шаблон: label обвива скрит input, preview се показва от JS -->
+            <label class="photo-slot group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-xl border border-dashed border-white/15 bg-black/40 transition hover:border-gold-400/40 hover:bg-white/[0.02] focus-within:border-gold-400/60">
+              <input type="file" name="photoFront" accept="image/*" class="sr-only" />
+              <img alt="" class="absolute inset-0 hidden h-full w-full object-cover" />
+              <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 transition group-hover:text-zinc-300" data-empty>
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="5.5" r="2.5"/><path d="M12 8v7m-4-4.5h8M9.5 21l2.5-6 2.5 6"/></svg>
+                <span class="text-[12px] font-medium">Предна</span>
+              </span>
+              <span class="absolute inset-x-1.5 bottom-1.5 hidden items-center justify-between rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur" data-filled>
+                Предна <svg viewBox="0 0 24 24" class="h-3 w-3 text-gold-300" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              </span>
+            </label>
+
+            <label class="photo-slot group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-xl border border-dashed border-white/15 bg-black/40 transition hover:border-gold-400/40 hover:bg-white/[0.02] focus-within:border-gold-400/60">
+              <input type="file" name="photoSide" accept="image/*" class="sr-only" />
+              <img alt="" class="absolute inset-0 hidden h-full w-full object-cover" />
+              <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 transition group-hover:text-zinc-300" data-empty>
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="5.5" r="2.5"/><path d="M12 8c-1.5 2-1.5 5 0 7m0-4.5 3 1.5M12 15l-1 6m1-6 1.5 6"/></svg>
+                <span class="text-[12px] font-medium">Странична</span>
+              </span>
+              <span class="absolute inset-x-1.5 bottom-1.5 hidden items-center justify-between rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur" data-filled>
+                Странична <svg viewBox="0 0 24 24" class="h-3 w-3 text-gold-300" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              </span>
+            </label>
+
+            <label class="photo-slot group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-xl border border-dashed border-white/15 bg-black/40 transition hover:border-gold-400/40 hover:bg-white/[0.02] focus-within:border-gold-400/60">
+              <input type="file" name="photoBack" accept="image/*" class="sr-only" />
+              <img alt="" class="absolute inset-0 hidden h-full w-full object-cover" />
+              <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-zinc-500 transition group-hover:text-zinc-300" data-empty>
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="5.5" r="2.5" stroke-dasharray="2 2"/><path d="M12 8v7m-4-4.5h8M9.5 21l2.5-6 2.5 6"/></svg>
+                <span class="text-[12px] font-medium">Задна</span>
+              </span>
+              <span class="absolute inset-x-1.5 bottom-1.5 hidden items-center justify-between rounded-md bg-black/70 px-2 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur" data-filled>
+                Задна <svg viewBox="0 0 24 24" class="h-3 w-3 text-gold-300" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+              </span>
+            </label>
+          </div>
+          <p class="mt-3 font-mono text-[11px] text-zinc-600"><span id="photo-count">0</span>/3 качени · JPG, PNG, HEIC</p>
+        </section>
+
+        <!-- ─── 5. Coach note & reflection ──────────────────────── -->
+        <section aria-labelledby="reflect-title" class="card reveal rounded-2xl border border-white/10 p-5" style="animation-delay:.24s">
+          <header>
+            <p class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">04 — Reflection</p>
+            <h2 id="reflect-title" class="mt-1 text-[17px] font-semibold text-white">Рефлексия по метода INTNS</h2>
+          </header>
+
+          <!-- Бележка от треньора -->
+          <figure class="mt-4 rounded-xl border border-gold-400/15 bg-gradient-to-b from-gold-400/[0.06] to-transparent p-4">
+            <figcaption class="flex items-center gap-3">
+              <img src="assets/coach.webp" alt="Тони Интенс" width="36" height="36" class="h-9 w-9 rounded-full object-cover ring-1 ring-gold-400/40" />
+              <div class="leading-tight">
+                <p class="text-[13px] font-medium text-white">Тони Интенс</p>
+                <p class="font-mono text-[10.5px] text-zinc-500">Head Coach · <span id="coach-note-when">миналата седмица</span></p>
+              </div>
+            </figcaption>
+            <blockquote id="coach-note" class="mt-3 whitespace-pre-line text-[14px] leading-relaxed text-zinc-300">
+              „Силна седмица на тренировките. Този път искам да чуя повече за съня и стреса — там е следващото ти ниво.“
+            </blockquote>
+          </figure>
+
+          <div class="mt-5">
+            <div class="flex items-center justify-between">
+              <label for="reflection" class="text-[13px] text-zinc-400">Твоята седмица</label>
+              <span class="font-mono text-[11px] text-zinc-600"><span id="char-count">0</span>/600</span>
+            </div>
+
+            <div class="mt-2 flex flex-wrap gap-1.5" role="group" aria-label="Подсказки">
+              <button type="button" data-prompt="Mind: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Mind</button>
+              <button type="button" data-prompt="Health: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Health</button>
+              <button type="button" data-prompt="Body: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Body</button>
+              <button type="button" data-prompt="Победа на седмицата: " class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200 focus-visible:border-gold-400/60 focus-visible:outline-none">+ Победа</button>
+            </div>
+
+            <textarea id="reflection" name="reflection" rows="5" maxlength="600"
+              placeholder="Какво работи? Къде срещна съпротива? Какво ще промениш следващата седмица?"
+              class="mt-3 block w-full resize-none rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-[15px] leading-relaxed text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-gold-400/50 focus:bg-black/60 focus:ring-4 focus:ring-gold-400/[0.07]"></textarea>
+          </div>
+
+          <label class="mt-4 flex cursor-pointer items-center gap-3 rounded-xl border border-white/[0.06] px-3.5 py-3 transition hover:bg-white/[0.02]">
+            <input type="checkbox" name="wantsCall" class="peer sr-only" />
+            <span class="relative h-5 w-9 shrink-0 rounded-full bg-white/10 transition peer-checked:bg-gold-400 peer-focus-visible:ring-2 peer-focus-visible:ring-gold-400/60 after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-zinc-300 after:transition peer-checked:after:translate-x-4 peer-checked:after:bg-black" aria-hidden="true"></span>
+            <span class="text-[13px] text-zinc-300">Искам 10-минутен разговор с треньора</span>
+          </label>
+        </section>
+
+        <!-- ─── 6. Submit ───────────────────────────────────────── -->
+        <div class="reveal pt-2" style="animation-delay:.3s">
+          <button id="submit" type="submit"
+            class="btn-luxe group relative flex h-14 w-full items-center justify-center gap-2.5 overflow-hidden rounded-2xl text-[15px] font-semibold tracking-wide text-white transition duration-300 hover:shadow-[0_0_40px_-8px_rgba(212,180,110,.55)] focus-visible:shadow-[0_0_40px_-8px_rgba(212,180,110,.7)] focus-visible:outline-none active:scale-[0.985] disabled:cursor-not-allowed">
+            <span class="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.07] to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" aria-hidden="true"></span>
+            <span data-label>Изпрати чек-ин</span>
+            <svg data-arrow viewBox="0 0 24 24" class="h-4 w-4 text-gold-300 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            <svg data-spinner viewBox="0 0 24 24" class="hidden h-4 w-4 animate-spin text-gold-300" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".25" stroke-width="2.5"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </button>
+          <p class="mt-3 text-center font-mono text-[11px] text-zinc-600">Отговор от треньора до 24 ч · ⌘/Ctrl + Enter за изпращане</p>
+        </div>
+      </form>
+
+      <!-- Успех -->
+      <section id="success" class="hidden pt-10 text-center" aria-live="polite">
+        <div class="mx-auto grid h-16 w-16 place-items-center rounded-full border border-gold-400/30 bg-gradient-to-b from-gold-400/15 to-transparent shadow-[0_0_60px_-10px_rgba(212,180,110,.6)]">
+          <svg viewBox="0 0 24 24" class="h-7 w-7 text-gold-200" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+        </div>
+        <h2 class="mt-6 text-[26px] font-semibold tracking-tight text-white">Чек-инът е изпратен.</h2>
+        <p class="mx-auto mt-2 max-w-xs text-[15px] text-zinc-400">Седмица 06 е заключена. Тони ще прегледа данните ти до 24 часа.</p>
+        <a href="#/coach" data-switch-role="coach" class="mt-8 inline-flex items-center gap-1.5 text-[13px] text-gold-300 transition hover:text-gold-200">Превключи към треньора и го виж →</a><br />
+        <button type="button" id="again" class="mt-4 rounded-xl border border-white/10 px-4 py-2 text-[13px] text-zinc-300 transition hover:border-white/20 hover:text-white">Обратно към формата</button>
+      </section>
+      <!-- ─── 3-дневна програма (Stripe) ──────────────────────── -->
+      <aside aria-labelledby="offer-title" class="mt-14">
+        <div class="flex items-center gap-3" aria-hidden="true">
+          <span class="h-px flex-1 bg-white/[0.06]"></span>
+          <span class="font-mono text-[10.5px] uppercase tracking-label text-zinc-600">Следваща стъпка</span>
+          <span class="h-px flex-1 bg-white/[0.06]"></span>
+        </div>
+
+        <div class="card relative mt-6 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-4 sm:p-5">
+          <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gold-400/10 blur-3xl" aria-hidden="true"></div>
+
+          <div class="relative flex gap-4">
+            <img src="assets/program-3day.webp" alt="Корица на програмата „Да се върна, себе си да прегърна“" width="360" height="360" loading="lazy"
+              class="aspect-square w-[42%] max-w-[180px] shrink-0 self-start rounded-xl object-cover ring-1 ring-white/10" />
+            <div class="flex min-w-0 flex-col py-0.5">
+              <p class="flex flex-wrap items-center gap-1.5">
+                <span class="rounded-full border border-gold-400/25 bg-gold-400/[0.08] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-gold-300">Pre-order</span>
+                <span class="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">3 дни</span>
+              </p>
+              <h2 id="offer-title" class="mt-2.5 text-[17px] font-semibold leading-snug text-white sm:text-[19px]">Да се върна, себе си да прегърна</h2>
+              <p class="mt-1.5 text-[13px] leading-relaxed text-zinc-400">Моята 3-дневна програма за връщане към теб — тяло, ум и спокойствие.</p>
+              <p class="mt-auto hidden pt-3 font-mono text-[11px] text-zinc-500 sm:block">от Тони Интенс</p>
+            </div>
+          </div>
+
+          <a href="https://buy.stripe.com/bJe4gydoseHk4UNgMxbII1r" target="_blank" rel="noopener noreferrer"
+            class="group relative mt-4 flex h-[52px] w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-b from-gold-200 via-gold-300 to-gold-500 text-[12px] font-semibold tracking-[0.08em] text-zinc-950 sm:text-[12.5px] sm:tracking-[0.14em] shadow-[0_1px_0_0_rgba(255,255,255,.5)_inset,0_12px_36px_-14px_rgba(212,180,110,.6)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_1px_0_0_rgba(255,255,255,.6)_inset,0_18px_44px_-12px_rgba(212,180,110,.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-200 focus-visible:ring-offset-2 focus-visible:ring-offset-black active:translate-y-0 active:scale-[0.99]">
+            <span class="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-white/40 opacity-0 blur-md transition-all duration-700 ease-out group-hover:left-[110%] group-hover:opacity-100" aria-hidden="true"></span>
+            <span class="relative">ВЗЕМИ МОЯТА 3-ДНЕВНА ПРОГРАМА</span>
+            <svg viewBox="0 0 24 24" class="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            <span class="sr-only">(отваря се в нов раздел)</span>
+          </a>
+          <p class="mt-3 flex items-center justify-center gap-1.5 font-mono text-[11px] text-zinc-500">
+            <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Сигурно плащане чрез Stripe
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ═══ 3. Треньор: табло ══════════════════════════════════════ -->
+  <main id="view-coach" class="view relative z-10" hidden>
+    <div class="mx-auto max-w-6xl px-4 pb-24 pt-6 sm:px-6 sm:pt-10">
+      <!-- Табове (мобилен) -->
+      <nav class="mb-6 grid grid-cols-2 rounded-xl border border-white/10 bg-white/[0.02] p-1 text-[13px] md:hidden" aria-label="Табло">
+        <a href="#/coach" data-tab-link class="rounded-lg py-2 text-center text-zinc-400 transition aria-[current=page]:bg-white/[0.08] aria-[current=page]:text-white">Чек-ини</a>
+        <a href="#/coach/revenue" data-tab-link class="rounded-lg py-2 text-center text-zinc-400 transition aria-[current=page]:bg-white/[0.08] aria-[current=page]:text-white">Приходи</a>
+      </nav>
+
+      <!-- Таб: чек-ини -->
+      <div data-coach-tab="checkins">
+
+        <!-- ─── Заглавие + KPI ──────────────────────────────────── -->
+        <section aria-labelledby="page-title" class="reveal">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-label text-gold-400/90">Седмица 06 · 28.09 – 04.10</p>
+              <h1 id="page-title" class="mt-2 text-[28px] font-semibold tracking-tight text-white sm:text-[34px]">Здравей, <span class="text-gold-grad">Тони.</span></h1>
+              <p class="mt-1.5 text-[14px] text-zinc-400"><span id="kpi-pending-inline" class="text-white">0</span> чек-ина чакат обратна връзка.</p>
+            </div>
+            <p class="font-mono text-[11px] text-zinc-500">Краен срок за отговор · <span class="text-zinc-300">24 ч</span></p>
+          </div>
+
+          <dl class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] lg:grid-cols-4">
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Получени</dt>
+              <dd class="mt-1.5 flex items-baseline gap-1 text-[24px] font-semibold tabular-nums text-white"><span id="kpi-received">0</span><span class="text-[14px] font-normal text-zinc-600">/ <span id="kpi-total">0</span></span></dd>
+            </div>
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">За преглед</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-gold-300" id="kpi-pending">0</dd>
+            </div>
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Ср. енергия · сън</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-white"><span id="kpi-energy">–</span><span class="text-zinc-600"> · </span><span id="kpi-sleep">–</span></dd>
+            </div>
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Ср. промяна тегло</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-emerald-300" id="kpi-delta">–</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- ─── Филтри ──────────────────────────────────────────── -->
+        <section aria-label="Филтри" class="reveal mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" style="animation-delay:.05s">
+          <div class="no-scrollbar -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+            <div class="inline-flex rounded-xl border border-white/10 bg-white/[0.02] p-1" role="tablist" aria-label="Програма">
+              <button type="button" role="tab" data-filter="all" aria-selected="true" class="filter-tab whitespace-nowrap rounded-lg px-3 py-1.5 text-[13px] text-zinc-400 transition hover:text-white aria-selected:bg-white/[0.08] aria-selected:text-white">Всички <span class="ml-1 font-mono text-[11px] text-zinc-500" data-count="all"></span></button>
+              <button type="button" role="tab" data-filter="pending" aria-selected="false" class="filter-tab whitespace-nowrap rounded-lg px-3 py-1.5 text-[13px] text-zinc-400 transition hover:text-white aria-selected:bg-white/[0.08] aria-selected:text-white">За преглед <span class="ml-1 font-mono text-[11px] text-gold-400" data-count="pending"></span></button>
+              <button type="button" role="tab" data-filter="School" aria-selected="false" class="filter-tab whitespace-nowrap rounded-lg px-3 py-1.5 text-[13px] text-zinc-400 transition hover:text-white aria-selected:bg-white/[0.08] aria-selected:text-white">School <span class="ml-1 font-mono text-[11px] text-zinc-500" data-count="School"></span></button>
+              <button type="button" role="tab" data-filter="Academy" aria-selected="false" class="filter-tab whitespace-nowrap rounded-lg px-3 py-1.5 text-[13px] text-zinc-400 transition hover:text-white aria-selected:bg-white/[0.08] aria-selected:text-white">Academy <span class="ml-1 font-mono text-[11px] text-zinc-500" data-count="Academy"></span></button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label class="relative flex-1 sm:w-56 sm:flex-none">
+              <span class="sr-only">Търси клиент</span>
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-500" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="search" type="search" placeholder="Търси клиент…" autocomplete="off"
+                class="h-9 w-full rounded-lg border border-white/10 bg-zinc-950 pl-8 pr-10 text-[13px] text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-gold-400/50" />
+              <kbd class="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 rounded border border-white/10 px-1.5 font-mono text-[10px] text-zinc-500 sm:block">/</kbd>
+            </label>
+            <label class="sr-only" for="sort">Подреди</label>
+            <select id="sort" class="h-9 rounded-lg border border-white/10 bg-zinc-950 px-2.5 text-[13px] text-zinc-300 outline-none transition focus:border-gold-400/50">
+              <option value="recent">Най-нови</option>
+              <option value="attention">Нужда от внимание</option>
+              <option value="delta">Най-голям спад</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- ─── Клиенти ─────────────────────────────────────────── -->
+        <section aria-label="Изпратени чек-ини" class="mt-5">
+          <ul id="grid" class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3" role="list"></ul>
+          <p id="empty" class="hidden rounded-2xl border border-dashed border-white/10 py-14 text-center text-[14px] text-zinc-500">Няма клиенти по този филтър.</p>
+        </section>
+
+        <!-- ─── Липсващи чек-ини ────────────────────────────────── -->
+        <section aria-labelledby="missing-title" class="mt-10">
+          <div class="flex items-center justify-between">
+            <h2 id="missing-title" class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Чакаме още · <span id="missing-count">0</span></h2>
+            <button type="button" id="remind-all" class="text-[12px] text-zinc-400 transition hover:text-gold-300">Напомни на всички</button>
+          </div>
+          <ul id="missing" class="mt-3 flex flex-wrap gap-2" role="list"></ul>
+        </section>
+      </div>
+
+      <!-- Таб: приходи + Stripe -->
+      <div data-coach-tab="revenue" hidden>
+        <section aria-labelledby="rev-title">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-label text-gold-400/90">Финанси · демо данни</p>
+              <h1 id="rev-title" class="mt-2 text-[28px] font-semibold tracking-tight text-white sm:text-[34px]">Приходи</h1>
+              <p class="mt-1.5 text-[14px] text-zinc-400">Всички плащания по програмите на INTNS на едно място.</p>
+            </div>
+            <p class="font-mono text-[11px] text-zinc-500">Източник · <span class="text-zinc-300">Stripe</span></p>
+          </div>
+
+          <dl class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] lg:grid-cols-4">
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Септември</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-white">7 240 €</dd>
+              <dd class="mt-0.5 font-mono text-[11px] text-emerald-300">↑ 23% спрямо август</dd>
+            </div>
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Месечни абонаменти</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-white">6 120 €</dd>
+              <dd class="mt-0.5 font-mono text-[11px] text-zinc-500">School + Academy</dd>
+            </div>
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Активни клиенти</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-white">17</dd>
+              <dd class="mt-0.5 font-mono text-[11px] text-zinc-500">5 Academy · 12 School</dd>
+            </div>
+            <div class="bg-zinc-950 p-4">
+              <dt class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Pre-order · 3 дни</dt>
+              <dd class="mt-1.5 text-[24px] font-semibold tabular-nums text-gold-300">14</dd>
+              <dd class="mt-0.5 font-mono text-[11px] text-zinc-500">записани досега</dd>
+            </div>
+          </dl>
+
+          <div class="mt-4 grid gap-4 lg:grid-cols-5">
+            <figure class="card rounded-2xl border border-white/10 p-5 lg:col-span-3">
+              <figcaption class="flex items-baseline justify-between">
+                <span class="text-[15px] font-semibold text-white">Приходи по месеци</span>
+                <span class="font-mono text-[11px] text-zinc-500">€ · 2026</span>
+              </figcaption>
+              <div id="rev-chart" class="mt-6"></div>
+            </figure>
+
+            <section aria-labelledby="rev-prog-title" class="card rounded-2xl border border-white/10 p-5 lg:col-span-2">
+              <div class="flex items-baseline justify-between">
+                <h2 id="rev-prog-title" class="text-[15px] font-semibold text-white">По програми</h2>
+                <span class="font-mono text-[11px] text-zinc-500">септември</span>
+              </div>
+              <table class="mt-3 w-full">
+                <thead>
+                  <tr class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">
+                    <th scope="col" class="pb-2 text-left font-normal">Програма</th>
+                    <th scope="col" class="pb-2 pr-3 text-right font-normal">Клиенти</th>
+                    <th scope="col" class="pb-2 text-right font-normal">Приход</th>
+                  </tr>
+                </thead>
+                <tbody id="rev-programs"></tbody>
+              </table>
+            </section>
+          </div>
+        </section>
+
+        <div class="mt-4 grid gap-4 lg:grid-cols-5">
+          <!-- Stripe продукт -->
+          <section aria-labelledby="stripe-title" class="card relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-5 lg:col-span-3">
+            <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gold-400/10 blur-3xl" aria-hidden="true"></div>
+            <div class="relative flex items-baseline justify-between">
+              <h2 id="stripe-title" class="text-[15px] font-semibold text-white">Плащане през Stripe</h2>
+              <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-emerald-300"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>Линкът е активен</span>
+            </div>
+
+            <div class="relative mt-4 flex gap-4">
+              <img src="assets/program-3day.webp" alt="Корица на програмата „Да се върна, себе си да прегърна“" width="360" height="360" loading="lazy"
+                class="aspect-square w-[38%] max-w-[160px] shrink-0 self-start rounded-xl object-cover ring-1 ring-white/10" />
+              <div class="min-w-0">
+                <p class="flex flex-wrap items-center gap-1.5">
+                  <span class="rounded-full border border-gold-400/25 bg-gold-400/[0.08] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-gold-300">Pre-order</span>
+                  <span class="font-mono text-[10.5px] uppercase tracking-wider text-zinc-500">3 дни</span>
+                </p>
+                <p class="mt-2.5 text-[17px] font-semibold leading-snug text-white">Да се върна, себе си да прегърна</p>
+                <p class="mt-1.5 text-[13px] leading-relaxed text-zinc-400">Моята 3-дневна програма за връщане към теб — тяло, ум и спокойствие.</p>
+                <p class="mt-3 truncate font-mono text-[11px] text-zinc-500" title="https://buy.stripe.com/bJe4gydoseHk4UNgMxbII1r">buy.stripe.com/bJe4gy…II1r</p>
+              </div>
+            </div>
+
+            <div class="relative mt-5 grid gap-2 sm:grid-cols-[1fr_auto]">
+              <a href="https://buy.stripe.com/bJe4gydoseHk4UNgMxbII1r" target="_blank" rel="noopener noreferrer"
+                class="group relative flex h-[50px] items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-b from-gold-200 via-gold-300 to-gold-500 text-[12px] font-semibold tracking-[0.08em] text-zinc-950 shadow-[0_1px_0_0_rgba(255,255,255,.5)_inset,0_12px_36px_-14px_rgba(212,180,110,.6)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_1px_0_0_rgba(255,255,255,.6)_inset,0_18px_44px_-12px_rgba(212,180,110,.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-200 focus-visible:ring-offset-2 focus-visible:ring-offset-black active:translate-y-0 sm:tracking-[0.14em]">
+                <span class="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-white/40 opacity-0 blur-md transition-all duration-700 ease-out group-hover:left-[110%] group-hover:opacity-100" aria-hidden="true"></span>
+                <span class="relative">ВЗЕМИ МОЯТА 3-ДНЕВНА ПРОГРАМА</span>
+                <svg viewBox="0 0 24 24" class="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+                <span class="sr-only">(отваря Stripe в нов раздел)</span>
+              </a>
+              <button type="button" id="copy-stripe" class="inline-flex h-[50px] items-center justify-center gap-2 rounded-xl border border-white/10 px-4 text-[13px] text-zinc-300 transition hover:border-white/20 hover:text-white">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+                <span data-label>Копирай линка</span>
+              </button>
+            </div>
+            <p class="relative mt-3 font-mono text-[11px] text-zinc-500">Бутонът е същият, който клиентите виждат в своя чек-ин.</p>
+          </section>
+
+          <!-- Последни плащания -->
+          <section aria-labelledby="pay-title" class="card rounded-2xl border border-white/10 p-5 lg:col-span-2">
+            <div class="flex items-baseline justify-between">
+              <h2 id="pay-title" class="text-[15px] font-semibold text-white">Последни плащания</h2>
+              <span class="font-mono text-[11px] text-zinc-500">7 дни</span>
+            </div>
+            <ul id="rev-payments" class="mt-1 divide-y divide-white/[0.06]" role="list"></ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Quick View ────────────────────────────────────────── -->
+  <div id="qv" class="pointer-events-none fixed inset-0 z-40" data-open="false" aria-hidden="true">
+    <div id="qv-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close></div>
+    <aside id="qv-panel" role="dialog" aria-modal="true" aria-labelledby="qv-name"
+      class="absolute inset-y-0 right-0 flex w-full max-w-[560px] flex-col border-l border-white/10 bg-zinc-950 shadow-[-40px_0_80px_-20px_rgba(0,0,0,.8)]">
+
+      <header class="flex items-center gap-3 border-b border-white/[0.06] px-5 py-4">
+        <span id="qv-avatar" class="grid h-10 w-10 shrink-0 place-items-center rounded-full text-[13px] font-semibold"></span>
+        <div class="min-w-0 flex-1">
+          <h2 id="qv-name" class="truncate text-[16px] font-semibold text-white"></h2>
+          <p id="qv-meta" class="truncate font-mono text-[11px] text-zinc-500"></p>
+        </div>
+        <div class="flex items-center gap-1">
+          <button type="button" data-nav="-1" class="grid h-8 w-8 place-items-center rounded-md text-zinc-500 transition hover:bg-white/[0.05] hover:text-white" aria-label="Предишен клиент (K)">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+          </button>
+          <button type="button" data-nav="1" class="grid h-8 w-8 place-items-center rounded-md text-zinc-500 transition hover:bg-white/[0.05] hover:text-white" aria-label="Следващ клиент (J)">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <button type="button" data-close class="ml-1 grid h-8 w-8 place-items-center rounded-md border border-white/10 text-zinc-400 transition hover:border-white/20 hover:text-white" aria-label="Затвори (Esc)">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div id="qv-body" class="flex-1 space-y-6 overflow-y-auto px-5 py-5">
+        <!-- Метрики -->
+        <dl id="qv-stats" class="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/[0.06] sm:grid-cols-4"></dl>
+
+        <!-- Флагове -->
+        <div id="qv-flags" class="flex flex-wrap gap-1.5"></div>
+
+        <!-- Снимки -->
+        <section aria-labelledby="qv-photos-title">
+          <div class="flex items-center justify-between">
+            <h3 id="qv-photos-title" class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Прогрес снимки</h3>
+            <span id="qv-photos-status" class="font-mono text-[11px] text-zinc-500"></span>
+          </div>
+          <div id="qv-photos" class="mt-3 grid grid-cols-3 gap-2"></div>
+        </section>
+
+        <!-- Рефлексия -->
+        <section aria-labelledby="qv-reflect-title">
+          <h3 id="qv-reflect-title" class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Рефлексия на клиента</h3>
+          <blockquote id="qv-reflection" class="mt-3 whitespace-pre-line rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-[14px] leading-relaxed text-zinc-300"></blockquote>
+        </section>
+
+        <!-- Обратна връзка -->
+        <section aria-labelledby="qv-fb-title" class="pb-2">
+          <div class="flex items-center justify-between">
+            <h3 id="qv-fb-title" class="font-mono text-[10.5px] uppercase tracking-label text-zinc-500">Обратна връзка към клиента</h3>
+            <span class="font-mono text-[11px] text-zinc-600"><span id="fb-count">0</span>/600</span>
+          </div>
+          <div id="qv-last-fb" class="mt-3 hidden rounded-xl border border-gold-400/15 bg-gold-400/[0.04] p-3 text-[13px] leading-relaxed text-zinc-400"></div>
+          <div class="mt-3 flex flex-wrap gap-1.5" role="group" aria-label="Бързи шаблони">
+            <button type="button" data-tpl="Отлична седмица — продължаваме със същото темпо." class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200">+ Браво</button>
+            <button type="button" data-tpl="Сънят е приоритет №1 тази седмица: екран off 60 мин преди лягане." class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200">+ Сън</button>
+            <button type="button" data-tpl="Качвам калориите с +150 kcal от въглехидрати около тренировката." class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200">+ Хранене</button>
+            <button type="button" data-tpl="Mind: 5 минути дишане 4-7-8 всяка вечер." class="rounded-full border border-white/10 px-2.5 py-1 text-[12px] text-zinc-400 transition hover:border-gold-400/40 hover:text-gold-200">+ Mind</button>
+          </div>
+          <label for="feedback" class="sr-only">Бележка към клиента</label>
+          <textarea id="feedback" rows="5" maxlength="600" placeholder="Какво видя тази седмица и какво е следващата стъпка?"
+            class="mt-3 block w-full resize-none rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-[14px] leading-relaxed text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-gold-400/50 focus:ring-4 focus:ring-gold-400/[0.07]"></textarea>
+        </section>
+      </div>
+
+      <footer class="flex items-center gap-3 border-t border-white/[0.06] bg-zinc-950/95 px-5 py-4">
+        <p class="hidden flex-1 font-mono text-[11px] text-zinc-600 sm:block">⌘/Ctrl + Enter · J/K навигация</p>
+        <button id="send-fb" type="button"
+          class="btn-luxe group relative flex h-11 flex-1 items-center justify-center gap-2 overflow-hidden rounded-xl px-5 text-[14px] font-semibold text-white transition duration-300 hover:shadow-[0_0_32px_-8px_rgba(212,180,110,.55)] focus-visible:outline-none active:scale-[0.985] disabled:cursor-not-allowed disabled:opacity-60 sm:flex-none">
+          <span data-label>Изпрати и маркирай</span>
+          <svg viewBox="0 0 24 24" class="h-4 w-4 text-gold-300 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </button>
+      </footer>
+    </aside>
+  </div>
+
+  <!-- Увеличена снимка -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95 p-6" role="dialog" aria-modal="true" aria-label="Увеличена снимка">
+    <img id="lightbox-img" alt="" class="max-h-full max-w-full rounded-xl border border-white/10 object-contain" />
+    <p id="lightbox-cap" class="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-black/70 px-3 py-1 font-mono text-[11px] text-zinc-300"></p>
+    <button type="button" id="lightbox-close" class="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-white/10 text-zinc-300 hover:text-white" aria-label="Затвори">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite"
+    class="pointer-events-none fixed bottom-6 left-1/2 z-[60] flex -translate-x-1/2 translate-y-4 items-center gap-2 rounded-full border border-white/10 bg-zinc-900/95 px-4 py-2 text-[13px] text-zinc-200 opacity-0 shadow-2xl backdrop-blur transition duration-300">
+    <svg viewBox="0 0 24 24" class="h-4 w-4 text-gold-300" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+    <span id="toast-text"></span>
+  </div>
+
 </body>
 </html>
