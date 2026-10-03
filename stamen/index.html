@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="bg" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Стамен Бояджиев — Кондиционен треньор във Варна | HIIT & Tabata</title>
+  <meta name="description" content="Сертифициран персонален и кондиционен треньор във Варна. Групови HIIT & Tabata тренировки в 100 Тона (Varna Towers, ниво -2) и индивидуален коучинг за реална трансформация." />
+  <meta name="theme-color" content="#07070a" />
+  <meta property="og:title" content="Стамен Бояджиев — Ковай хранителя в себе си" />
+  <meta property="og:description" content="HIIT, Tabata и индивидуални трансформации във Варна. Запази своето място." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/stamen-hero.jpg" />
+  <meta property="og:locale" content="bg_BG" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { DEFAULT: '#07070a', 900: '#0b0b10', 800: '#111118', 700: '#191922', 600: '#24242f' },
+            volt: { DEFAULT: '#f7d41e', 300: '#ffe76a', 500: '#f7d41e', 600: '#d9b100', 700: '#a88900' },
+          },
+          fontFamily: {
+            display: ['Oswald', 'Impact', 'sans-serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            volt: '0 0 0 1px rgba(247,212,30,.35), 0 20px 60px -15px rgba(247,212,30,.45)',
+            deep: '0 50px 120px -30px rgba(0,0,0,.9)',
+          },
+          keyframes: {
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+            pulseGlow: { '0%,100%': { opacity: '.55' }, '50%': { opacity: '1' } },
+          },
+          animation: {
+            marquee: 'marquee 32s linear infinite',
+            float: 'float 6s ease-in-out infinite',
+            'float-slow': 'float 8s ease-in-out infinite',
+            glow: 'pulseGlow 4s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root { --volt: 247 212 30; }
+    html { background: #07070a; }
+    body { font-feature-settings: "locl" 0; background: #07070a; color: #e9e9ee; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    ::selection { background: rgb(var(--volt)); color: #07070a; }
+
+    /* Film grain overlay for the cinematic feel */
+    .grain::after {
+      content: ""; position: fixed; inset: -50%; z-index: 60; pointer-events: none; opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 1.2s steps(6) infinite;
+    }
+    @keyframes grain {
+      0% { transform: translate(0,0) } 20% { transform: translate(-3%,2%) } 40% { transform: translate(2%,-3%) }
+      60% { transform: translate(-2%,-1%) } 80% { transform: translate(3%,3%) } 100% { transform: translate(0,0) }
+    }
+
+    .text-volt-gradient {
+      background: linear-gradient(180deg, #fff6b0 0%, #f7d41e 45%, #c99f00 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 0 28px rgba(247,212,30,.35));
+    }
+    .text-outline { -webkit-text-stroke: 1px rgba(255,255,255,.12); color: transparent; }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    }
+
+    /* ---------- 3D Hero stage ---------- */
+    .stage { perspective: 1400px; }
+    .stage-inner { transform-style: preserve-3d; transition: transform .25s ease-out; will-change: transform; }
+    .layer { transform-style: preserve-3d; transition: transform .25s ease-out; will-change: transform; }
+    .hero-frame {
+      background:
+        radial-gradient(120% 80% at 50% 0%, rgba(247,212,30,.22), transparent 55%),
+        linear-gradient(180deg, #16161d 0%, #0b0b10 100%);
+    }
+    .hero-frame::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+      background: linear-gradient(160deg, rgba(247,212,30,.9), rgba(247,212,30,.05) 40%, rgba(255,255,255,.08) 70%, rgba(247,212,30,.6));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    /* The athlete breaks the top edge of the frame; soft fade at the sides and bottom */
+    .hero-cutout {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 5%, #000 70%, transparent 97%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 82%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 5%, #000 70%, transparent 97%);
+      mask-composite: intersect;
+      filter: contrast(1.08) saturate(1.05) drop-shadow(0 40px 60px rgba(0,0,0,.85));
+    }
+    /* If you swap in a true transparent PNG cutout, add class "is-png" to the <img> to drop the mask */
+    .hero-cutout.is-png { -webkit-mask-image: none; mask-image: none; }
+
+    /* ---------- Reveal on scroll ---------- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .reveal[data-delay="1"] { transition-delay: .1s; }
+    .reveal[data-delay="2"] { transition-delay: .2s; }
+    .reveal[data-delay="3"] { transition-delay: .3s; }
+
+    /* ---------- Spotlight cards ---------- */
+    .spot { position: relative; isolation: isolate; }
+    .spot::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; opacity: 0; transition: opacity .4s;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(247,212,30,.16), transparent 45%);
+    }
+    .spot:hover::before { opacity: 1; }
+
+    /* ---------- Before / After slider ---------- */
+    .ba { --pos: 50%; }
+    .ba .after { clip-path: inset(0 0 0 var(--pos)); }
+    .ba .handle { left: var(--pos); }
+    .ba input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: ew-resize; }
+    .ba input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 44px; height: 100%; opacity: 0; }
+    .ba input[type="range"]::-moz-range-thumb { width: 44px; height: 100%; opacity: 0; border: 0; }
+    .ph-before {
+      background:
+        radial-gradient(60% 50% at 50% 30%, rgba(255,255,255,.08), transparent 60%),
+        linear-gradient(180deg, #1b1b22, #0e0e13);
+    }
+    .ph-after {
+      background:
+        radial-gradient(60% 55% at 50% 25%, rgba(247,212,30,.35), transparent 60%),
+        linear-gradient(180deg, #2a2510, #0e0d08);
+    }
+
+    /* ---------- Form ---------- */
+    .field { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: border-color .2s, box-shadow .2s, background .2s; }
+    .field:focus { outline: none; border-color: rgba(247,212,30,.8); box-shadow: 0 0 0 4px rgba(247,212,30,.12); background: rgba(255,255,255,.05); }
+    .field::placeholder { color: rgba(233,233,238,.35); }
+    .choice input:checked + .choice-card { border-color: rgb(var(--volt)); background: rgba(247,212,30,.08); box-shadow: 0 0 0 1px rgba(247,212,30,.6), 0 20px 40px -20px rgba(247,212,30,.5); }
+    .choice input:checked + .choice-card .dot { background: rgb(var(--volt)); box-shadow: 0 0 12px rgba(247,212,30,.9); border-color: rgb(var(--volt)); }
+    .choice input:focus-visible + .choice-card { outline: 2px solid rgb(var(--volt)); outline-offset: 3px; }
+
+    .btn-volt { background: linear-gradient(180deg, #ffe55a 0%, #f7d41e 50%, #e0b800 100%); color: #07070a; box-shadow: 0 10px 40px -10px rgba(247,212,30,.7), inset 0 1px 0 rgba(255,255,255,.6); }
+    .btn-volt:hover { box-shadow: 0 16px 60px -10px rgba(247,212,30,.95), inset 0 1px 0 rgba(255,255,255,.6); }
+    .btn-shine { position: relative; overflow: hidden; }
+    .btn-shine::after { content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transition: left .7s ease; }
+    .btn-shine:hover::after { left: 140%; }
+
+    .map-dark { filter: grayscale(1) invert(.92) contrast(.9) brightness(.85) hue-rotate(180deg); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="grain font-sans">
+
+  <!-- ============ NAV ============ -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#top" class="group flex items-center gap-3" aria-label="Стамен Бояджиев — начало">
+        <span class="grid h-10 w-10 place-items-center rounded-lg bg-volt font-display text-lg font-bold text-ink shadow-volt">СБ</span>
+        <span class="leading-tight">
+          <span class="block font-display text-base font-semibold uppercase tracking-[.18em] text-white">Стамен</span>
+          <span class="block text-[11px] uppercase tracking-[.28em] text-white/50">Бояджиев · Coach</span>
+        </span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-semibold text-white/70 md:flex" aria-label="Основна навигация">
+        <a href="#arena" class="transition hover:text-volt">Арената</a>
+        <a href="#results" class="transition hover:text-volt">Трансформации</a>
+        <a href="#location" class="transition hover:text-volt">Локация & График</a>
+        <a href="#join" class="transition hover:text-volt">Контакт</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#join" data-service="group" class="btn-volt btn-shine hidden rounded-full px-5 py-2.5 text-sm font-extrabold uppercase tracking-wider transition sm:inline-flex">Запиши се</a>
+        <button id="menuBtn" class="grid h-10 w-10 place-items-center rounded-lg border border-white/10 text-white md:hidden" aria-label="Отвори менюто" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden border-t border-white/5 bg-ink/95 px-4 pb-6 pt-2 backdrop-blur-xl md:hidden">
+      <nav class="flex flex-col text-lg font-semibold text-white/80" aria-label="Мобилна навигация">
+        <a href="#arena" class="border-b border-white/5 py-3">Арената</a>
+        <a href="#results" class="border-b border-white/5 py-3">Трансформации</a>
+        <a href="#location" class="border-b border-white/5 py-3">Локация & График</a>
+        <a href="#join" class="py-3">Контакт</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="relative isolate min-h-[100svh] overflow-hidden pt-28 sm:pt-32 lg:pt-24">
+      <!-- Ambient background -->
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="grid-bg absolute inset-0"></div>
+        <div class="absolute -right-40 top-10 h-[640px] w-[640px] rounded-full bg-volt/20 blur-[140px] animate-glow"></div>
+        <div class="absolute -left-40 bottom-0 h-[420px] w-[420px] rounded-full bg-volt/10 blur-[120px]"></div>
+        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink"></div>
+      </div>
+
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-12 lg:gap-6 lg:px-8">
+
+        <!-- Copy -->
+        <div class="relative z-10 lg:col-span-6 xl:col-span-6">
+          <div class="reveal inline-flex items-center gap-2 rounded-full border border-volt/30 bg-volt/[.07] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[.22em] text-volt sm:text-xs">
+            <span class="h-1.5 w-1.5 rounded-full bg-volt shadow-[0_0_10px_#f7d41e]"></span>
+            Варна · 100 Тона · Varna Towers
+          </div>
+
+          <h1 class="reveal mt-6 font-display font-bold uppercase leading-[.9] tracking-tight text-white" data-delay="1">
+            <span class="block text-[clamp(3rem,11vw,6.75rem)]">Ковай</span>
+            <span class="block text-[clamp(3rem,11vw,6.75rem)] text-volt-gradient">хранителя</span>
+            <span class="block text-[clamp(2.2rem,7vw,5.25rem)]">в себе си.</span>
+          </h1>
+
+          <p class="reveal mt-6 max-w-xl border-l-2 border-volt pl-4 font-display text-xl font-medium uppercase tracking-wide text-white/90 sm:text-2xl" data-delay="2">
+            Влез в онова състояние, където слабостта няма място.
+          </p>
+
+          <p class="reveal mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg" data-delay="2">
+            Сертифициран кондиционен треньор. Преминай отвъд границите на обикновеното с HIIT, Tabata и професионални трансформации във Варна.
+          </p>
+
+          <div class="reveal mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" data-delay="3">
+            <a href="#join" data-service="group" class="btn-volt btn-shine group inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-sm font-extrabold uppercase tracking-wider transition sm:text-[15px]">
+              Запази място за групова тренировка
+              <svg class="h-5 w-5 transition group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#join" data-service="individual" class="group inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-white/[.03] px-7 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur transition hover:border-volt/60 hover:text-volt sm:text-[15px]">
+              Започни индивидуална трансформация
+            </a>
+          </div>
+
+          <dl class="reveal mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-white/10 pt-6" data-delay="3">
+            <div>
+              <dt class="text-[11px] uppercase tracking-[.2em] text-white/40">Формат</dt>
+              <dd class="mt-1 font-display text-lg font-semibold text-white sm:text-2xl">HIIT · Tabata</dd>
+            </div>
+            <div>
+              <dt class="text-[11px] uppercase tracking-[.2em] text-white/40">Групи</dt>
+              <dd class="mt-1 font-display text-lg font-semibold text-white sm:text-2xl">Вт · Чт</dd>
+            </div>
+            <div>
+              <dt class="text-[11px] uppercase tracking-[.2em] text-white/40">Старт</dt>
+              <dd class="mt-1 font-display text-lg font-semibold text-volt sm:text-2xl">19:30</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- 3D Layered stage -->
+        <div class="relative lg:col-span-6 xl:col-span-6">
+          <div id="stage" class="stage relative mx-auto aspect-[4/5] w-full max-w-[520px] sm:max-w-[560px] lg:max-w-none">
+            <div id="stageInner" class="stage-inner absolute inset-0">
+
+              <!-- L0: giant outlined word -->
+              <div class="layer pointer-events-none absolute inset-x-0 top-[6%] select-none text-center" data-depth="-60">
+                <span class="text-outline font-display text-[clamp(5rem,22vw,13rem)] font-bold uppercase leading-none tracking-tighter">SB1</span>
+              </div>
+
+              <!-- L1: glow -->
+              <div class="layer absolute left-1/2 top-[38%] h-[70%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-volt/25 blur-[90px]" data-depth="-30"></div>
+
+              <!-- L2: frame -->
+              <div class="layer absolute inset-x-[7%] bottom-[4%] top-[22%]" data-depth="0">
+                <div class="hero-frame relative h-full w-full overflow-hidden rounded-[2rem] shadow-deep">
+                  <div class="grid-bg absolute inset-0 opacity-70"></div>
+                  <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  <!-- Frame UI chrome -->
+                  <div class="absolute left-5 top-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.3em] text-white/50">
+                    <span class="h-2 w-2 animate-pulse rounded-full bg-red-500"></span> REC · Ниво -2
+                  </div>
+                  <div class="absolute right-5 top-5 font-display text-xs uppercase tracking-[.3em] text-volt/80">100 Тона</div>
+                </div>
+              </div>
+
+              <!-- L3: athlete — bursts out above the frame -->
+              <!--
+                За истински "изскачащ" ефект замени файла с изрязан PNG без фон (напр. assets/stamen-cutout.png)
+                и добави клас "is-png" към <img>. Сегашната снимка използва мека маска, която я слива с тъмния фон.
+              -->
+              <div class="layer pointer-events-none absolute inset-x-[2%] bottom-[4%] top-0 flex items-end justify-center" data-depth="45">
+                <img src="assets/stamen-hero.jpg" alt="Стамен Бояджиев по време на тренировка с медицинска топка"
+                     class="hero-cutout h-full w-auto max-w-none object-contain" width="537" height="1300" fetchpriority="high" />
+              </div>
+
+              <!-- L4: floating chips -->
+              <div class="layer absolute left-0 top-[34%] sm:-left-4" data-depth="90">
+                <div class="animate-float rounded-2xl border border-white/10 bg-ink-800/80 px-4 py-3 shadow-deep backdrop-blur-xl">
+                  <div class="text-[10px] font-bold uppercase tracking-[.25em] text-white/40">Tabata протокол</div>
+                  <div class="mt-1 font-display text-2xl font-bold text-white">20<span class="text-volt">/</span>10 <span class="text-sm font-medium text-white/50">× 8</span></div>
+                </div>
+              </div>
+
+              <div class="layer absolute bottom-[14%] right-0 sm:-right-4" data-depth="110">
+                <div class="animate-float-slow rounded-2xl border border-volt/40 bg-volt px-4 py-3 text-ink shadow-volt">
+                  <div class="text-[10px] font-extrabold uppercase tracking-[.25em] text-ink/60">Кондиционна</div>
+                  <div class="mt-0.5 font-display text-xl font-bold uppercase">19:30 – 20:20</div>
+                </div>
+              </div>
+
+              <div class="layer absolute bottom-[2%] left-[10%]" data-depth="70">
+                <div class="flex items-center gap-3 rounded-full border border-white/10 bg-black/60 py-2 pl-2 pr-4 backdrop-blur-xl">
+                  <span class="grid h-8 w-8 place-items-center rounded-full bg-volt/15 text-volt">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7l7-4z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white/80">Сертифициран треньор</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <a href="#arena" class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-bold uppercase tracking-[.35em] text-white/40 transition hover:text-volt lg:flex" aria-label="Към секция Арената">
+        Скрол
+        <span class="h-10 w-px bg-gradient-to-b from-volt to-transparent"></span>
+      </a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="relative overflow-hidden py-3" aria-hidden="true"><div class="relative -mx-4 -rotate-1 overflow-hidden border-y border-volt/40 bg-volt py-4 text-ink shadow-volt">
+      <div class="flex w-max animate-marquee whitespace-nowrap font-display text-2xl font-bold uppercase tracking-wide sm:text-3xl">
+        <div class="flex items-center gap-8 pr-8">
+          <span>HIIT</span><span>✦</span><span>Tabata</span><span>✦</span><span>Кондиция</span><span>✦</span><span>Сила</span><span>✦</span><span>Издръжливост</span><span>✦</span><span>Дисциплина</span><span>✦</span><span>Трансформация</span><span>✦</span>
+        </div>
+        <div class="flex items-center gap-8 pr-8">
+          <span>HIIT</span><span>✦</span><span>Tabata</span><span>✦</span><span>Кондиция</span><span>✦</span><span>Сила</span><span>✦</span><span>Издръжливост</span><span>✦</span><span>Дисциплина</span><span>✦</span><span>Трансформация</span><span>✦</span>
+        </div>
+      </div>
+    </div></div>
+
+    <!-- ============ ARENA ============ -->
+    <section id="arena" class="relative scroll-mt-24 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="reveal max-w-2xl">
+            <p class="text-xs font-bold uppercase tracking-[.3em] text-volt">01 — Арената</p>
+            <h2 class="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold uppercase leading-[.95] text-white">
+              Три пътя. <span class="text-white/30">Една цел —</span> <span class="text-volt-gradient">по-силната версия на теб.</span>
+            </h2>
+          </div>
+          <p class="reveal max-w-md text-white/60" data-delay="1">
+            Без шаблонни програми и празни обещания. Всяка тренировка има протокол, всяка серия — смисъл, всяка седмица — измерим прогрес.
+          </p>
+        </div>
+
+        <div class="mt-16 grid gap-6 lg:grid-cols-3">
+          <!-- Card 1 -->
+          <article class="spot reveal group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-ink-800 to-ink-900 p-8 transition duration-500 hover:-translate-y-2 hover:border-volt/50">
+            <div class="flex items-start justify-between">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl bg-volt text-ink shadow-volt">
+                <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="font-display text-6xl font-bold text-white/[.06]">01</span>
+            </div>
+            <h3 class="mt-8 font-display text-3xl font-bold uppercase text-white">Групови тренировки</h3>
+            <p class="mt-1 text-sm font-bold uppercase tracking-[.2em] text-volt">HIIT & Tabata · 100 Тона</p>
+            <p class="mt-5 leading-relaxed text-white/60">
+              Динамика, колективна енергия и издръжливост. Залата пулсира, групата те тегли напред, а ти откриваш, че можеш още един рунд.
+            </p>
+            <ul class="mt-6 space-y-3 text-sm text-white/75">
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Вторник и четвъртък · 19:30 – 20:20</li>
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Интервални протоколи за всяко ниво</li>
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Изгаряне на мазнини и кондиция</li>
+            </ul>
+            <a href="#join" data-service="group" class="mt-auto inline-flex items-center gap-2 pt-10 text-sm font-extrabold uppercase tracking-wider text-volt">
+              Запази място
+              <svg class="h-4 w-4 transition group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Card 2 (featured) -->
+          <article class="spot reveal group relative flex flex-col overflow-hidden rounded-3xl border border-volt/40 bg-gradient-to-b from-[#1d1a08] to-ink-900 p-8 shadow-volt transition duration-500 hover:-translate-y-2 lg:-mt-6 lg:mb-6" data-delay="1">
+            <div class="absolute right-6 top-6 rounded-full bg-volt px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.2em] text-ink">Най-търсено</div>
+            <div class="flex items-start justify-between">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl border border-volt/50 bg-volt/10 text-volt">
+                <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+              </span>
+            </div>
+            <h3 class="mt-8 font-display text-3xl font-bold uppercase text-white">Индивидуален коучинг</h3>
+            <p class="mt-1 text-sm font-bold uppercase tracking-[.2em] text-volt">1:1 · Прецизен протокол</p>
+            <p class="mt-5 leading-relaxed text-white/60">
+              Прецизирани тренировъчни протоколи спрямо твоите цели, тяло и график. Всеки повтор е под контрол — техника, темпо, натоварване.
+            </p>
+            <ul class="mt-6 space-y-3 text-sm text-white/75">
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Начална оценка и ясни цели</li>
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Персонален план и прогресия</li>
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Удобни часове по уговорка</li>
+            </ul>
+            <a href="#join" data-service="individual" class="btn-volt btn-shine mt-auto inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider" style="margin-top:2.5rem">
+              Започни сега
+            </a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="spot reveal group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-ink-800 to-ink-900 p-8 transition duration-500 hover:-translate-y-2 hover:border-volt/50" data-delay="2">
+            <div class="flex items-start justify-between">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl border border-white/15 bg-white/5 text-volt">
+                <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="font-display text-6xl font-bold text-white/[.06]">03</span>
+            </div>
+            <h3 class="mt-8 font-display text-3xl font-bold uppercase text-white">Реални трансформации</h3>
+            <p class="mt-1 text-sm font-bold uppercase tracking-[.2em] text-volt">Пътеката към форма</p>
+            <p class="mt-5 leading-relaxed text-white/60">
+              Пътеката към перфектната физическа форма — стъпка по стъпка. Тренировки, навици и дисциплина, които остават с теб и след финала.
+            </p>
+            <ul class="mt-6 space-y-3 text-sm text-white/75">
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Проследяване на прогреса</li>
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Насоки за хранене и възстановяване</li>
+              <li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-volt"></span>Мотивация, когато е най-трудно</li>
+            </ul>
+            <a href="#results" class="mt-auto inline-flex items-center gap-2 pt-10 text-sm font-extrabold uppercase tracking-wider text-volt">
+              Виж резултатите
+              <svg class="h-4 w-4 transition group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MANIFESTO / COACH ============ -->
+    <section class="relative overflow-hidden py-20 sm:py-28">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div class="reveal relative lg:col-span-5">
+          <div class="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 shadow-deep">
+            <img src="assets/stamen-portrait.jpg" alt="Портрет на треньора Стамен Бояджиев" loading="lazy"
+                 class="h-full w-full object-cover object-[50%_20%] grayscale contrast-125" width="551" height="1258" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-volt/10 mix-blend-overlay"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <p class="font-display text-3xl font-bold uppercase text-white">Стамен Бояджиев</p>
+              <p class="mt-1 text-xs font-bold uppercase tracking-[.25em] text-volt">Персонален & кондиционен треньор</p>
+            </div>
+          </div>
+          <div class="absolute -bottom-6 -right-2 hidden h-28 w-28 place-items-center rounded-full border border-volt/40 bg-ink/80 text-center backdrop-blur-xl sm:grid lg:-right-6">
+            <span class="font-display text-[11px] font-bold uppercase leading-tight tracking-[.2em] text-volt">@sb1<br/>coach</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <p class="reveal text-xs font-bold uppercase tracking-[.3em] text-volt">02 — Манифест</p>
+          <blockquote class="reveal mt-6 font-display text-[clamp(2rem,4.5vw,3.5rem)] font-semibold uppercase leading-[1.05] text-white" data-delay="1">
+            „Тялото ти чува всичко, което умът ти казва. <span class="text-volt-gradient">Научи го да не се предава.</span>“
+          </blockquote>
+          <p class="reveal mt-8 max-w-2xl text-lg leading-relaxed text-white/60" data-delay="2">
+            Работя с хора, които искат повече от „ходене на фитнес“. Структурирана кондиция, интелигентно натоварване и атмосфера, в която всеки рунд те прави по-твърд — физически и ментално.
+          </p>
+          <div class="reveal mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3" data-delay="3">
+            <div class="rounded-2xl border border-white/10 bg-white/[.02] p-5">
+              <p class="font-display text-lg font-bold uppercase text-white">Сила</p>
+              <p class="mt-1 text-sm text-white/50">Функционална мощ за реалния живот.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[.02] p-5">
+              <p class="font-display text-lg font-bold uppercase text-white">Кондиция</p>
+              <p class="mt-1 text-sm text-white/50">Сърце и бели дробове, които не се предават.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[.02] p-5">
+              <p class="font-display text-lg font-bold uppercase text-white">Дисциплина</p>
+              <p class="mt-1 text-sm text-white/50">Навик, който остава след последната серия.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BEFORE / AFTER ============ -->
+    <section id="results" class="relative scroll-mt-24 overflow-hidden py-24 sm:py-32">
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-volt/10 blur-[140px]"></div>
+      </div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-3xl text-center">
+          <p class="text-xs font-bold uppercase tracking-[.3em] text-volt">03 — Преди & След</p>
+          <h2 class="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold uppercase leading-[.95] text-white">
+            Доказателството е <span class="text-volt-gradient">в огледалото.</span>
+          </h2>
+          <p class="mt-5 text-white/60">Плъзни разделителя и виж разликата, която дисциплината прави.</p>
+        </div>
+
+        <!--
+          Как да добавиш реални снимки:
+          във всеки .ba блок замени двата <div class="ph-*"> с <img src="assets/client-1-before.jpg" class="absolute inset-0 h-full w-full object-cover" alt="...">
+          (същото за "after"), и обнови текста с реалните резултати на клиента.
+        -->
+        <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Result 1 -->
+          <figure class="reveal overflow-hidden rounded-3xl border border-white/10 bg-ink-800 shadow-deep">
+            <div class="ba relative aspect-[4/5] select-none overflow-hidden">
+              <div class="before ph-before absolute inset-0 grid place-items-center">
+                <svg class="h-2/3 text-white/10" viewBox="0 0 100 200" fill="currentColor" aria-hidden="true"><circle cx="50" cy="22" r="16"/><path d="M22 52c0-6 6-10 12-10h32c6 0 12 4 12 10l6 60c0 4-3 7-7 7h-4l-4 70H39l-4-70h-4c-4 0-7-3-7-7z"/></svg>
+              </div>
+              <div class="after ph-after absolute inset-0 grid place-items-center">
+                <svg class="h-2/3 text-volt/25" viewBox="0 0 100 200" fill="currentColor" aria-hidden="true"><circle cx="50" cy="20" r="14"/><path d="M18 48c0-5 5-9 11-9h42c6 0 11 4 11 9l4 58c0 4-3 6-6 6h-6l-6 78H43l-6-78h-6c-3 0-6-2-6-6z"/></svg>
+              </div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.25em] text-white/80 backdrop-blur">Преди</span>
+              <span class="absolute right-4 top-4 rounded-full bg-volt px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.25em] text-ink">След</span>
+              <div class="handle pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-volt shadow-[0_0_20px_#f7d41e]">
+                <span class="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-volt text-ink shadow-volt">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="absolute inset-0 h-full w-full" aria-label="Сравни преди и след — трансформация 1" />
+            </div>
+            <figcaption class="flex items-end justify-between gap-4 p-6">
+              <div>
+                <p class="font-display text-xl font-bold uppercase text-white">Мазнини → Релеф</p>
+                <p class="mt-1 text-sm text-white/50">Индивидуален протокол · 16 седмици</p>
+              </div>
+              <p class="font-display text-3xl font-bold text-volt">−12<span class="text-base"> кг</span></p>
+            </figcaption>
+          </figure>
+
+          <!-- Result 2 -->
+          <figure class="reveal overflow-hidden rounded-3xl border border-white/10 bg-ink-800 shadow-deep" data-delay="1">
+            <div class="ba relative aspect-[4/5] select-none overflow-hidden">
+              <div class="before ph-before absolute inset-0 grid place-items-center">
+                <svg class="h-2/3 text-white/10" viewBox="0 0 100 200" fill="currentColor" aria-hidden="true"><circle cx="50" cy="22" r="15"/><path d="M26 50c0-5 5-9 11-9h26c6 0 11 4 11 9l4 58c0 4-3 6-6 6h-4l-4 76H40l-4-76h-4c-3 0-6-2-6-6z"/></svg>
+              </div>
+              <div class="after ph-after absolute inset-0 grid place-items-center">
+                <svg class="h-2/3 text-volt/25" viewBox="0 0 100 200" fill="currentColor" aria-hidden="true"><circle cx="50" cy="20" r="14"/><path d="M14 48c0-6 6-10 12-10h48c6 0 12 4 12 10l4 56c0 4-3 7-7 7h-6l-6 79H43l-6-79h-6c-4 0-7-3-7-7z"/></svg>
+              </div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.25em] text-white/80 backdrop-blur">Преди</span>
+              <span class="absolute right-4 top-4 rounded-full bg-volt px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.25em] text-ink">След</span>
+              <div class="handle pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-volt shadow-[0_0_20px_#f7d41e]">
+                <span class="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-volt text-ink shadow-volt">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="absolute inset-0 h-full w-full" aria-label="Сравни преди и след — трансформация 2" />
+            </div>
+            <figcaption class="flex items-end justify-between gap-4 p-6">
+              <div>
+                <p class="font-display text-xl font-bold uppercase text-white">Мускулна маса</p>
+                <p class="mt-1 text-sm text-white/50">Сила + кондиция · 20 седмици</p>
+              </div>
+              <p class="font-display text-3xl font-bold text-volt">+6<span class="text-base"> кг</span></p>
+            </figcaption>
+          </figure>
+
+          <!-- Result 3 -->
+          <figure class="reveal overflow-hidden rounded-3xl border border-white/10 bg-ink-800 shadow-deep md:col-span-2 lg:col-span-1" data-delay="2">
+            <div class="ba relative aspect-[4/5] select-none overflow-hidden md:aspect-[16/10] lg:aspect-[4/5]">
+              <div class="before ph-before absolute inset-0 grid place-items-center">
+                <svg class="h-2/3 text-white/10" viewBox="0 0 100 200" fill="currentColor" aria-hidden="true"><circle cx="50" cy="22" r="16"/><path d="M20 54c0-7 6-12 13-12h34c7 0 13 5 13 12l5 56c0 4-3 7-7 7h-4l-4 72H38l-4-72h-4c-4 0-7-3-7-7z"/></svg>
+              </div>
+              <div class="after ph-after absolute inset-0 grid place-items-center">
+                <svg class="h-2/3 text-volt/25" viewBox="0 0 100 200" fill="currentColor" aria-hidden="true"><circle cx="50" cy="20" r="14"/><path d="M20 48c0-5 5-9 11-9h38c6 0 11 4 11 9l4 58c0 4-3 6-6 6h-6l-6 78H43l-6-78h-6c-3 0-6-2-6-6z"/></svg>
+              </div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.25em] text-white/80 backdrop-blur">Преди</span>
+              <span class="absolute right-4 top-4 rounded-full bg-volt px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.25em] text-ink">След</span>
+              <div class="handle pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-volt shadow-[0_0_20px_#f7d41e]">
+                <span class="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-volt text-ink shadow-volt">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="absolute inset-0 h-full w-full" aria-label="Сравни преди и след — трансформация 3" />
+            </div>
+            <figcaption class="flex items-end justify-between gap-4 p-6">
+              <div>
+                <p class="font-display text-xl font-bold uppercase text-white">Издръжливост</p>
+                <p class="mt-1 text-sm text-white/50">Групови HIIT & Tabata · 12 седмици</p>
+              </div>
+              <p class="font-display text-3xl font-bold text-volt">−9<span class="text-base"> см талия</span></p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="reveal mt-14 flex flex-col items-center justify-center gap-4 text-center sm:flex-row">
+          <p class="text-white/60">Следващата трансформация може да е твоята.</p>
+          <a href="#join" data-service="individual" class="inline-flex items-center gap-2 rounded-full border border-volt/50 px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-volt transition hover:bg-volt hover:text-ink">
+            Започни своята
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="border-y border-white/5 bg-ink-900/60 py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 md:grid-cols-3">
+          <div class="reveal">
+            <p class="font-display text-6xl font-bold text-volt">01</p>
+            <h3 class="mt-3 font-display text-2xl font-bold uppercase text-white">Заявка</h3>
+            <p class="mt-2 text-white/55">Оставяш име и телефон. Обаждаме се до 24 часа, за да уточним цели и график.</p>
+          </div>
+          <div class="reveal" data-delay="1">
+            <p class="font-display text-6xl font-bold text-volt">02</p>
+            <h3 class="mt-3 font-display text-2xl font-bold uppercase text-white">Първа тренировка</h3>
+            <p class="mt-2 text-white/55">Оценка на нивото, техника и темпо. Без его — само честна отправна точка.</p>
+          </div>
+          <div class="reveal" data-delay="2">
+            <p class="font-display text-6xl font-bold text-volt">03</p>
+            <h3 class="mt-3 font-display text-2xl font-bold uppercase text-white">Трансформация</h3>
+            <p class="mt-2 text-white/55">Ясен протокол, проследим прогрес и треньор, който няма да те остави да спреш.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOCATION & SCHEDULE ============ -->
+    <section id="location" class="relative scroll-mt-24 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-2xl">
+          <p class="text-xs font-bold uppercase tracking-[.3em] text-volt">04 — Локация & График</p>
+          <h2 class="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold uppercase leading-[.95] text-white">
+            Ниво -2. <span class="text-volt-gradient">Тук се кове формата.</span>
+          </h2>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-5">
+          <!-- Info -->
+          <div class="reveal flex flex-col rounded-3xl border border-white/10 bg-gradient-to-b from-ink-800 to-ink-900 p-6 sm:p-8 lg:col-span-2">
+            <div class="flex items-center gap-4">
+              <span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-volt font-display text-lg font-bold leading-none text-ink">100</span>
+              <div>
+                <p class="font-display text-2xl font-bold uppercase text-white">Зала 100 Тона</p>
+                <p class="text-sm text-white/55">Varna Towers, ниво -2 · Варна</p>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <p class="text-[11px] font-bold uppercase tracking-[.25em] text-white/40">График</p>
+              <ul class="mt-4 divide-y divide-white/5 rounded-2xl border border-white/10 bg-black/30">
+                <li class="flex items-center justify-between gap-4 px-5 py-4">
+                  <div>
+                    <p class="font-semibold text-white">Вторник</p>
+                    <p class="text-xs text-white/45">Кондиционна · HIIT & Tabata</p>
+                  </div>
+                  <span class="shrink-0 whitespace-nowrap rounded-full bg-volt/10 px-3 py-1 font-display text-sm font-semibold text-volt">19:30 – 20:20</span>
+                </li>
+                <li class="flex items-center justify-between gap-4 px-5 py-4">
+                  <div>
+                    <p class="font-semibold text-white">Четвъртък</p>
+                    <p class="text-xs text-white/45">Кондиционна · HIIT & Tabata</p>
+                  </div>
+                  <span class="shrink-0 whitespace-nowrap rounded-full bg-volt/10 px-3 py-1 font-display text-sm font-semibold text-volt">19:30 – 20:20</span>
+                </li>
+                <li class="flex items-center justify-between gap-4 px-5 py-4">
+                  <div>
+                    <p class="font-semibold text-white">Индивидуални</p>
+                    <p class="text-xs text-white/45">Персонален коучинг 1:1</p>
+                  </div>
+                  <span class="shrink-0 whitespace-nowrap rounded-full border border-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white/70">По уговорка</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:mt-auto lg:pt-8">
+              <a href="tel:+359888832877" class="btn-volt btn-shine inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-extrabold uppercase tracking-wider">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Обади се
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Varna+Towers+Varna" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition hover:border-volt/60 hover:text-volt">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 1114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Навигация
+              </a>
+              <a href="https://www.instagram.com/sb1_coach/" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition hover:border-volt/60 hover:text-volt sm:col-span-2">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+                @sb1_coach в Instagram
+              </a>
+            </div>
+          </div>
+
+          <!-- Map -->
+          <div class="reveal relative min-h-[360px] overflow-hidden rounded-3xl border border-white/10 lg:col-span-3" data-delay="1">
+            <iframe title="Карта — Varna Towers, Варна" class="map-dark absolute inset-0 h-full w-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps?q=Varna+Towers,+Varna&z=16&output=embed"></iframe>
+            <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-volt/20"></div>
+            <div class="pointer-events-none absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-ink/85 px-5 py-4 backdrop-blur-xl sm:bottom-6 sm:left-6 sm:right-auto">
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-[.25em] text-volt">Намираш ни в</p>
+                <p class="font-display text-lg font-bold uppercase text-white">Varna Towers · Ниво -2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LEAD CAPTURE ============ -->
+    <section id="join" class="relative scroll-mt-20 overflow-hidden py-24 sm:py-32">
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-[url('assets/stamen-hero.jpg')] bg-cover bg-[center_20%] opacity-[.12] grayscale"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-ink via-ink/90 to-ink"></div>
+        <div class="absolute bottom-0 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-volt/15 blur-[150px]"></div>
+      </div>
+
+      <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div class="reveal">
+          <p class="text-xs font-bold uppercase tracking-[.3em] text-volt">05 — Решението</p>
+          <h2 class="mt-4 font-display text-[clamp(2.75rem,7vw,5rem)] font-bold uppercase leading-[.9] text-white">
+            Утре ще ти благодари <span class="text-volt-gradient">днешното ти решение.</span>
+          </h2>
+          <p class="mt-6 max-w-md text-lg text-white/60">
+            Местата в груповите тренировки са ограничени. Остави контакт и ще те върнем с конкретен ден и час за старт.
+          </p>
+          <ul class="mt-8 space-y-3 text-white/75">
+            <li class="flex items-center gap-3"><svg class="h-5 w-5 text-volt" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Обратна връзка до 24 часа</li>
+            <li class="flex items-center gap-3"><svg class="h-5 w-5 text-volt" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Без ангажимент при заявката</li>
+            <li class="flex items-center gap-3"><svg class="h-5 w-5 text-volt" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Подходящо за всяко ниво</li>
+          </ul>
+        </div>
+
+        <div class="reveal relative" data-delay="1">
+          <div class="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-volt/70 via-volt/5 to-volt/40"></div>
+          <form id="leadForm" class="relative rounded-[2rem] bg-ink-900/95 p-6 shadow-deep backdrop-blur-xl sm:p-10" novalidate>
+            <div id="formFields">
+              <h3 class="font-display text-3xl font-bold uppercase text-white">Заяви мястото си</h3>
+              <p class="mt-2 text-sm text-white/50">Отнема 20 секунди. Колкото един Tabata интервал.</p>
+
+              <div class="mt-8 space-y-5">
+                <div>
+                  <label for="name" class="mb-2 block text-[11px] font-bold uppercase tracking-[.22em] text-white/50">Име</label>
+                  <input id="name" name="name" type="text" autocomplete="name" required minlength="2" placeholder="Твоето име"
+                         class="field w-full rounded-xl px-4 py-3.5 text-base text-white" />
+                  <p class="err mt-1.5 hidden text-xs text-red-400">Моля, въведи името си.</p>
+                </div>
+                <div>
+                  <label for="phone" class="mb-2 block text-[11px] font-bold uppercase tracking-[.22em] text-white/50">Телефон</label>
+                  <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+359 88 123 4567"
+                         class="field w-full rounded-xl px-4 py-3.5 text-base text-white" />
+                  <p class="err mt-1.5 hidden text-xs text-red-400">Моля, въведи валиден телефонен номер.</p>
+                </div>
+
+                <fieldset>
+                  <legend class="mb-2 block text-[11px] font-bold uppercase tracking-[.22em] text-white/50">Избор на услуга</legend>
+                  <div class="grid gap-3 sm:grid-cols-2">
+                    <label class="choice cursor-pointer">
+                      <input type="radio" name="service" value="Групова тренировка" id="svc-group" class="sr-only" checked />
+                      <span class="choice-card flex h-full items-start gap-3 rounded-xl border border-white/10 bg-white/[.02] p-4 transition">
+                        <span class="dot mt-1 h-3.5 w-3.5 shrink-0 rounded-full border-2 border-white/30 transition"></span>
+                        <span>
+                          <span class="block font-display text-lg font-bold uppercase text-white">Групова</span>
+                          <span class="block text-xs text-white/50">HIIT & Tabata · Вт/Чт</span>
+                        </span>
+                      </span>
+                    </label>
+                    <label class="choice cursor-pointer">
+                      <input type="radio" name="service" value="Индивидуална тренировка" id="svc-individual" class="sr-only" />
+                      <span class="choice-card flex h-full items-start gap-3 rounded-xl border border-white/10 bg-white/[.02] p-4 transition">
+                        <span class="dot mt-1 h-3.5 w-3.5 shrink-0 rounded-full border-2 border-white/30 transition"></span>
+                        <span>
+                          <span class="block font-display text-lg font-bold uppercase text-white">Индивидуална</span>
+                          <span class="block text-xs text-white/50">1:1 коучинг · по уговорка</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <!-- Honeypot against spam bots -->
+                <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+                <button type="submit" id="submitBtn" class="btn-volt btn-shine flex w-full items-center justify-center gap-3 rounded-full px-6 py-4 text-base font-extrabold uppercase tracking-wider transition disabled:opacity-60">
+                  <span>Заяви своята промяна сега</span>
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <p class="text-center text-[11px] leading-relaxed text-white/35">С изпращането се съгласяваш да се свържем с теб по телефона. Данните ти не се споделят с трети страни.</p>
+              </div>
+            </div>
+
+            <div id="formSuccess" class="hidden py-10 text-center" role="status" aria-live="polite">
+              <div class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-volt text-ink shadow-volt">
+                <svg class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h3 class="mt-6 font-display text-3xl font-bold uppercase text-white">Решението е взето.</h3>
+              <p class="mx-auto mt-3 max-w-sm text-white/60"><span id="successName">Шампионе</span>, ще се свържем с теб до 24 часа. Дотогава — пий вода и се наспи.</p>
+              <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <a href="tel:+359888832877" class="btn-volt inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold uppercase tracking-wider">Обади се веднага</a>
+                <a href="https://www.instagram.com/sb1_coach/" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white hover:border-volt/60 hover:text-volt">Instagram</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-white/5 pb-28 pt-12 sm:pb-12">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
+      <div>
+        <p class="font-display text-xl font-bold uppercase tracking-[.15em] text-white">Стамен Бояджиев</p>
+        <p class="mt-1 text-sm text-white/40">Персонален & кондиционен треньор · 100 Тона, Varna Towers, ниво -2</p>
+      </div>
+      <div class="flex items-center gap-5 text-sm font-semibold text-white/60">
+        <a href="tel:+359888832877" class="hover:text-volt">+359 888 832 877</a>
+        <a href="https://www.instagram.com/sb1_coach/" target="_blank" rel="noopener" class="hover:text-volt">Instagram</a>
+        <a href="https://www.100tona.com" target="_blank" rel="noopener" class="hover:text-volt">100tona.com</a>
+      </div>
+    </div>
+    <p class="mt-8 text-center text-xs text-white/25">© <span id="year"></span> Стамен Бояджиев. Всички права запазени.</p>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <div id="stickyCta" class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-white/10 bg-ink/90 p-3 backdrop-blur-xl transition-transform duration-300 sm:hidden" style="padding-bottom: max(.75rem, env(safe-area-inset-bottom));">
+    <div class="flex gap-2">
+      <a href="tel:+359888832877" class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/15 text-volt" aria-label="Обади се">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#join" data-service="group" class="btn-volt flex flex-1 items-center justify-center rounded-full text-sm font-extrabold uppercase tracking-wider">Запази място</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ---- Form endpoint ----
+      // Постави тук URL на услуга за форми (напр. Formspree: https://formspree.io/f/xxxxxx)
+      // или свой бекенд. Ако е празно, формата само показва успешно съобщение.
+      var FORM_ENDPOINT = '';
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // ---- Nav background on scroll + sticky mobile CTA ----
+      var nav = document.getElementById('nav');
+      var sticky = document.getElementById('stickyCta');
+      var joinSection = document.getElementById('join');
+      function onScroll() {
+        var y = window.scrollY;
+        nav.classList.toggle('bg-ink/80', y > 30);
+        nav.classList.toggle('backdrop-blur-xl', y > 30);
+        nav.classList.toggle('border-b', y > 30);
+        nav.classList.toggle('border-white/5', y > 30);
+        var joinTop = joinSection.getBoundingClientRect().top;
+        var show = y > window.innerHeight * 0.8 && joinTop > window.innerHeight * 0.6;
+        sticky.classList.toggle('translate-y-full', !show);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // ---- Mobile menu ----
+      var menuBtn = document.getElementById('menuBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+      menuBtn.addEventListener('click', function () {
+        var open = mobileMenu.classList.toggle('hidden') === false;
+        menuBtn.setAttribute('aria-expanded', String(open));
+        if (open) nav.classList.add('bg-ink/80', 'backdrop-blur-xl');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          mobileMenu.classList.add('hidden');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // ---- Preselect service from CTA buttons ----
+      document.querySelectorAll('[data-service]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var id = el.getAttribute('data-service') === 'individual' ? 'svc-individual' : 'svc-group';
+          document.getElementById(id).checked = true;
+        });
+      });
+
+      // ---- Reveal on scroll ----
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reduceMotion) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      // ---- 3D parallax hero stage ----
+      var stage = document.getElementById('stage');
+      var stageInner = document.getElementById('stageInner');
+      var layers = stage.querySelectorAll('.layer[data-depth]');
+      var finePointer = window.matchMedia('(pointer: fine)').matches;
+
+      function applyParallax(nx, ny) {
+        // nx, ny in range -1..1
+        stageInner.style.transform = 'rotateY(' + (nx * 8) + 'deg) rotateX(' + (-ny * 6) + 'deg)';
+        layers.forEach(function (layer) {
+          var d = parseFloat(layer.getAttribute('data-depth')) || 0;
+          layer.style.transform = 'translate3d(' + (nx * d * 0.25) + 'px,' + (ny * d * 0.2) + 'px,' + d + 'px)';
+        });
+      }
+
+      if (!reduceMotion) {
+        applyParallax(0, 0);
+        if (finePointer) {
+          var ticking = false;
+          window.addEventListener('mousemove', function (e) {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function () {
+              var r = stage.getBoundingClientRect();
+              var nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2)));
+              var ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (window.innerHeight / 2)));
+              applyParallax(nx, ny);
+              ticking = false;
+            });
+          }, { passive: true });
+        } else {
+          // Touch devices: gentle scroll-driven depth
+          window.addEventListener('scroll', function () {
+            var r = stage.getBoundingClientRect();
+            var p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight));
+            applyParallax(0, p * 0.8);
+          }, { passive: true });
+        }
+      }
+
+      // ---- Spotlight cards ----
+      document.querySelectorAll('.spot').forEach(function (card) {
+        card.addEventListener('pointermove', function (e) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      });
+
+      // ---- Before / After sliders ----
+      document.querySelectorAll('.ba').forEach(function (ba) {
+        var range = ba.querySelector('input[type="range"]');
+        var set = function () { ba.style.setProperty('--pos', range.value + '%'); };
+        range.addEventListener('input', set);
+        set();
+      });
+
+      // ---- Lead form ----
+      var form = document.getElementById('leadForm');
+      var fields = document.getElementById('formFields');
+      var success = document.getElementById('formSuccess');
+      var submitBtn = document.getElementById('submitBtn');
+
+      function setError(input, hasError) {
+        var err = input.parentElement.querySelector('.err');
+        input.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+        input.classList.toggle('!border-red-400', hasError);
+        if (err) err.classList.toggle('hidden', !hasError);
+      }
+
+      function validPhone(v) {
+        var digits = v.replace(/[^\d]/g, '');
+        return digits.length >= 9 && digits.length <= 15 && /^[+\d\s()\-./]+$/.test(v.trim());
+      }
+
+      ['name', 'phone'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', function (e) { setError(e.target, false); });
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = form.name.value.trim();
+        var phone = form.phone.value.trim();
+        var okName = name.length >= 2;
+        var okPhone = validPhone(phone);
+        setError(form.name, !okName);
+        setError(form.phone, !okPhone);
+        if (!okName) { form.name.focus(); return; }
+        if (!okPhone) { form.phone.focus(); return; }
+        if (form.company.value) return; // honeypot
+
+        var payload = {
+          name: name,
+          phone: phone,
+          service: form.querySelector('input[name="service"]:checked').value,
+          source: 'stamen-landing'
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.querySelector('span').textContent = 'Изпращане…';
+
+        function done() {
+          document.getElementById('successName').textContent = name.split(' ')[0];
+          fields.classList.add('hidden');
+          success.classList.remove('hidden');
+          success.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+        }
+        function fail() {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = 'Заяви своята промяна сега';
+          alert('Нещо се обърка при изпращането. Моля, опитай отново или ни се обади на +359 888 832 877.');
+        }
+
+        if (!FORM_ENDPOINT) { setTimeout(done, 500); return; }
+
+        fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (res) { res.ok ? done() : fail(); }).catch(fail);
+      });
+    })();
+  </script>
+</body>
+</html>
