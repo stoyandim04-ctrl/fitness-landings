@@ -1,6 +1,7 @@
 // Треньорски изглед: приходи (демо данни) + продукт в Stripe.
 import { esc, STRIPE_3DAY_URL } from './store.js';
 import { toast } from './ui.js';
+import { eur } from './programs.js';
 
 // Демо данни — сменят се с реални от Stripe API при истински бекенд.
 const MONTHS = [
@@ -8,23 +9,22 @@ const MONTHS = [
   { m: 'юни',  v: 5340 },
   { m: 'юли',  v: 6110 },
   { m: 'авг',  v: 5870 },
-  { m: 'сеп',  v: 7240 },
+  { m: 'сеп',  v: 6538.6 },
   { m: 'окт',  v: 1980, partial: true },
 ];
 const PROGRAMS = [
   { name: 'INTNS Academy',            clients: 5,  revenue: 3960 },
   { name: 'INTNS School',             clients: 12, revenue: 2160 },
-  { name: '3-дневна програма',         clients: 14, revenue: 1120, tag: 'Pre-order' },
+  { name: '3-дневна програма',         clients: 14, revenue: 418.6, tag: 'Pre-order' },
 ];
 const PAYMENTS = [
-  { who: 'Калина Илиева',   what: '3-дневна програма', amount: 80,  ago: 'преди 2 ч',  kind: 'preorder' },
+  { who: 'Калина Илиева',   what: '3-дневна програма', amount: 29.9, ago: 'преди 2 ч',  kind: 'preorder' },
   { who: 'Стефан Василев',  what: 'INTNS Academy',     amount: 790, ago: 'вчера',      kind: 'paid' },
   { who: 'Никол Стоянова',  what: 'INTNS School',      amount: 180, ago: 'вчера',      kind: 'paid' },
-  { who: 'Рая Маринова',    what: '3-дневна програма', amount: 80,  ago: 'преди 2 д',  kind: 'preorder' },
+  { who: 'Рая Маринова',    what: '3-дневна програма', amount: 29.9, ago: 'преди 2 д',  kind: 'preorder' },
   { who: 'Иван Георгиев',   what: 'INTNS Academy',     amount: 790, ago: 'преди 3 д',  kind: 'paid' },
 ];
 
-const eur = v => v.toLocaleString('bg-BG') + ' €';
 
 export function initRevenue() {
   let rendered = false;

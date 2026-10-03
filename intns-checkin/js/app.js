@@ -4,6 +4,7 @@ import { createRouter } from './router.js';
 import { initClient } from './client.js';
 import { initCoach } from './coach.js';
 import { initRevenue } from './revenue.js';
+import { initPricing } from './pricing.js';
 
 const session = {
   get role() { return store.read(KEYS.session).role || null; },
@@ -17,6 +18,19 @@ let activeView = null;
 const client = initClient();
 const coach = initCoach({ isActive: () => activeView === 'view-coach' });
 const revenue = initRevenue();
+
+// „Попитай Тони“ от ценовата секция → към рефлексията в чек-ина
+initPricing({
+  onAsk() {
+    const form = document.getElementById('checkin');
+    if (form.classList.contains('hidden')) document.getElementById('again').click();
+    const ta = document.getElementById('reflection');
+    if (!ta.value.includes('Въпрос към Тони')) ta.value = (ta.value ? ta.value + '\n' : '') + 'Въпрос към Тони: коя програма е за мен? ';
+    ta.dispatchEvent(new Event('input'));
+    ta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => ta.focus({ preventScroll: true }), 400);
+  },
+});
 
 // ── Хедър според ролята ──
 const header = document.getElementById('app-header');

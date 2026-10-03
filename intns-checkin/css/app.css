@@ -83,3 +83,10 @@ input[type=number] { -moz-appearance: textfield; }
   .reveal, .btn-luxe, .tab-in { animation: none !important; opacity: 1; transform: none; }
   .view, #qv-panel, #qv-backdrop { transition: none !important; filter: none !important; }
 }
+
+/* Ценова секция: смяна на картата (exit → enter с лека пружина) */
+[data-pricing-card] { transition: opacity .15s ease, transform .15s ease, filter .15s ease; }
+[data-pricing-card][data-anim="exit"] { opacity: 0; transform: translateY(-10px); filter: blur(2px); }
+[data-pricing-card][data-anim="init"] { opacity: 0; transform: translateY(14px); filter: blur(2px); transition: none; }
+[data-pricing-card][data-anim="in"]   { opacity: 1; transform: none; filter: none;
+  transition: opacity .3s ease, transform .55s cubic-bezier(.2,1.35,.4,1), filter .3s ease; }
