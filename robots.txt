@@ -10,9 +10,10 @@ User-agent: meta-externalagent
 User-agent: Amazonbot
 Disallow: /
 
-# Всички останали (вкл. AI чатове, когато им пратиш линк): само тези два сайта.
+# Всички останали (вкл. AI чатове, когато им пратиш линк): само тези сайтове.
 # Търсачките пак не ги индексират — страниците са с noindex.
 User-agent: *
 Allow: /tony-intense/
 Allow: /intns/
+Allow: /dr-malamov/
 Disallow: /
