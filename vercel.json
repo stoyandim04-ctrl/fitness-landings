@@ -14,6 +14,11 @@
       "source": "/stamen",
       "destination": "/stamen/",
       "permanent": false
+    },
+    {
+      "source": "/tony-intense",
+      "destination": "/tony-intense/",
+      "permanent": false
     }
   ]
 }
