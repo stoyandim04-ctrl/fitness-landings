@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="bg" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Д-р Константин Маламов — Anti-aging & Longevity медицина</title>
+  <meta name="description" content="Д-р Константин Маламов — ендокринология, метаболитно здраве и медицина на дълголетието. Хормонална оптимизация, пептидни протоколи и персонални планове, базирани на лабораторни данни." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#f4f1ea" />
+  <meta property="og:title" content="Д-р Константин Маламов — Обърни биологичния часовник" />
+  <meta property="og:description" content="Медицина на дълголетието: хормони, метаболизъм, сън и енергия — с план, изграден върху твоите данни." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/malamov-og.jpg" />
+  <meta property="og:locale" content="bg_BG" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: { DEFAULT: '#f4f1ea', 50: '#fbfaf6', 100: '#f4f1ea', 200: '#e9e4d8', 300: '#d9d2c2' },
+            sage: { DEFAULT: '#7d8a6a', 100: '#e6e9de', 200: '#cdd3bf', 400: '#9aa585', 500: '#7d8a6a', 600: '#5f6b4f', 700: '#46503a', 800: '#2f3628', 900: '#1d221a' },
+            stone: { DEFAULT: '#a48c7a', 400: '#b9a291', 500: '#a48c7a', 600: '#86705f' },
+            gold: { DEFAULT: '#b8975a', 300: '#d8bf8c', 500: '#b8975a', 600: '#957640' },
+            forest: { DEFAULT: '#151a14', 800: '#1b2119', 700: '#232b21' },
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 30px 80px -30px rgba(29,34,26,.35)',
+            lift: '0 1px 0 rgba(255,255,255,.7) inset, 0 20px 50px -25px rgba(29,34,26,.35)',
+          },
+          keyframes: {
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-8px)' } },
+            spin: { to: { transform: 'rotate(360deg)' } },
+          },
+          animation: {
+            marquee: 'marquee 40s linear infinite',
+            float: 'float 7s ease-in-out infinite',
+            'spin-slow': 'spin 40s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { background: #f4f1ea; }
+    body { background: #f4f1ea; color: #1d221a; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    ::selection { background: #7d8a6a; color: #fbfaf6; }
+
+    /* Subtle paper texture */
+    .paper::before {
+      content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Marble-inspired gradient, echoing the table in the portrait */
+    .marble {
+      background:
+        radial-gradient(120% 80% at 10% 20%, rgba(184,151,90,.18), transparent 55%),
+        radial-gradient(90% 70% at 90% 80%, rgba(125,138,106,.22), transparent 60%),
+        linear-gradient(135deg, #fbfaf6 0%, #efebe2 50%, #f7f4ee 100%);
+    }
+    .marble-dark {
+      background:
+        radial-gradient(80% 60% at 15% 10%, rgba(184,151,90,.16), transparent 60%),
+        radial-gradient(70% 60% at 85% 90%, rgba(125,138,106,.22), transparent 60%),
+        #151a14;
+    }
+
+    .text-gold-gradient {
+      background: linear-gradient(100deg, #957640 0%, #d8bf8c 45%, #b8975a 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hairline { background: linear-gradient(90deg, transparent, rgba(184,151,90,.6), transparent); height: 1px; }
+
+    .arch { border-radius: 999px 999px 28px 28px; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal[data-delay="1"] { transition-delay: .1s; }
+    .reveal[data-delay="2"] { transition-delay: .2s; }
+    .reveal[data-delay="3"] { transition-delay: .3s; }
+
+    .nav-scrolled { background: rgba(244,241,234,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(29,34,26,.08); }
+
+    .card-hover { transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s, border-color .5s; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(29,34,26,.35); border-color: rgba(184,151,90,.55); }
+
+    .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s ease; }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .quiz-opt { transition: all .25s; }
+    .quiz-opt.sel { background: #2f3628; color: #fbfaf6; border-color: #2f3628; }
+
+    .ring-track { stroke: rgba(255,255,255,.1); }
+    .ring-val { transition: stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .animate-marquee, .animate-float, .animate-spin-slow { animation: none !important; }
+    }
+  </style>
+</head>
+<body class="paper font-sans">
+
+  <!-- NAV -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-500">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+      <a href="#top" class="group flex items-center gap-3">
+        <span class="grid h-10 w-10 place-items-center rounded-full border border-gold/60 font-serif text-lg italic text-sage-800">КМ</span>
+        <span class="leading-tight">
+          <span class="block font-serif text-lg font-semibold tracking-wide text-sage-900">Д-р Маламов</span>
+          <span class="block text-[10px] uppercase tracking-[.28em] text-sage-600">Longevity Medicine</span>
+        </span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm text-sage-800 lg:flex">
+        <a href="#about" class="hover:text-gold-600">За мен</a>
+        <a href="#focus" class="hover:text-gold-600">Направления</a>
+        <a href="#method" class="hover:text-gold-600">Методът</a>
+        <a href="#test" class="hover:text-gold-600">Самотест</a>
+        <a href="#media" class="hover:text-gold-600">Подкасти</a>
+        <a href="#faq" class="hover:text-gold-600">Въпроси</a>
+      </nav>
+      <a href="#book" class="rounded-full bg-sage-900 px-5 py-2.5 text-xs font-semibold uppercase tracking-[.18em] text-ivory-50 transition hover:bg-sage-700">Консултация</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="marble relative overflow-hidden pt-28 md:pt-32">
+      <div class="pointer-events-none absolute -right-40 top-20 h-[34rem] w-[34rem] rounded-full border border-gold/20 animate-spin-slow" aria-hidden="true">
+        <span class="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold"></span>
+      </div>
+
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 md:px-8 lg:grid-cols-12 lg:gap-8 lg:pb-28">
+        <div class="lg:col-span-7">
+          <p class="reveal mb-6 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[.32em] text-sage-600">
+            <span class="h-px w-10 bg-gold"></span> Anti-aging · Longevity · Ендокринология
+          </p>
+          <h1 class="reveal font-serif text-[3.1rem] font-medium leading-[.98] tracking-tight text-sage-900 sm:text-7xl xl:text-[5.6rem]" data-delay="1">
+            Възрастта е число.<br />
+            <em class="text-gold-gradient font-normal">Биологията</em> — избор.
+          </h1>
+          <p class="reveal mt-8 max-w-xl text-lg leading-relaxed text-sage-700" data-delay="2">
+            Медицина на дълголетието, която открива ускореното стареене, хормоналния дисбаланс и метаболитните нарушения <span class="text-sage-900">преди</span> да се превърнат в болест — и изгражда персонален план върху твоите собствени данни.
+          </p>
+          <div class="reveal mt-10 flex flex-col gap-4 sm:flex-row sm:items-center" data-delay="3">
+            <a href="#book" class="group inline-flex items-center justify-center gap-3 rounded-full bg-sage-900 px-8 py-4 text-sm font-semibold uppercase tracking-[.16em] text-ivory-50 shadow-soft transition hover:bg-sage-700">
+              Запази консултация
+              <svg class="h-4 w-4 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#test" class="inline-flex items-center justify-center gap-2 rounded-full border border-sage-900/20 px-8 py-4 text-sm font-semibold uppercase tracking-[.16em] text-sage-900 transition hover:border-gold hover:text-gold-600">
+              Направи самотеста
+            </a>
+          </div>
+
+          <dl class="reveal mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-sage-900/10 pt-8" data-delay="3">
+            <div><dt class="text-[10px] uppercase tracking-[.22em] text-sage-600">Общност</dt><dd class="mt-1 font-serif text-4xl text-sage-900"><span data-count="33">33</span>K+</dd></div>
+            <div><dt class="text-[10px] uppercase tracking-[.22em] text-sage-600">Публикации</dt><dd class="mt-1 font-serif text-4xl text-sage-900"><span data-count="390">390</span>+</dd></div>
+            <div><dt class="text-[10px] uppercase tracking-[.22em] text-sage-600">Фокус</dt><dd class="mt-1 font-serif text-4xl text-sage-900">360°</dd></div>
+          </dl>
+        </div>
+
+        <div class="relative lg:col-span-5">
+          <div class="reveal relative mx-auto max-w-md" data-delay="2">
+            <div class="absolute -inset-4 arch border border-gold/40" aria-hidden="true"></div>
+            <div class="arch overflow-hidden shadow-soft">
+              <img src="assets/malamov-hero.jpg" alt="Д-р Константин Маламов" class="aspect-[4/5] w-full object-cover" width="900" height="1125" fetchpriority="high" />
+            </div>
+
+            <div class="absolute -left-3 bottom-10 animate-float rounded-2xl border border-white/70 bg-ivory-50/90 p-4 shadow-lift backdrop-blur sm:-left-12 sm:bottom-16">
+              <p class="text-[10px] uppercase tracking-[.22em] text-sage-600">Персонален протокол</p>
+              <p class="mt-1 font-serif text-2xl leading-tight text-sage-900">Хормони · Метаболизъм<br/>Сън · Енергия</p>
+            </div>
+
+            <div class="absolute -right-3 top-10 rounded-full border border-white/70 bg-ivory-50/90 px-4 py-2 text-xs font-semibold text-sage-800 shadow-lift backdrop-blur sm:-right-8">
+              <span class="mr-1.5 inline-block h-2 w-2 rounded-full bg-sage-500 align-middle"></span> Приема нови пациенти
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- marquee -->
+      <div class="relative border-y border-sage-900/10 bg-ivory-50/60 py-5">
+        <div class="flex w-max animate-marquee gap-12 whitespace-nowrap font-serif text-2xl italic text-sage-700">
+          <span>Хормонална оптимизация</span><span class="text-gold">✦</span>
+          <span>Метаболитно здраве</span><span class="text-gold">✦</span>
+          <span>Пептидни протоколи</span><span class="text-gold">✦</span>
+          <span>Сън & възстановяване</span><span class="text-gold">✦</span>
+          <span>Биохакинг</span><span class="text-gold">✦</span>
+          <span>Енергия & фокус</span><span class="text-gold">✦</span>
+          <span>Хормонална оптимизация</span><span class="text-gold">✦</span>
+          <span>Метаболитно здраве</span><span class="text-gold">✦</span>
+          <span>Пептидни протоколи</span><span class="text-gold">✦</span>
+          <span>Сън & възстановяване</span><span class="text-gold">✦</span>
+          <span>Биохакинг</span><span class="text-gold">✦</span>
+          <span>Енергия & фокус</span><span class="text-gold">✦</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / PHILOSOPHY -->
+    <section id="about" class="relative py-24 md:py-32">
+      <div class="mx-auto grid max-w-7xl gap-14 px-5 md:px-8 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <div class="reveal relative mb-10 lg:mb-0">
+            <img src="assets/malamov-portrait.jpg" alt="Д-р Маламов в кабинета" class="aspect-[3/4] w-full rounded-[28px] object-cover object-[50%_60%] shadow-soft" loading="lazy" width="1200" height="1600" />
+            <div class="absolute -bottom-8 right-6 max-w-[15rem] rounded-2xl bg-sage-900 p-6 text-ivory-50 shadow-soft">
+              <p class="font-serif text-2xl italic leading-snug">Превенцията е най-луксозната медицина.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 lg:pl-10">
+          <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-600">Философия</p>
+          <h2 class="reveal mt-5 font-serif text-5xl font-medium leading-[1.05] text-sage-900 md:text-6xl" data-delay="1">
+            Не чакаме болестта.<br/><em class="font-normal text-sage-600">Изпреварваме я.</em>
+          </h2>
+          <div class="reveal mt-8 space-y-5 text-lg leading-relaxed text-sage-700" data-delay="2">
+            <p>Аз съм д-р Константин Маламов — лекар с фокус върху ендокринологията, метаболитната медицина и медицината на дълголетието.</p>
+            <p>Работя с хора, които усещат, че нещо „не е както преди“ — хронична умора, лош сън, наддаване, спад в либидото и фокуса — дори когато стандартните изследвания са „в норма“. Търсим причината, а не само симптома.</p>
+            <p>Комбинирам съвременна лабораторна диагностика, хранене, движение, сън, таргетирана суплементация и — когато е показано — хормонални, пептидни и инфузионни терапии в един персонален протокол.</p>
+          </div>
+
+          <div class="reveal mt-12 grid gap-4 sm:grid-cols-3" data-delay="3">
+            <div class="rounded-2xl border border-sage-900/10 bg-ivory-50 p-5">
+              <p class="font-serif text-3xl text-gold-600">01</p>
+              <p class="mt-2 text-sm font-semibold text-sage-900">Данни, не догадки</p>
+              <p class="mt-1 text-sm text-sage-600">Всеки план започва с изследвания.</p>
+            </div>
+            <div class="rounded-2xl border border-sage-900/10 bg-ivory-50 p-5">
+              <p class="font-serif text-3xl text-gold-600">02</p>
+              <p class="mt-2 text-sm font-semibold text-sage-900">Персонален протокол</p>
+              <p class="mt-1 text-sm text-sage-600">Няма два еднакви пациента.</p>
+            </div>
+            <div class="rounded-2xl border border-sage-900/10 bg-ivory-50 p-5">
+              <p class="font-serif text-3xl text-gold-600">03</p>
+              <p class="mt-2 text-sm font-semibold text-sage-900">Измерим резултат</p>
+              <p class="mt-1 text-sm text-sage-600">Проследяваме и коригираме.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS AREAS -->
+    <section id="focus" class="marble-dark relative overflow-hidden py-24 text-ivory-100 md:py-32">
+      <div class="mx-auto max-w-7xl px-5 md:px-8">
+        <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <div>
+            <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-300">Направления</p>
+            <h2 class="reveal mt-5 max-w-2xl font-serif text-5xl font-medium leading-[1.05] md:text-6xl" data-delay="1">Шест стълба на <em class="text-gold-gradient font-normal">дълголетието</em></h2>
+          </div>
+          <p class="reveal max-w-sm text-ivory-300/80" data-delay="2">Всяко направление е част от една система. Работим върху тялото като цяло — не върху отделен показател.</p>
+        </div>
+
+        <div class="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <article class="reveal card-hover group rounded-3xl border border-white/10 bg-white/[.03] p-8">
+            <div class="grid h-12 w-12 place-items-center rounded-full border border-gold/40 text-gold-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m-6-6l6 6 6-6M6 9l6-6 6 6"/></svg>
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">Хормонална оптимизация</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ivory-300/75">Тестостерон, естрогени, щитовидна жлеза, кортизол. Оценка и — при показания — заместителна терапия (TRT / HRT) под стриктен контрол.</p>
+          </article>
+          <article class="reveal card-hover group rounded-3xl border border-white/10 bg-white/[.03] p-8" data-delay="1">
+            <div class="grid h-12 w-12 place-items-center rounded-full border border-gold/40 text-gold-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">Метаболитно здраве</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ivory-300/75">Инсулинова резистентност, Хашимото, наднормено тегло, липиден профил. Стабилна кръвна захар — основата на енергията.</p>
+          </article>
+          <article class="reveal card-hover group rounded-3xl border border-white/10 bg-white/[.03] p-8" data-delay="2">
+            <div class="grid h-12 w-12 place-items-center rounded-full border border-gold/40 text-gold-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path stroke-linecap="round" d="M8.3 11l7.4-3.8M8.3 13l7.4 3.8"/></svg>
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">Пептиди & инфузии</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ivory-300/75">Съвременни пептидни протоколи и интравенозни терапии за възстановяване, регенерация и клетъчна енергия.</p>
+          </article>
+          <article class="reveal card-hover group rounded-3xl border border-white/10 bg-white/[.03] p-8">
+            <div class="grid h-12 w-12 place-items-center rounded-full border border-gold/40 text-gold-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">Биологична възраст</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ivory-300/75">Колко години е тялото ти — не паспортът. Измерваме маркерите на стареенето и следим как се променят във времето.</p>
+          </article>
+          <article class="reveal card-hover group rounded-3xl border border-white/10 bg-white/[.03] p-8" data-delay="1">
+            <div class="grid h-12 w-12 place-items-center rounded-full border border-gold/40 text-gold-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4-3-7-6.5-7-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 017 3.5C19 14.5 16 18 12 21z"/></svg>
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">Хранене & движение</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ivory-300/75">Персонален хранителен режим и тренировъчен подход, съобразени с хормоналния и метаболитния ти профил.</p>
+          </article>
+          <article class="reveal card-hover group rounded-3xl border border-white/10 bg-white/[.03] p-8" data-delay="2">
+            <div class="grid h-12 w-12 place-items-center rounded-full border border-gold/40 text-gold-300">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></svg>
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">Сън & възстановяване</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ivory-300/75">Сънят е най-мощният anti-aging инструмент. Работим върху циркадния ритъм, качеството на съня и стреса.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- METHOD -->
+    <section id="method" class="py-24 md:py-32">
+      <div class="mx-auto max-w-7xl px-5 md:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-600">Методът</p>
+          <h2 class="reveal mt-5 font-serif text-5xl font-medium leading-[1.05] text-sage-900 md:text-6xl" data-delay="1">Четири стъпки до <em class="font-normal text-sage-600">по-млада версия</em> на теб</h2>
+        </div>
+
+        <ol class="relative mt-20 grid gap-10 md:grid-cols-4 md:gap-6">
+          <div class="hairline absolute left-0 right-0 top-7 hidden md:block" aria-hidden="true"></div>
+          <li class="reveal relative">
+            <span class="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-gold bg-ivory font-serif text-xl text-gold-600">I</span>
+            <h3 class="mt-6 font-serif text-2xl text-sage-900">Консултация</h3>
+            <p class="mt-2 text-sm leading-relaxed text-sage-600">Подробна анамнеза: начин на живот, симптоми, цели. Разбираме откъде тръгваме.</p>
+          </li>
+          <li class="reveal relative" data-delay="1">
+            <span class="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-gold bg-ivory font-serif text-xl text-gold-600">II</span>
+            <h3 class="mt-6 font-serif text-2xl text-sage-900">Диагностика</h3>
+            <p class="mt-2 text-sm leading-relaxed text-sage-600">Разширен лабораторен панел — хормони, метаболизъм, възпаление, витамини и минерали.</p>
+          </li>
+          <li class="reveal relative" data-delay="2">
+            <span class="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-gold bg-ivory font-serif text-xl text-gold-600">III</span>
+            <h3 class="mt-6 font-serif text-2xl text-sage-900">Протокол</h3>
+            <p class="mt-2 text-sm leading-relaxed text-sage-600">Персонален план: хранене, движение, сън, суплементи и терапии при показания.</p>
+          </li>
+          <li class="reveal relative" data-delay="3">
+            <span class="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-gold bg-ivory font-serif text-xl text-gold-600">IV</span>
+            <h3 class="mt-6 font-serif text-2xl text-sage-900">Проследяване</h3>
+            <p class="mt-2 text-sm leading-relaxed text-sage-600">Контролни изследвания и корекции. Резултатът се измерва, не се предполага.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SELF-TEST -->
+    <section id="test" class="marble border-y border-sage-900/10 py-24 md:py-32">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-600">Самотест · 60 секунди</p>
+          <h2 class="reveal mt-5 font-serif text-5xl font-medium leading-[1.05] text-sage-900 md:text-6xl" data-delay="1">Колко бързо<br/><em class="font-normal text-sage-600">стареят навиците ти?</em></h2>
+          <p class="reveal mt-6 max-w-md text-lg leading-relaxed text-sage-700" data-delay="2">Шест въпроса за ежедневието ти. Получаваш ориентировъчен „индекс на дълголетие“ и къде е най-голямата възможност за подобрение.</p>
+          <p class="reveal mt-6 max-w-md text-xs leading-relaxed text-sage-600" data-delay="3">Тестът е образователен и не замества медицински преглед или лабораторни изследвания.</p>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div id="quiz" class="reveal rounded-[28px] border border-white/80 bg-ivory-50/80 p-6 shadow-soft backdrop-blur md:p-10" data-delay="1">
+            <div class="flex items-center justify-between text-xs uppercase tracking-[.22em] text-sage-600">
+              <span id="q-step">Въпрос 1 / 6</span>
+              <span id="q-area" class="text-gold-600"></span>
+            </div>
+            <div class="mt-4 h-1 w-full overflow-hidden rounded-full bg-sage-900/10"><div id="q-bar" class="h-full w-0 rounded-full bg-gold transition-all duration-500"></div></div>
+
+            <div id="q-body" class="mt-8">
+              <h3 id="q-text" class="font-serif text-3xl leading-snug text-sage-900"></h3>
+              <div id="q-opts" class="mt-6 grid gap-3"></div>
+            </div>
+
+            <div id="q-result" class="hidden">
+              <div class="flex flex-col items-center gap-8 md:flex-row md:items-center">
+                <div class="relative h-44 w-44 shrink-0 rounded-full bg-sage-900 p-3">
+                  <svg viewBox="0 0 120 120" class="h-full w-full -rotate-90">
+                    <circle cx="60" cy="60" r="52" fill="none" stroke-width="6" class="ring-track"/>
+                    <circle id="ring" cx="60" cy="60" r="52" fill="none" stroke="#d8bf8c" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" class="ring-val"/>
+                  </svg>
+                  <div class="absolute inset-0 grid place-items-center text-center">
+                    <div><span id="r-score" class="font-serif text-5xl text-ivory-50">0</span><span class="block text-[10px] uppercase tracking-[.22em] text-gold-300">от 100</span></div>
+                  </div>
+                </div>
+                <div>
+                  <p id="r-label" class="text-[11px] font-semibold uppercase tracking-[.28em] text-gold-600"></p>
+                  <h3 id="r-title" class="mt-2 font-serif text-3xl leading-snug text-sage-900"></h3>
+                  <p id="r-text" class="mt-3 text-sage-700"></p>
+                </div>
+              </div>
+              <div class="mt-8 rounded-2xl border border-sage-900/10 bg-ivory p-5">
+                <p class="text-[11px] font-semibold uppercase tracking-[.22em] text-sage-600">Най-голямата ти възможност</p>
+                <p id="r-weak" class="mt-2 font-serif text-2xl text-sage-900"></p>
+              </div>
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href="#book" id="r-cta" class="inline-flex flex-1 items-center justify-center rounded-full bg-sage-900 px-6 py-4 text-sm font-semibold uppercase tracking-[.16em] text-ivory-50 transition hover:bg-sage-700">Обсъди резултата с д-р Маламов</a>
+                <button id="q-restart" type="button" class="rounded-full border border-sage-900/20 px-6 py-4 text-sm font-semibold uppercase tracking-[.16em] text-sage-900 transition hover:border-gold">Отначало</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+    <section id="media" class="py-24 md:py-32">
+      <div class="mx-auto max-w-7xl px-5 md:px-8">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-600">Подкасти & медии</p>
+            <h2 class="reveal mt-5 font-serif text-5xl font-medium leading-[1.05] text-sage-900 md:text-6xl" data-delay="1">Чуй разговорите</h2>
+          </div>
+          <a href="https://www.instagram.com/dr.constantinemalamov/" target="_blank" rel="noopener" class="reveal inline-flex items-center gap-2 text-sm font-semibold text-sage-800 underline decoration-gold underline-offset-8 hover:text-gold-600" data-delay="2">Още в Instagram →</a>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-3">
+          <article class="reveal card-hover overflow-hidden rounded-3xl border border-sage-900/10 bg-ivory-50">
+            <button type="button" class="yt group relative block aspect-video w-full overflow-hidden bg-sage-900" data-id="rSJEbVOiilo" aria-label="Пусни: Съвети за подмладяване, дълголетие и добър сън">
+              <img src="https://i.ytimg.com/vi/rSJEbVOiilo/hqdefault.jpg" alt="" class="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" loading="lazy" />
+              <span class="absolute inset-0 grid place-items-center"><span class="grid h-16 w-16 place-items-center rounded-full bg-ivory-50/90 text-sage-900 shadow-soft transition group-hover:scale-110"><svg class="ml-1 h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </button>
+            <div class="p-6">
+              <p class="text-[10px] uppercase tracking-[.22em] text-gold-600">Подкаст с Цвети Василева</p>
+              <h3 class="mt-2 font-serif text-2xl leading-snug text-sage-900">Съвети за подмладяване, дълголетие и добър сън</h3>
+            </div>
+          </article>
+          <article class="reveal card-hover overflow-hidden rounded-3xl border border-sage-900/10 bg-ivory-50" data-delay="1">
+            <button type="button" class="yt group relative block aspect-video w-full overflow-hidden bg-sage-900" data-id="UzDepVkw8P4" aria-label="Пусни: Biohacking — протокол за суперхора">
+              <img src="https://i.ytimg.com/vi/UzDepVkw8P4/hqdefault.jpg" alt="" class="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" loading="lazy" />
+              <span class="absolute inset-0 grid place-items-center"><span class="grid h-16 w-16 place-items-center rounded-full bg-ivory-50/90 text-sage-900 shadow-soft transition group-hover:scale-110"><svg class="ml-1 h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </button>
+            <div class="p-6">
+              <p class="text-[10px] uppercase tracking-[.22em] text-gold-600">Biohacking</p>
+              <h3 class="mt-2 font-serif text-2xl leading-snug text-sage-900">Протокол за „суперхора“</h3>
+            </div>
+          </article>
+          <article class="reveal card-hover overflow-hidden rounded-3xl border border-sage-900/10 bg-ivory-50" data-delay="2">
+            <button type="button" class="yt group relative block aspect-video w-full overflow-hidden bg-sage-900" data-id="pngTyrz4KCA" aria-label="Пусни: Защо младите мъже имат нисък тестостерон?">
+              <img src="https://i.ytimg.com/vi/pngTyrz4KCA/hqdefault.jpg" alt="" class="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" loading="lazy" />
+              <span class="absolute inset-0 grid place-items-center"><span class="grid h-16 w-16 place-items-center rounded-full bg-ivory-50/90 text-sage-900 shadow-soft transition group-hover:scale-110"><svg class="ml-1 h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
+            </button>
+            <div class="p-6">
+              <p class="text-[10px] uppercase tracking-[.22em] text-gold-600">ABNORMAL Podcast</p>
+              <h3 class="mt-2 font-serif text-2xl leading-snug text-sage-900">Защо младите мъже имат нисък тестостерон?</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE BAND -->
+    <section class="marble-dark py-24 text-center text-ivory-100 md:py-32">
+      <div class="mx-auto max-w-4xl px-5 md:px-8">
+        <span class="reveal font-serif text-7xl leading-none text-gold-300">“</span>
+        <p class="reveal -mt-4 font-serif text-4xl font-normal italic leading-[1.2] md:text-5xl" data-delay="1">
+          Десет минути разходка след всяко хранене регулират кръвната захар и инсулина.
+        </p>
+        <div class="reveal mx-auto mt-10 h-px w-24 bg-gold/60" data-delay="2"></div>
+        <p class="reveal mt-6 text-xs uppercase tracking-[.3em] text-gold-300" data-delay="2">Малките навици · Големите резултати</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 md:py-32">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-600">Въпроси</p>
+          <h2 class="reveal mt-5 font-serif text-5xl font-medium leading-[1.05] text-sage-900" data-delay="1">Преди първата среща</h2>
+        </div>
+        <div class="divide-y divide-sage-900/10 border-y border-sage-900/10 lg:col-span-8" id="faq-list">
+          <div class="faq-item">
+            <button type="button" class="flex w-full items-center justify-between gap-6 py-6 text-left">
+              <span class="font-serif text-2xl text-sage-900">За кого е медицината на дълголетието?</span>
+              <span class="faq-icon grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sage-900/15 text-xl text-sage-700 transition">+</span>
+            </button>
+            <div class="faq-a"><div class="overflow-hidden"><p class="pb-6 pr-12 leading-relaxed text-sage-700">За всеки, който иска да остане енергичен, ясен и здрав с годините — както хора без оплаквания, които мислят превантивно, така и такива с умора, лош сън, наддаване или хормонални симптоми.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="flex w-full items-center justify-between gap-6 py-6 text-left">
+              <span class="font-serif text-2xl text-sage-900">Изследванията ми са „в норма“, а не се чувствам добре. Защо?</span>
+              <span class="faq-icon grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sage-900/15 text-xl text-sage-700 transition">+</span>
+            </button>
+            <div class="faq-a"><div class="overflow-hidden"><p class="pb-6 pr-12 leading-relaxed text-sage-700">Референтните граници показват дали има болест, а не дали стойностите са оптимални за теб. Освен това стандартният панел често пропуска ключови показатели. Гледаме по-широко и в контекст.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="flex w-full items-center justify-between gap-6 py-6 text-left">
+              <span class="font-serif text-2xl text-sage-900">Задължително ли е хормонална терапия?</span>
+              <span class="faq-icon grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sage-900/15 text-xl text-sage-700 transition">+</span>
+            </button>
+            <div class="faq-a"><div class="overflow-hidden"><p class="pb-6 pr-12 leading-relaxed text-sage-700">Не. Терапии се обсъждат само при ясни показания и след изследвания. В много случаи хранене, сън, движение и таргетирани добавки дават значим ефект сами по себе си.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="flex w-full items-center justify-between gap-6 py-6 text-left">
+              <span class="font-serif text-2xl text-sage-900">Как протича първата консултация?</span>
+              <span class="faq-icon grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sage-900/15 text-xl text-sage-700 transition">+</span>
+            </button>
+            <div class="faq-a"><div class="overflow-hidden"><p class="pb-6 pr-12 leading-relaxed text-sage-700">Разговаряме подробно за здравето, навиците и целите ти, преглеждаме наличните изследвания и определяме какви анализи са нужни. След резултатите получаваш персонален протокол.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="flex w-full items-center justify-between gap-6 py-6 text-left">
+              <span class="font-serif text-2xl text-sage-900">Възможна ли е онлайн консултация?</span>
+              <span class="faq-icon grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sage-900/15 text-xl text-sage-700 transition">+</span>
+            </button>
+            <div class="faq-a"><div class="overflow-hidden"><p class="pb-6 pr-12 leading-relaxed text-sage-700">Да — за проследяване и обсъждане на резултати. Посочи в заявката, че предпочиташ онлайн формат, и ще уточним детайлите.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="book" class="marble relative overflow-hidden border-t border-sage-900/10 py-24 md:py-32">
+      <div class="mx-auto grid max-w-7xl gap-14 px-5 md:px-8 lg:grid-cols-2">
+        <div>
+          <p class="reveal text-[11px] font-semibold uppercase tracking-[.32em] text-gold-600">Запази час</p>
+          <h2 class="reveal mt-5 font-serif text-5xl font-medium leading-[1.02] text-sage-900 md:text-7xl" data-delay="1">Най-добрата година<br/><em class="font-normal text-gold-gradient">тепърва предстои.</em></h2>
+          <p class="reveal mt-8 max-w-md text-lg leading-relaxed text-sage-700" data-delay="2">Остави данните си и ще се свържем с теб, за да уточним удобен час за първата консултация.</p>
+
+          <ul class="reveal mt-10 space-y-4 text-sage-800" data-delay="3">
+            <li class="flex items-center gap-4"><span class="grid h-10 w-10 place-items-center rounded-full border border-gold/50 text-gold-600"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg></span><a href="mailto:Constantine.malamov@gmail.com" class="hover:text-gold-600">Constantine.malamov@gmail.com</a></li>
+            <li class="flex items-center gap-4"><span class="grid h-10 w-10 place-items-center rounded-full border border-gold/50 text-gold-600"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></span><a href="https://www.instagram.com/dr.constantinemalamov/" target="_blank" rel="noopener" class="hover:text-gold-600">@dr.constantinemalamov</a></li>
+            <li class="flex items-center gap-4"><span class="grid h-10 w-10 place-items-center rounded-full border border-gold/50 text-gold-600"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-11a7 7 0 1114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>Пловдив · и онлайн</span></li>
+          </ul>
+        </div>
+
+        <form id="book-form" class="reveal rounded-[28px] border border-white/80 bg-ivory-50/85 p-6 shadow-soft backdrop-blur md:p-10" data-delay="2" novalidate>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="block">
+              <span class="text-[11px] font-semibold uppercase tracking-[.2em] text-sage-600">Име</span>
+              <input name="name" required autocomplete="name" class="mt-2 w-full rounded-xl border border-sage-900/15 bg-white/70 px-4 py-3.5 text-sage-900 outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" />
+            </label>
+            <label class="block">
+              <span class="text-[11px] font-semibold uppercase tracking-[.2em] text-sage-600">Телефон</span>
+              <input name="phone" type="tel" required autocomplete="tel" class="mt-2 w-full rounded-xl border border-sage-900/15 bg-white/70 px-4 py-3.5 text-sage-900 outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" />
+            </label>
+          </div>
+          <label class="mt-5 block">
+            <span class="text-[11px] font-semibold uppercase tracking-[.2em] text-sage-600">Какво те интересува</span>
+            <select name="topic" class="mt-2 w-full rounded-xl border border-sage-900/15 bg-white/70 px-4 py-3.5 text-sage-900 outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20">
+              <option>Цялостна longevity консултация</option>
+              <option>Хормонална оптимизация</option>
+              <option>Метаболитно здраве / тегло</option>
+              <option>Пептидни и инфузионни терапии</option>
+              <option>Сън, енергия и стрес</option>
+              <option>Друго</option>
+            </select>
+          </label>
+          <label class="mt-5 block">
+            <span class="text-[11px] font-semibold uppercase tracking-[.2em] text-sage-600">Формат</span>
+            <div class="mt-2 grid grid-cols-2 gap-3">
+              <label class="cursor-pointer"><input type="radio" name="format" value="На място" class="peer sr-only" checked /><span class="block rounded-xl border border-sage-900/15 bg-white/70 px-4 py-3 text-center text-sm text-sage-800 transition peer-checked:border-sage-900 peer-checked:bg-sage-900 peer-checked:text-ivory-50">На място</span></label>
+              <label class="cursor-pointer"><input type="radio" name="format" value="Онлайн" class="peer sr-only" /><span class="block rounded-xl border border-sage-900/15 bg-white/70 px-4 py-3 text-center text-sm text-sage-800 transition peer-checked:border-sage-900 peer-checked:bg-sage-900 peer-checked:text-ivory-50">Онлайн</span></label>
+            </div>
+          </label>
+          <label class="mt-5 block">
+            <span class="text-[11px] font-semibold uppercase tracking-[.2em] text-sage-600">Няколко думи (по желание)</span>
+            <textarea name="msg" rows="3" class="mt-2 w-full resize-none rounded-xl border border-sage-900/15 bg-white/70 px-4 py-3.5 text-sage-900 outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20"></textarea>
+          </label>
+          <p id="form-err" class="mt-4 hidden text-sm text-red-700">Моля, попълни име и телефон.</p>
+          <button type="submit" class="mt-7 w-full rounded-full bg-sage-900 px-6 py-4 text-sm font-semibold uppercase tracking-[.18em] text-ivory-50 transition hover:bg-sage-700">Изпрати заявка</button>
+          <p class="mt-4 text-center text-xs text-sage-600">Отговаряме в рамките на 1–2 работни дни.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="marble-dark text-ivory-300/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-14 md:flex-row md:items-center md:justify-between md:px-8">
+      <div class="flex items-center gap-3">
+        <span class="grid h-10 w-10 place-items-center rounded-full border border-gold/50 font-serif text-lg italic text-gold-300">КМ</span>
+        <span class="font-serif text-xl text-ivory-100">Д-р Константин Маламов</span>
+      </div>
+      <p class="max-w-md text-xs leading-relaxed">Информацията на този сайт е с образователна цел и не замества индивидуална медицинска консултация, диагноза или лечение.</p>
+      <p class="text-xs">© <span id="yr"></span></p>
+    </div>
+  </footer>
+
+  <!-- mobile sticky CTA -->
+  <a href="#book" id="m-cta" class="fixed inset-x-4 bottom-4 z-40 translate-y-24 rounded-full bg-sage-900 py-4 text-center text-sm font-semibold uppercase tracking-[.18em] text-ivory-50 shadow-soft transition duration-500 md:hidden">Запази консултация</a>
+
+  <script>
+    // Nav background on scroll + mobile CTA visibility
+    const nav = document.getElementById('nav');
+    const mcta = document.getElementById('m-cta');
+    const book = document.getElementById('book');
+    const onScroll = () => {
+      nav.classList.toggle('nav-scrolled', scrollY > 30);
+      const bookTop = book.getBoundingClientRect().top;
+      const show = scrollY > innerHeight * 0.8 && bookTop > innerHeight;
+      mcta.style.transform = show ? 'translateY(0)' : '';
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Count-up stats
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target, end = +el.dataset.count, t0 = performance.now(), dur = 1600;
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / dur);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
+
+    // YouTube: load the player only when clicked
+    document.querySelectorAll('.yt').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1&rel=0`;
+        f.title = btn.getAttribute('aria-label');
+        f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';
+        f.allowFullscreen = true;
+        f.className = 'aspect-video w-full';
+        btn.replaceWith(f);
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item > button').forEach((b) => {
+      b.addEventListener('click', () => {
+        const item = b.parentElement, open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach((i) => i.classList.remove('open'));
+        if (!open) item.classList.add('open');
+        b.setAttribute('aria-expanded', String(!open));
+      });
+    });
+
+    // Longevity self-test
+    const Q = [
+      { area: 'Сън', q: 'Колко часа спиш средно на нощ?', o: [['По-малко от 6', 0], ['6–7', 1], ['7–8', 3], ['Над 8, събуждам се отпочинал', 3]] },
+      { area: 'Движение', q: 'Колко пъти седмично тренираш целенасочено?', o: [['Почти никога', 0], ['1–2 пъти', 1], ['3–4 пъти', 3], ['5+ пъти, сила и кардио', 3]] },
+      { area: 'Метаболизъм', q: 'Как се чувстваш 1–2 часа след обяд?', o: [['Сънлив, търся сладко или кафе', 0], ['Понякога отпаднал', 1], ['Обикновено стабилно', 2], ['Енергичен и фокусиран', 3]] },
+      { area: 'Хранене', q: 'Колко често ядеш преработени храни и захар?', o: [['Всеки ден', 0], ['Няколко пъти седмично', 1], ['Рядко', 2], ['Почти никога', 3]] },
+      { area: 'Стрес', q: 'Как оценяваш нивото си на стрес?', o: [['Постоянно високо', 0], ['Често напрегнат', 1], ['Умерено, справям се', 2], ['Ниско, имам рутини за възстановяване', 3]] },
+      { area: 'Превенция', q: 'Кога за последно си правил разширени изследвания?', o: [['Не помня / никога', 0], ['Преди повече от 2 години', 1], ['През последната година', 2], ['Следя ги редовно', 3]] },
+    ];
+    const tips = {
+      'Сън': 'Сънят — регулярен час за лягане, тъмна и хладна спалня, без екран 60 мин. преди сън.',
+      'Движение': 'Движението — силови тренировки 2–3 пъти седмично плюс ежедневни крачки.',
+      'Метаболизъм': 'Кръвната захар — 10 минути разходка след хранене и протеин във всяко ядене.',
+      'Хранене': 'Храненето — повече цели храни, протеин и фибри, по-малко захар и преработено.',
+      'Стрес': 'Стресът — дишане, слънчева светлина сутрин и ясни граници за възстановяване.',
+      'Превенция': 'Изследванията — разширен панел, за да видиш какво наистина се случва в тялото.',
+    };
+    const st = { i: 0, a: [] };
+    const $ = (id) => document.getElementById(id);
+    function renderQ() {
+      const q = Q[st.i];
+      $('q-step').textContent = `Въпрос ${st.i + 1} / ${Q.length}`;
+      $('q-area').textContent = q.area;
+      $('q-bar').style.width = `${(st.i / Q.length) * 100}%`;
+      $('q-text').textContent = q.q;
+      const box = $('q-opts'); box.innerHTML = '';
+      q.o.forEach(([label, v]) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'quiz-opt rounded-2xl border border-sage-900/15 bg-white/60 px-5 py-4 text-left text-sage-900 hover:border-gold';
+        b.textContent = label;
+        b.addEventListener('click', () => {
+          b.classList.add('sel');
+          st.a[st.i] = v;
+          setTimeout(() => { st.i++; st.i < Q.length ? renderQ() : showResult(); }, 260);
+        });
+        box.appendChild(b);
+      });
+    }
+    function showResult() {
+      $('q-bar').style.width = '100%';
+      $('q-body').classList.add('hidden');
+      $('q-result').classList.remove('hidden');
+      $('q-step').textContent = 'Резултат';
+      $('q-area').textContent = '';
+      const score = Math.round((st.a.reduce((s, v) => s + v, 0) / (Q.length * 3)) * 100);
+      let weakIdx = 0; st.a.forEach((v, i) => { if (v < st.a[weakIdx]) weakIdx = i; });
+      const tier = score >= 75
+        ? ['Отлична основа', 'Навиците ти работят за теб.', 'Следващото ниво е прецизност — данни, които показват кое още може да се оптимизира.']
+        : score >= 45
+        ? ['Има потенциал', 'Добра база с ясни възможности.', 'Няколко таргетирани промени могат да направят осезаема разлика в енергията и биологичната ти възраст.']
+        : ['Време е за действие', 'Тялото ти вероятно сигнализира.', 'Добрата новина: най-големите подобрения идват точно от тук. Започни с консултация и изследвания.'];
+      $('r-label').textContent = tier[0];
+      $('r-title').textContent = tier[1];
+      $('r-text').textContent = tier[2];
+      $('r-weak').textContent = tips[Q[weakIdx].area];
+      const ring = $('ring'); const C = 326.7;
+      requestAnimationFrame(() => { ring.style.strokeDashoffset = C - (C * score) / 100; });
+      const t0 = performance.now();
+      const tick = (t) => { const p = Math.min(1, (t - t0) / 1400); $('r-score').textContent = Math.round(score * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      sessionStorageSafe('quizScore', String(score));
+    }
+    function sessionStorageSafe(k, v) { try { sessionStorage.setItem(k, v); } catch (_) {} }
+    $('q-restart').addEventListener('click', () => {
+      st.i = 0; st.a = [];
+      $('ring').style.strokeDashoffset = 326.7;
+      $('q-result').classList.add('hidden');
+      $('q-body').classList.remove('hidden');
+      renderQ();
+    });
+    renderQ();
+
+    // Booking form → prefilled email
+    $('book-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const name = (f.get('name') || '').trim(), phone = (f.get('phone') || '').trim();
+      if (!name || !phone) { $('form-err').classList.remove('hidden'); return; }
+      $('form-err').classList.add('hidden');
+      let score = null; try { score = sessionStorage.getItem('quizScore'); } catch (_) {}
+      const lines = [`Име: ${name}`, `Телефон: ${phone}`, `Интерес: ${f.get('topic')}`, `Формат: ${f.get('format')}`];
+      if (score) lines.push(`Индекс от самотеста: ${score}/100`);
+      const msg = (f.get('msg') || '').trim();
+      if (msg) lines.push('', msg);
+      const body = lines.join('\n');
+      location.href = `mailto:Constantine.malamov@gmail.com?subject=${encodeURIComponent('Заявка за консултация — ' + name)}&body=${encodeURIComponent(body)}`;
+    });
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

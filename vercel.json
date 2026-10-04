@@ -24,6 +24,11 @@
       "source": "/intns",
       "destination": "/intns/",
       "permanent": false
+    },
+    {
+      "source": "/dr-malamov",
+      "destination": "/dr-malamov/",
+      "permanent": false
     }
   ],
   "headers": [
