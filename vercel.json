@@ -20,5 +20,16 @@
       "destination": "/tony-intense/",
       "permanent": false
     }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noai, noimageai"
+        }
+      ]
+    }
   ]
 }
