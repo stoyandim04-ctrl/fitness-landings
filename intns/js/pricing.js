@@ -58,7 +58,7 @@ export function initPricing({ onAsk } = {}) {
   if (!root) return;
   const tabs = root.querySelector('[data-pricing-tabs]');
   const card = root.querySelector('[data-pricing-card]');
-  let selected = PROGRAMS[0].value;
+  let selected = (PROGRAMS.find(p => p.stripeUrl) || PROGRAMS[0]).value;
   let busy = null;
 
   tabs.innerHTML = PROGRAMS.map(p => `

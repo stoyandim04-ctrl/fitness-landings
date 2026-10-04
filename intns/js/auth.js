@@ -5,7 +5,9 @@ import { store, KEYS, DEMO_USER } from './store.js';
 const NEXT_KEY = 'intns.next';
 
 export const session = {
-  get user() { return store.read(KEYS.session).email ? DEMO_USER : null; },
+  // Профилът + последно отворената програма (запомня се между посещенията)
+  get user() { return store.read(KEYS.session).email ? { ...DEMO_USER, ...store.read(KEYS.prefs) } : null; },
+  remember(prefs) { store.write(KEYS.prefs, { ...store.read(KEYS.prefs), ...prefs }); },
   async login(email, password) {
     await new Promise(r => setTimeout(r, 700)); // имитира мрежова заявка
     const ok = email.trim().toLowerCase() === DEMO_USER.email && password === DEMO_USER.password;

@@ -7,7 +7,9 @@ export const KEYS = {
   session: 'intns.session.v1',
   checkins: 'intns.checkins.v1',
   feedback: 'intns.feedback.v1',
-  progress: 'intns.progress.v1',
+  progress: 'intns.progress.v2',     // { [програма]: { [седмица/ден]: [завършени елементи] } }
+  checkinLog: 'intns.checkinlog.v1', // { [програма]: [седмици/дни с чек-ин] }
+  prefs: 'intns.prefs.v1',           // { lastActive }
 };
 
 export const store = {
@@ -26,10 +28,12 @@ export const DEMO_USER = {
   name: 'Мария Петрова',
   short: 'Мария',
   initials: 'МП',
-  program: 'school',          // активна програма
-  week: 6, totalWeeks: 12,    // текуща седмица
+  // Достъпи: програма → 'active'. Липсваща = няма достъп (или „скоро“, ако програмата не е отворена).
+  access: { '3day': 'active', school: 'active' },
+  // Докъде е стигнала във всяка активна програма (седмица или ден)
+  position: { '3day': 3, school: 6 },
+  lastActive: 'school',
   startDate: '2026-08-24',
-  access: { '3day': 'active', school: 'active', academy: 'locked', retreat: 'soon' },
 };
 export const USERS = { client: DEMO_USER };
 

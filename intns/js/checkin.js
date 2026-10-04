@@ -1,8 +1,10 @@
 // Изглед „Чек-ин“: седмичен отчет (тегло, енергия, сън, снимки, рефлексия).
 import { store, KEYS, USERS } from './store.js';
 
-export function initClient() {
-  const CLIENT_ID = USERS.client.id, WEEK = 6;
+// context() → { program, unit, phase } от портала: чек-инът е общ за всички програми.
+export function initClient({ context } = {}) {
+  const CLIENT_ID = USERS.client.id;
+  let ctx = null;
 
   // Последната бележка от треньора (пише се от таблото)
   function refreshCoachNote() {
@@ -132,7 +134,7 @@ export function initClient() {
     const [front, side, back] = await Promise.all(['photoFront', 'photoSide', 'photoBack'].map(n => shrink(file(n))));
     const all = store.read(KEYS.checkins);
     all[CLIENT_ID] = {
-      clientId: CLIENT_ID, week: WEEK, submittedAt: new Date().toISOString(),
+      clientId: CLIENT_ID, program: ctx?.program.value, unit: ctx?.unit, submittedAt: new Date().toISOString(),
       weight: parseFloat(data.get('weight')),
       energy: +data.get('energy'), sleep: +data.get('sleep'), sleepHours: data.get('sleepHours'),
       reflection: (data.get('reflection') || '').trim(),
@@ -140,6 +142,12 @@ export function initClient() {
       photos: { front, side, back },
     };
     // Ако снимките не се побират, запази поне данните
+    // Дневник: кои седмици/дни на коя програма имат чек-ин
+    if (ctx) {
+      const log = store.read(KEYS.checkinLog);
+      log[ctx.program.value] = [...new Set([...(log[ctx.program.value] || []), ctx.unit])];
+      store.write(KEYS.checkinLog, log);
+    }
     if (!store.write(KEYS.checkins, all)) {
       all[CLIENT_ID].photos = { front: null, side: null, back: null };
       store.write(KEYS.checkins, all);
@@ -168,5 +176,21 @@ export function initClient() {
     submit.querySelector('[data-spinner]').classList.add('hidden');
   });
 
-  return { onEnter: refreshCoachNote };
+  // Заглавието следва активната програма и текущата седмица/ден
+  function paintContext() {
+    ctx = context?.();
+    if (!ctx) return;
+    const { program: p, unit, phase } = ctx;
+    const pad = n => String(n).padStart(2, '0');
+    document.getElementById('ci-program').textContent = p.short;
+    document.getElementById('ci-unit-label').textContent = p.unit === 'day' ? 'Ден' : 'Седмица';
+    document.getElementById('ci-unit').textContent = pad(unit);
+    document.getElementById('ci-total').textContent = p.length;
+    document.getElementById('ci-phase').textContent = phase;
+    document.getElementById('ci-segments').innerHTML = Array.from({ length: p.length }, (_, i) =>
+      `<li class="h-1 flex-1 rounded-full ${i + 1 < unit ? 'bg-zinc-300' : i + 1 === unit ? 'bg-gradient-to-r from-gold-300 to-gold-500 shadow-[0_0_12px_rgba(212,180,110,.6)]' : 'bg-white/10'}"></li>`).join('');
+    document.getElementById('ci-back').setAttribute('href', '#/program?p=' + p.value);
+  }
+
+  return { onEnter() { paintContext(); refreshCoachNote(); } };
 }
