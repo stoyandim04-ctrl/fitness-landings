@@ -19,6 +19,11 @@
       "source": "/tony-intense",
       "destination": "/tony-intense/",
       "permanent": false
+    },
+    {
+      "source": "/intns",
+      "destination": "/intns/",
+      "permanent": false
     }
   ],
   "headers": [

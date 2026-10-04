@@ -1,0 +1,100 @@
+/* INTNS | Mind, Health & Body — общи стилове */
+:root { color-scheme: dark; }
+body { font-feature-settings: "ss01", "cv11"; }
+
+/* Фин шум + радиален отблясък за дълбочина */
+.bg-luxe {
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(212,180,110,0.10), transparent 60%),
+    radial-gradient(80% 50% at 100% 0%, rgba(255,255,255,0.04), transparent 60%),
+    #000;
+}
+.grain::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Карти с фин горен отблясък */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.06), 0 1px 2px rgba(0,0,0,.6);
+}
+
+.text-gold-grad {
+  background: linear-gradient(180deg, #f3e6c4 0%, #d4b46e 55%, #a8843f 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Скала 1–10 */
+.scale-input:checked + .scale-dot {
+  background: linear-gradient(180deg, #efe2c0, #c19a4f);
+  color: #0a0a0a; border-color: transparent;
+  box-shadow: 0 0 0 1px rgba(212,180,110,.4), 0 8px 24px -6px rgba(212,180,110,.55);
+  transform: translateY(-1px);
+}
+.scale-input:focus-visible + .scale-dot { outline: 2px solid rgba(212,180,110,.7); outline-offset: 2px; }
+
+/* Бутон за изпращане: въртящ се златен контур */
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.btn-luxe {
+  background:
+    linear-gradient(#0b0b0c, #0b0b0c) padding-box,
+    conic-gradient(from var(--angle), rgba(212,180,110,.15), #e3cd95, rgba(212,180,110,.15) 30%, rgba(255,255,255,.12) 60%, rgba(212,180,110,.15)) border-box;
+  border: 1px solid transparent;
+  animation: spin-border 6s linear infinite;
+}
+@keyframes spin-border { to { --angle: 360deg; } }
+.btn-luxe:hover, .btn-luxe:focus-visible { animation-duration: 2.2s; }
+
+.reveal { opacity: 0; transform: translateY(8px); animation: reveal .7s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes reveal { to { opacity: 1; transform: none; } }
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+
+/* Quick View: панел отдясно (desktop) / цял екран (mobile) */
+#qv-panel { transform: translateX(100%); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+#qv[data-open="true"] #qv-panel { transform: none; }
+#qv-backdrop { opacity: 0; transition: opacity .3s ease; }
+#qv[data-open="true"] #qv-backdrop { opacity: 1; }
+
+.reveal { opacity: 0; transform: translateY(6px); animation: reveal .6s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes reveal { to { opacity: 1; transform: none; } }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ── Смяна на изгледите ── */
+.view { transition: opacity .26s ease, transform .32s cubic-bezier(.2,.8,.2,1), filter .26s ease; will-change: opacity, transform; }
+.view[data-state="entering"] { opacity: 0; transform: translateY(10px) scale(.995); filter: blur(6px); }
+.view[data-state="leaving"]  { opacity: 0; transform: translateY(-6px) scale(.995); filter: blur(6px); }
+.view[data-state="active"]   { opacity: 1; transform: none; filter: none; }
+
+/* Табове в треньорския изглед */
+.tab-in { animation: tab-in .35s cubic-bezier(.2,.8,.2,1); }
+@keyframes tab-in { from { opacity: 0; transform: translateY(6px); } }
+
+/* Карти за вход: състояние „влизане“ */
+[data-login][aria-busy="true"] [data-arrow] { display: none; }
+[data-login][aria-busy="true"] [data-spinner] { display: block; }
+[data-login][aria-busy="true"] { border-color: rgba(212,180,110,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .btn-luxe, .tab-in { animation: none !important; opacity: 1; transform: none; }
+  .view, #qv-panel, #qv-backdrop { transition: none !important; filter: none !important; }
+}
+
+/* Ценова секция: смяна на картата (exit → enter с лека пружина) */
+[data-pricing-card] { transition: opacity .15s ease, transform .15s ease, filter .15s ease; }
+[data-pricing-card][data-anim="exit"] { opacity: 0; transform: translateY(-10px); filter: blur(2px); }
+[data-pricing-card][data-anim="init"] { opacity: 0; transform: translateY(14px); filter: blur(2px); transition: none; }
+[data-pricing-card][data-anim="in"]   { opacity: 1; transform: none; filter: none;
+  transition: opacity .3s ease, transform .55s cubic-bezier(.2,1.35,.4,1), filter .3s ease; }
+
+/* Вход: състояние „зарежда“ на бутона */
+[data-loading] [data-label] { opacity: 0; }
+[data-loading] [data-spinner] { display: block; }
+input[aria-invalid="true"] { border-color: rgba(251,113,133,.5); }
+
+/* hidden атрибутът винаги печели над display класовете */
+[hidden] { display: none !important; }
