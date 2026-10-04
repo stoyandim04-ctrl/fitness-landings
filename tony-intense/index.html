@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tony Intense — INTNS | Mind, Health &amp; Body</title>
+  <meta name="description" content="Създавам нова култура на живот чрез метода INTNS. 3 Day Reset, School, Academy, Corporate и Retreat." />
+  <meta name="theme-color" content="#FBF8F4" />
+  <!-- Демо: не индексирай в търсачките. Махни реда, когато сайтът стане официален. -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <meta property="og:title" content="Tony Intense — INTNS" />
+  <meta property="og:description" content="Създавам нова култура на живот чрез метода INTNS." />
+  <meta property="og:image" content="assets/tony-hero.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            ivory: '#FBF8F4',
+            sand: '#F3EDE6',
+            blush: '#E9D9CF',
+            ink: '#1F1A17',
+            taupe: '#7A6E66',
+            line: '#E6DED5',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; }
+    /* Плавно появяване при скрол */
+    .fade { opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .fade { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+
+<body class="bg-ivory font-sans text-ink selection:bg-blush">
+
+  <!-- ─── Навигация ───────────────────────────────────────────── -->
+  <header class="sticky top-0 z-40 border-b border-line/70 bg-ivory/90 backdrop-blur">
+    <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8" aria-label="Основна навигация">
+      <a href="#" class="font-serif text-[24px] font-semibold tracking-tight">Tony Intense</a>
+
+      <ul class="hidden items-center gap-8 text-[14px] text-taupe md:flex">
+        <li><a href="#metod" class="transition hover:text-ink">Методът</a></li>
+        <li><a href="#programi" class="transition hover:text-ink">Програми</a></li>
+        <li><a href="#za-men" class="transition hover:text-ink">За мен</a></li>
+        <li><a href="#kontakt" class="transition hover:text-ink">Контакт</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <a href="#reset" class="hidden rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-ivory transition hover:bg-ink/85 sm:inline-block">3 Day Reset</a>
+        <button type="button" id="menu-btn" class="grid h-10 w-10 place-items-center rounded-full md:hidden" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden border-t border-line px-5 pb-6 pt-2 md:hidden">
+      <ul class="flex flex-col text-[17px]">
+        <li><a href="#metod" class="block border-b border-line py-3.5">Методът</a></li>
+        <li><a href="#programi" class="block border-b border-line py-3.5">Програми</a></li>
+        <li><a href="#za-men" class="block border-b border-line py-3.5">За мен</a></li>
+        <li><a href="#kontakt" class="block py-3.5">Контакт</a></li>
+      </ul>
+      <a href="#reset" class="mt-3 block rounded-full bg-ink py-3.5 text-center text-[14px] font-medium text-ivory">3 Day Reset</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ─── Hero ────────────────────────────────────────────────── -->
+    <section class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-20 pt-12 sm:px-8 md:grid-cols-[1.1fr_1fr] md:gap-16 md:pb-28 md:pt-20">
+      <div class="fade">
+        <p class="text-[12px] font-medium uppercase tracking-[0.22em] text-taupe">INTNS · Mind, Health &amp; Body</p>
+        <h1 class="mt-6 font-serif text-[46px] font-medium leading-[1.02] tracking-tight sm:text-[64px] lg:text-[76px]">
+          Създавам нова<br />култура <em class="italic text-taupe">на живот.</em>
+        </h1>
+        <p class="mt-6 max-w-md text-[16px] leading-[1.75] text-taupe">
+          Методът INTNS обединява ум, здраве и тяло. Без крайности — с ясна структура, грижа към себе си и подкрепа по пътя.
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a href="#reset" class="rounded-full bg-ink px-7 py-4 text-center text-[14px] font-medium text-ivory transition hover:bg-ink/85">Започни с 3 Day Reset</a>
+          <a href="#programi" class="group inline-flex items-center justify-center gap-2 px-2 py-3 text-[14px] font-medium">
+            Всички програми
+            <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <figure class="fade relative mx-auto w-full max-w-[440px]">
+        <div class="overflow-hidden rounded-t-[200px] rounded-b-[24px] bg-sand">
+          <img src="assets/tony-hero.webp" alt="Тони Интенс" width="800" height="1000" class="aspect-[4/5] w-full object-cover" />
+        </div>
+        <figcaption class="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-line bg-ivory px-5 py-2.5 text-[13px] text-taupe shadow-sm">
+          <a href="https://www.instagram.com/tony_intense/" target="_blank" rel="noopener noreferrer" class="transition hover:text-ink">@tony_intense · 15,8K</a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ─── Методът ─────────────────────────────────────────────── -->
+    <section id="metod" class="border-y border-line bg-sand/60">
+      <div class="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+        <div class="fade max-w-2xl">
+          <p class="text-[12px] font-medium uppercase tracking-[0.22em] text-taupe">Методът INTNS</p>
+          <h2 class="mt-4 font-serif text-[38px] font-medium leading-[1.1] sm:text-[50px]">Три опори, <em class="italic text-taupe">един начин на живот.</em></h2>
+        </div>
+
+        <ol class="mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
+          <li class="fade border-t border-ink/80 pt-6">
+            <span class="font-serif text-[20px] italic text-taupe">01</span>
+            <h3 class="mt-2 font-serif text-[30px] font-medium">Mind</h3>
+            <p class="mt-3 text-[15px] leading-[1.75] text-taupe">Промяната започва отвътре — от начина, по който мислиш и се отнасяш към себе си.</p>
+          </li>
+          <li class="fade border-t border-ink/80 pt-6">
+            <span class="font-serif text-[20px] italic text-taupe">02</span>
+            <h3 class="mt-2 font-serif text-[30px] font-medium">Health</h3>
+            <p class="mt-3 text-[15px] leading-[1.75] text-taupe">Хранене и навици, които се вписват в живота ти, а не го подчиняват.</p>
+          </li>
+          <li class="fade border-t border-ink/80 pt-6">
+            <span class="font-serif text-[20px] italic text-taupe">03</span>
+            <h3 class="mt-2 font-serif text-[30px] font-medium">Body</h3>
+            <p class="mt-3 text-[15px] leading-[1.75] text-taupe">Движение с цел и постоянство — за тяло, в което се чувстваш у дома.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ─── 3 Day Reset (Stripe) ────────────────────────────────── -->
+    <section id="reset" class="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
+      <div class="fade grid items-center gap-10 overflow-hidden rounded-[28px] bg-blush/45 p-6 sm:p-10 md:grid-cols-[320px_1fr] md:gap-14 md:p-14">
+        <img src="assets/3day-reset.webp" alt="Корица на програмата „Да се върна, себе си да прегърна“" width="360" height="360" loading="lazy"
+          class="mx-auto aspect-square w-full max-w-[320px] rounded-[20px] object-cover shadow-[0_20px_50px_-25px_rgba(31,26,23,.45)]" />
+        <div>
+          <p class="text-[12px] font-medium uppercase tracking-[0.22em] text-taupe">INTNS 3 Day Reset · Pre-order</p>
+          <h2 class="mt-4 font-serif text-[36px] font-medium leading-[1.1] sm:text-[46px]">Да се върна, <em class="italic">себе си да прегърна.</em></h2>
+          <p class="mt-5 max-w-lg text-[16px] leading-[1.75] text-taupe">Новото издание на 3-дневната програма. Три дни, в които спираш, връщаш се към себе си и започваш отначало — по метода INTNS.</p>
+
+          <div class="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+            <p class="font-serif text-[44px] font-medium leading-none">29,90 €</p>
+            <a href="https://buy.stripe.com/bJe4gydoseHk4UNgMxbII1r" target="_blank" rel="noopener noreferrer"
+              class="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-[14px] font-medium text-ivory transition hover:bg-ink/85">
+              Вземи моята 3-дневна програма
+              <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
+              <span class="sr-only">(отваря плащането в нов раздел)</span>
+            </a>
+          </div>
+          <p class="mt-4 text-[13px] text-taupe">Еднократно плащане · сигурно през Stripe</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Програми ────────────────────────────────────────────── -->
+    <section id="programi" class="mx-auto max-w-6xl px-5 pb-20 sm:px-8 md:pb-28">
+      <div class="fade flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <p class="text-[12px] font-medium uppercase tracking-[0.22em] text-taupe">Програми</p>
+          <h2 class="mt-4 font-serif text-[38px] font-medium leading-[1.1] sm:text-[50px]">Намери своя <em class="italic text-taupe">път.</em></h2>
+        </div>
+        <p class="max-w-sm text-[15px] leading-[1.7] text-taupe">Не си сигурна откъде да започнеш? Пиши ми и ще те насоча.</p>
+      </div>
+
+      <ul class="mt-12 border-t border-line">
+        <li class="fade">
+          <a href="#reset" class="group grid gap-2 border-b border-line py-7 transition md:grid-cols-[80px_1fr_1.3fr_40px] md:items-center md:gap-8">
+            <span class="font-serif text-[18px] italic text-taupe">01</span>
+            <span class="font-serif text-[30px] font-medium">3 Day Reset</span>
+            <span class="text-[15px] leading-[1.7] text-taupe">Кратко начало, за да се върнеш към себе си. Най-лесната първа стъпка.</span>
+            <span class="hidden text-[20px] transition group-hover:translate-x-1 md:block" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li class="fade">
+          <a href="https://ig.me/m/tony_intense" target="_blank" rel="noopener noreferrer" class="group grid gap-2 border-b border-line py-7 transition md:grid-cols-[80px_1fr_1.3fr_40px] md:items-center md:gap-8">
+            <span class="font-serif text-[18px] italic text-taupe">02</span>
+            <span class="font-serif text-[30px] font-medium">School</span>
+            <span class="text-[15px] leading-[1.7] text-taupe">Основите на метода в група — структура, ритъм и общност.</span>
+            <span class="hidden text-[20px] transition group-hover:translate-x-1 md:block" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li class="fade">
+          <a href="https://ig.me/m/tony_intense" target="_blank" rel="noopener noreferrer" class="group grid gap-2 border-b border-line py-7 transition md:grid-cols-[80px_1fr_1.3fr_40px] md:items-center md:gap-8">
+            <span class="font-serif text-[18px] italic text-taupe">03</span>
+            <span class="font-serif text-[30px] font-medium">Academy</span>
+            <span class="text-[15px] leading-[1.7] text-taupe">Лична работа с мен — индивидуален подход и подкрепа отблизо.</span>
+            <span class="hidden text-[20px] transition group-hover:translate-x-1 md:block" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li class="fade">
+          <a href="https://ig.me/m/tony_intense" target="_blank" rel="noopener noreferrer" class="group grid gap-2 border-b border-line py-7 transition md:grid-cols-[80px_1fr_1.3fr_40px] md:items-center md:gap-8">
+            <span class="font-serif text-[18px] italic text-taupe">04</span>
+            <span class="font-serif text-[30px] font-medium">Corporate</span>
+            <span class="text-[15px] leading-[1.7] text-taupe">Методът INTNS за екипи и компании.</span>
+            <span class="hidden text-[20px] transition group-hover:translate-x-1 md:block" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li class="fade">
+          <a href="https://ig.me/m/tony_intense" target="_blank" rel="noopener noreferrer" class="group grid gap-2 border-b border-line py-7 transition md:grid-cols-[80px_1fr_1.3fr_40px] md:items-center md:gap-8">
+            <span class="font-serif text-[18px] italic text-taupe">05</span>
+            <span class="font-serif text-[30px] font-medium">Retreat</span>
+            <span class="text-[15px] leading-[1.7] text-taupe">Няколко дни далеч от всичко — на живо, заедно.</span>
+            <span class="hidden text-[20px] transition group-hover:translate-x-1 md:block" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─── За мен ──────────────────────────────────────────────── -->
+    <section id="za-men" class="bg-ink text-ivory">
+      <div class="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:grid-cols-[1fr_1.4fr] md:items-center md:gap-20 md:py-28">
+        <div class="fade flex flex-col items-start gap-6">
+          <img src="assets/tony-avatar.webp" alt="Тони Интенс" width="180" height="180" loading="lazy" class="h-28 w-28 rounded-full object-cover" />
+          <p class="text-[12px] font-medium uppercase tracking-[0.22em] text-ivory/60">За мен</p>
+        </div>
+        <div class="fade">
+          <blockquote class="font-serif text-[30px] font-medium leading-[1.25] sm:text-[40px]">
+            „Аз съм Тони. Създадох INTNS, защото вярвам, че промяната на тялото започва с промяна в начина, по който живееш.“
+          </blockquote>
+          <p class="mt-8 max-w-xl text-[16px] leading-[1.8] text-ivory/70">
+            Чрез метода INTNS помагам на жените да изградят живот, в който грижата за ума, здравето и тялото е естествена част от деня — не временна диета.
+          </p>
+          <a href="https://www.instagram.com/tony_intense/" target="_blank" rel="noopener noreferrer" class="group mt-8 inline-flex items-center gap-2 border-b border-ivory/30 pb-1 text-[14px] transition hover:border-ivory">
+            Последвай ме в Instagram
+            <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Контакт ─────────────────────────────────────────────── -->
+    <section id="kontakt" class="mx-auto max-w-3xl px-5 py-24 text-center sm:px-8 md:py-32">
+      <div class="fade">
+        <h2 class="font-serif text-[40px] font-medium leading-[1.1] sm:text-[56px]">Готова ли си <em class="italic text-taupe">да започнеш?</em></h2>
+        <p class="mx-auto mt-5 max-w-md text-[16px] leading-[1.75] text-taupe">Започни с 3 Day Reset или ми пиши — заедно ще изберем програмата, която е за теб.</p>
+        <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+          <a href="https://buy.stripe.com/bJe4gydoseHk4UNgMxbII1r" target="_blank" rel="noopener noreferrer" class="rounded-full bg-ink px-8 py-4 text-[14px] font-medium text-ivory transition hover:bg-ink/85">3 Day Reset · 29,90 €</a>
+          <a href="https://ig.me/m/tony_intense" target="_blank" rel="noopener noreferrer" class="rounded-full border border-ink/20 px-8 py-4 text-[14px] font-medium transition hover:border-ink">Пиши ми в Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-[13px] text-taupe sm:flex-row sm:px-8">
+      <p><span class="font-serif text-[18px] text-ink">Tony Intense</span> · INTNS | Mind, Health &amp; Body</p>
+      <p>© 2026 · <a href="https://www.instagram.com/tony_intense/" target="_blank" rel="noopener noreferrer" class="transition hover:text-ink">Instagram</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Мобилно меню
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      btn.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Плавно появяване при скрол
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { threshold: 0.15 });
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
